@@ -1,0 +1,49 @@
+git init
+git config --global user.name "Test User"
+git config --global user.email "test@user.com"
+git config user.name "Test User"
+git config user.email "test@user.com"
+
+git config --global core.editor "'c:/program files/sublime text 3/subl.exe' -w" --replace-all (редактор для коммитов по умолчанию (флаг --replace-all можно не ставить если настраиваете первый раз. Флаг -w означает wait). С помощью этой конфигурации Git новая вкладка открывается в моем редакторе. Я редактирую сообщение о фиксации, сохраняю вкладку ( Ctrl+ S) и закрываю ее ( Ctrl+ W).
+Git будет ждать, пока вкладка не будет закрыта, чтобы продолжить свою работу.)
+
+git config --global core.editor "$(which vim)" --replace-all (vim редактор, сохранить :w Enter, while in the normal mode (you get to the normal mode by pressing Esc).
+You close your file with :q while in the normal mode.
+You can combine both these actions and do Esc:wq Enter to save the commit and quit vim.
+As an alternate to the above, you can also press Z Z while in the normal mode, which will save the file and exit vim. This is also easier for some people as it's the same key pressed twice.)
+
+git add .
+git add *
+git commit -m "first commit"
+gitk
+git status
+git log
+git log --pretty=format:"%h - %s : %ad[ %an ]" --date=short --graph
+git checkout 315ea46 (откатит изменений к прошлой версии)
+git checkout master (возврат к последней версии)
+git reset HEAD index.php (отмена индексирования файла, убрать из будущего коммита, убрать "из add" (шаг вверх))
+git reset 315ea46 index.php (отмена индексирования файла, убрать из будущего коммита, убрать "из add" (шаг к конкретному коммиту))
+git checkout public/index.php
+git revert HEAD --no-edit (отмена коммита, шаг вверх)
+git revert 315ea46 --no-edit (отмена коммита, шаг к конкретному коммиту)
+git branch <branch> (создать ветку)
+git checkout <branch> (перейти на ветку)
+git checkout -b <branch> (одновременно можно создаь и перейти на ветку)
+git branch (показывает на какой мы ветке)
+git checkout <branch> (переключает на ветку)
+git merge <branch> (слияние двух веток, ту которую указывает после merge в ту в которой находимся)
+git rebase <branch> (перемещение)
+------------------------------------------------------------------------------
+работа с удаленным репозиторием
+git clone <link> (скачать репозиторий)
+git remote add origin <link> (добавить ссылку на удаленный репозиторий в проект)
+git remote (просмотр имя удаленного сервера, обычно origin)
+git push -u origin master (выгрузка проекта на удаленный репозиторий)
+git push (выгружать изменения после коммита)
+git  <branch> (выгрузить ветку на удаленный репозиторий)
+git push origin <branch> (выгрузить ветку на удаленный репозиторий)
+git pull origin (скачать с удаленного репозитория, предпочтительно)
+git pull (скачать с удаленного репозитория)
+git pull origin <branch> (скачать ветку с удаленного репозитория)
+git pull --rebase origin
+git pull --rebase origin <branch>
