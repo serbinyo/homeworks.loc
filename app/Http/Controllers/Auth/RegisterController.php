@@ -62,10 +62,41 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        if ($data['role']=='s')
+        {
+            return User::create([
+                'name' => $data['name'],
+                'role' => $data['role'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ])->schoolkid()->create([
+                'firstname' => 'iva',
+                'middlename' => 'vladimirovich',
+                'lastname' => 'sinica',
+                'class' => '8-Б',
+                'parants_contacts' => '+985654786 папа'
+            ]);
+        }
+        elseif ($data['role']=='t')
+        {
+            return User::create([
+                'name' => $data['name'],
+                'role' => $data['role'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ])->teacher()->create([
+                'firstname' => 'uchit',
+                'middlename' => 'evgenovich',
+                'lastname' => 'gitsov',
+                'tel' => '+985655472',
+                'qualification' => 'master',
+                'date_of_employment' => '2012-12-16',
+                'disciplines_id' => '3'
+            ]);
+        }
+        else
+        {
+            dd('Неизвестная роль');
+        }
     }
 }
