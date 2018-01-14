@@ -9,6 +9,7 @@
 
 		<link rel="shortcut icon" href="{{ asset('public/favicon.ico') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('public/css/style.css') }}">
+		<link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 		<script src="{{asset('public/js/jquery-3.2.1.min.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
 

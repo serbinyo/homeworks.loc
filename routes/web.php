@@ -13,6 +13,8 @@
 
 Route::get('/', 'IndexController@index');
 
+Route::get('test', 'IndexController@index')->middleware('auth');;
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

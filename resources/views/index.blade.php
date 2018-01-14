@@ -1,14 +1,14 @@
-@extends('layouts.main-layout')
+@extends('layouts.app')
 
 @section('content')
 
     <section>
         <div class="main_lable">
             <a href="/">
-                Клиентское приложение для работы с базой данных Спортивный клуб
+                Система электронных домашних заданий. Сербин А
             </a>
         </div>
-        <table class="ava_table">
+        <table class="hello_table">
             <tbody>
             <tr>
                 <td>
@@ -46,34 +46,7 @@
         @if (!$user)
             <div class="enter_area">
                 <div class="enter_block">
-                    <div id="mybutton"> Войти в программу</div>
-                </div>
-                <div class="enter_block">
-                    <div class="login_form_container" id="login-container">
-                        {!! Form::open(['url'=>''])!!}
-                        {!! Form::hidden('login') !!}
-
-                        <div class="form-group">
-                            {!! Form::label(null, 'Логин: ', ['class'=>'control-label']) !!}
-                            <div class="form-element">
-                                {!! Form::text('login', null, ['class'=>'inp']) !!}
-                            </div>
-                            <div class="clr"></div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label(null, 'Пароль: ', ['class'=>'control-label']) !!}
-                            <div class="form-element">
-                                {!! Form::password('passwd', ['class'=>'inp']) !!}
-                            </div>
-                            <div class="clr"></div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::submit('Войти', ['class'=>'enter_button', 'name'=>'do-login']) !!}
-                            <div class="clr"></div>
-                        </div>
-                        {!! Form::close() !!}
-
-                    </div>
+                    <a href="login" style="text-decoration: none"><div id="mybutton">  Войти в программу  </div></a>
                 </div>
             </div>
         @else
@@ -81,19 +54,19 @@
                 <div class="enter_area">
                     <div class="hello_label">
                         Вы
-                        {{$user->фамилия }}
+                        {{--{{$user->фамилия }}
                         {{$user->имя }}
-                        {{$user->отчество }}
+                        {{$user->отчество }}--}}
                     </div>
 
                     <table class="hello_table">
                         <tbody>
                         <tr>
                             <td>
-                                <a href="menu" class="enter_button">Продолжить</a>
+                                <a href="/" style="text-decoration: none" class="enter_button">Продолжить</a>
                             </td>
                             <td>
-                                {!! Form::open(['url'=>'']) !!}
+                                {!! Form::open(['url'=>route('logout')]) !!}
                                 {!! Form::submit('   Выйти  ',['class'=>'enter_button']) !!}
                                 {!! Form::close() !!}
                             </td>
