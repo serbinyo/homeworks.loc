@@ -49,6 +49,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'role' => 'required',
+            'login' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -65,8 +67,9 @@ class RegisterController extends Controller
         if ($data['role']=='s')
         {
             return User::create([
-                'name' => $data['name'],
                 'role' => $data['role'],
+                'login' => $data['login'],
+                'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ])->schoolkid()->create([
@@ -80,8 +83,9 @@ class RegisterController extends Controller
         elseif ($data['role']=='t')
         {
             return User::create([
-                'name' => $data['name'],
                 'role' => $data['role'],
+                'login' => $data['login'],
+                'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ])->teacher()->create([
