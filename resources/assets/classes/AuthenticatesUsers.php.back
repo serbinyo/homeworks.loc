@@ -3,7 +3,7 @@
     /**
      *  для того, что бы авторизация проходила по логину а не по емейлу вставить трейт
      *  по пути \vendor\laravel\framework\src\Illuminate\Foundation\Auth\AuthenticatesUsers.php
-     *  заменив оригинал
+     *  стерев разширение .back заменив оригинал
      */
 
 namespace Illuminate\Foundation\Auth;
