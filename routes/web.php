@@ -28,24 +28,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('result/{id}', 'User\HomeworksController@show')->name('resultOfHomework');
 //
 Route::get('statistics', 'User\StatisticsController@index');
-//
-//
+
+
 //  //teacher
-Route::get('sethometask', 'Teacher\WorksController@index');
+Route::get('teacher/sethometask', 'Teacher\SethometasksController@index');
 //
-//Route::get('addhomework', 'Teacher\WorksController@create');
+//Route::get('teacher/addhomework', 'Teacher\WorksController@create');
 //
-//Route::get('addtask', 'Teacher\TaskController@create');
+//Route::get('teacher/addtask', 'Teacher\TaskController@create');
 //
-//Route::get('addtest', 'Teacher\TestController@create');
+//Route::get('teacher/addtest', 'Teacher\TestController@create');
 //
-//Route::get('addmaterial', 'Teacher\MaterialController@create');
+//Route::get('teacher/addmaterial', 'Teacher\MaterialController@create');
 //
-//Route::get('hometasks', 'Teacher\HomeworksController@index');
+//Route::get('teacher/hometasks', 'Teacher\HomeworksController@index');
 //
-//Route::get('solved', 'Teacher\HomeworksController@solved');
+//Route::get('teacher/solved', 'Teacher\HomeworksController@solved');
 //
-//Route::get('taskcheck/{id}', 'Teacher\HomeworksController@show')->name('taskCheck');
+//Route::get('teacher/taskcheck/{id}', 'Teacher\HomeworksController@show')->name('taskCheck');
 //
-//Route::get('taskcontrol/{id}', 'Teacher\HomeworksController@edit')->name('taskControl');
+//Route::get('teacher/taskcontrol/{id}', 'Teacher\HomeworksController@edit')->name('taskControl');
 

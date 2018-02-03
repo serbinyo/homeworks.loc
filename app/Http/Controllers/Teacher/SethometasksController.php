@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 
-class WorksController extends TeacherController
+class SethometasksController extends TeacherController
 {
     /**
      * Display a listing of the resource.
