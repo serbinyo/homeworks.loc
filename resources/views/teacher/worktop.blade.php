@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Teacher worktop!
                 </div>
             </div>
         </div>
