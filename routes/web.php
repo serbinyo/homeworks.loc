@@ -21,10 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //user
-
 Route::get('desktop', 'User\DesktopController@index');
 
 Route::get('statistics', 'User\StatisticsController@index');
+
+
 
 
 
@@ -32,5 +33,9 @@ Route::get('statistics', 'User\StatisticsController@index');
 Route::get('teacher/worktop', 'Teacher\WorktopController@index');
 
 Route::get('teacher/sethometask', 'Teacher\SethometasksController@index');
+
+Route::get('teacher/teachereg', 'Teacher\TeacheregController@index');
+
+Route::get('teacher/usereg', 'Teacher\UseregController@index');
 
 

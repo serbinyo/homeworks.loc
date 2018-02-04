@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
-    protected $user;
+//    protected $user;
 
     /**
      * Create a new controller instance.
@@ -18,7 +18,7 @@ class TeacherController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
-                $this->user = Auth::user();
+//                $this->user = Auth::user();
                 if (Auth::user()->role == 't') {
                     return $next($request);
                 } else {

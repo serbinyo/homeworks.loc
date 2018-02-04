@@ -55,7 +55,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->email }}
+                                    {{ Auth::user()->login }}
                                     {{--{{ Auth::user()->schoolkid->lastname }} --}}
                                     <span class="caret"></span>
                                 </a>

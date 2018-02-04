@@ -43,38 +43,45 @@
             </tbody>
         </table>
 
-        @if (!$user)
+        @if($user)
             <div class="enter_area">
-                <div class="enter_block">
-                    <a href="login" style="text-decoration: none"><div id="mybutton">  Войти в программу  </div></a>
+                <div class="hello_label">
+                    Вы
+                    {{ $user->login }}
+                    {{--{{$user->фамилия }}
+                    {{$user->имя }}
+                    {{$user->отчество }}--}}
                 </div>
+
+                <table class="hello_table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            @if ($user->role == 't')
+                                <a href="teacher/worktop" style="text-decoration: none" class="enter_button">В учительскую</a>
+                            @else
+                                <a href="desktop" style="text-decoration: none" class="enter_button">За уроки</a>
+                            @endif
+                        </td>
+                        <td>
+                            {!! Form::open(['url'=>route('logout')]) !!}
+                            {!! Form::submit('   Выйти  ',['class'=>'enter_button']) !!}
+                            {!! Form::close() !!}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @else
-            @if($user)
-                <div class="enter_area">
-                    <div class="hello_label">
-                        Вы
-                        {{--{{$user->фамилия }}
-                        {{$user->имя }}
-                        {{$user->отчество }}--}}
-                    </div>
-
-                    <table class="hello_table">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a href="/" style="text-decoration: none" class="enter_button">Продолжить</a>
-                            </td>
-                            <td>
-                                {!! Form::open(['url'=>route('logout')]) !!}
-                                {!! Form::submit('   Выйти  ',['class'=>'enter_button']) !!}
-                                {!! Form::close() !!}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="enter_area">
+                <div class="enter_block">
+                    <a href="login" style="text-decoration: none">
+                        <div id="mybutton"> Войти в программу</div>
+                    </a>
                 </div>
-            @endif
+            </div>
         @endif
+
+
     </section>
 @endsection
