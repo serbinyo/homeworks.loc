@@ -62,43 +62,6 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-/*    protected function create(array $data)
-    {
-        if ($data['role']=='s')
-        {
-            return User::create([
-                'role' => $data['role'],
-                'login' => $data['login'],
-                'password' => bcrypt($data['password']),
-            ])->schoolkid()->create([
-                'firstname' => data['firstname'],
-                'middlename' => data['middlename'],
-                'lastname' => data['lastname'],
-                'class' => data['class'],
-                'parants_contacts' => data['']
-            ]);
-        }
-        elseif ($data['role']=='t')
-        {
-            return User::create([
-                'role' => $data['role'],
-                'login' => $data['login'],
-                'password' => bcrypt($data['password']),
-            ])->teacher()->create([
-                'firstname' => data['firstname'],
-                'middlename' => data['middlename'],
-                'lastname' => data['lastname'],
-                'tel' => data['tel'],
-                'qualification' => data['qualification'],
-                'date_of_employment' => data['date_of_employment'],
-                'disciplines_id' => data['disciplines_id']
-            ]);
-        }
-        else
-        {
-            dd('Неизвестная роль');
-        }
-    }*/
     protected function create(array $data)
     {
         if ($data['role']=='s')
@@ -108,11 +71,10 @@ class RegisterController extends Controller
                 'login' => $data['login'],
                 'password' => bcrypt($data['password']),
             ])->schoolkid()->create([
-                'firstname' => 'iva',
-                'middlename' => 'vladimirovich',
-                'lastname' => 'sinica',
-                'class' => '8-Б',
-                'parants_contacts' => '+985654786 папа'
+                'firstname' => $data['firstname'],
+                'middlename' => $data['middlename'],
+                'lastname' => $data['lastname'],
+                'classes_id' => '3',
             ]);
         }
         elseif ($data['role']=='t')
@@ -120,14 +82,12 @@ class RegisterController extends Controller
             return User::create([
                 'role' => $data['role'],
                 'login' => $data['login'],
+                'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ])->teacher()->create([
-                'firstname' => 'uchit',
-                'middlename' => 'evgenovich',
-                'lastname' => 'gitsov',
-                'tel' => '+985655472',
-                'qualification' => 'master',
-                'date_of_employment' => '2012-12-16',
+                'firstname' => $data['firstname'],
+                'middlename' => $data['middlename'],
+                'lastname' => $data['lastname'],
                 'disciplines_id' => '3'
             ]);
         }

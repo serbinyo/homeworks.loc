@@ -16,7 +16,7 @@
                             {!! Form::hidden('role', 's') !!}
 
                             <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                                <label for="login" class="col-md-4 control-label">Login</label>
+                                <label for="login" class="col-md-4 control-label">Логин</label>
 
                                 <div class="col-md-6">
                                     <input id="login" type="text" class="form-control" name="login"
@@ -25,6 +25,66 @@
                                     @if ($errors->has('login'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('login') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                                <label for="lastname" class="col-md-4 control-label">Имя</label>
+
+                                <div class="col-md-6">
+                                    <input id="lastname" type="text" class="form-control" name="lastname"
+                                           value="{{ old('lastname') }}" required autofocus>
+
+                                    @if ($errors->has('lastname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
+                                <label for="firstname" class="col-md-4 control-label">firstname</label>
+
+                                <div class="col-md-6">
+                                    <input id="firstname" type="text" class="form-control" name="firstname"
+                                           value="{{ old('firstname') }}" required autofocus>
+
+                                    @if ($errors->has('firstname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('middlename') ? ' has-error' : '' }}">
+                                <label for="middlename" class="col-md-4 control-label">middlename</label>
+
+                                <div class="col-md-6">
+                                    <input id="middlename" type="text" class="form-control" name="middlename"
+                                           value="{{ old('middlename') }}" required autofocus>
+
+                                    @if ($errors->has('middlename'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('middlename') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('class') ? ' has-error' : '' }}">
+                                <label for="class" class="col-md-4 control-label">class</label>
+
+                                <div class="col-md-6">
+                                    <input id="class" type="text" class="form-control" name="class"
+                                           value="{{ old('class') }}" required autofocus>
+
+                                    @if ($errors->has('class'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('class') }}</strong>
                                     </span>
                                     @endif
                                 </div>

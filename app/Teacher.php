@@ -17,7 +17,7 @@ class Teacher  extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'middlename', 'lastname', 'tel', 'qualification', 'date_of_employment', 'disciplines_id'
+        'firstname', 'middlename', 'lastname', 'disciplines_id'
     ];
 
     public function user()
