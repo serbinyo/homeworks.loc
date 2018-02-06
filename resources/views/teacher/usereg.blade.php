@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-                                <label for="lastname" class="col-md-4 control-label">Имя</label>
+                                <label for="lastname" class="col-md-4 control-label">Фамилия</label>
 
                                 <div class="col-md-6">
                                     <input id="lastname" type="text" class="form-control" name="lastname"
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
-                                <label for="firstname" class="col-md-4 control-label">firstname</label>
+                                <label for="firstname" class="col-md-4 control-label">Имя</label>
 
                                 <div class="col-md-6">
                                     <input id="firstname" type="text" class="form-control" name="firstname"
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('middlename') ? ' has-error' : '' }}">
-                                <label for="middlename" class="col-md-4 control-label">middlename</label>
+                                <label for="middlename" class="col-md-4 control-label">Отчество</label>
 
                                 <div class="col-md-6">
                                     <input id="middlename" type="text" class="form-control" name="middlename"
@@ -75,23 +75,31 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('class') ? ' has-error' : '' }}">
-                                <label for="class" class="col-md-4 control-label">class</label>
+                            <div class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
+                                <label for="grade" class="col-md-4 control-label">Класс</label>
 
                                 <div class="col-md-6">
-                                    <input id="class" type="text" class="form-control" name="class"
-                                           value="{{ old('class') }}" required autofocus>
+                                    <select name="grade" class="form-control" id="grade" required>
+                                        <option selected="selected" value="">Выберите класс...</option>
+                                        @foreach($grades as $grade)
+                                            <option value={{$grade->id}} >
+                                                {{$grade->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    {{--<input id="grade" type="text" class="form-control" name="grade"--}}
+                                           {{--value="{{ old('grade') }}" required autofocus>--}}
 
-                                    @if ($errors->has('class'))
+                                    @if ($errors->has('grade'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('class') }}</strong>
+                                        <strong>{{ $errors->first('grade') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">Пароль</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required>
@@ -105,7 +113,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"

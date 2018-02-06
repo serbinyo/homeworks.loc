@@ -74,7 +74,7 @@ class RegisterController extends Controller
                 'firstname' => $data['firstname'],
                 'middlename' => $data['middlename'],
                 'lastname' => $data['lastname'],
-                'classes_id' => '3',
+                'grades_id' => $data['grade'],
             ]);
         }
         elseif ($data['role']=='t')
@@ -88,7 +88,7 @@ class RegisterController extends Controller
                 'firstname' => $data['firstname'],
                 'middlename' => $data['middlename'],
                 'lastname' => $data['lastname'],
-                'disciplines_id' => '3'
+                'disciplines_id' => $data['discipline']
             ]);
         }
         else

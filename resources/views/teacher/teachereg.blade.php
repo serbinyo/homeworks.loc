@@ -95,8 +95,16 @@
                                 <label for="discipline" class="col-md-4 control-label">Дисциплина</label>
 
                                 <div class="col-md-6">
-                                    <input id="discipline" type="text" class="form-control" name="discipline"
-                                           value="{{ old('discipline') }}" required autofocus>
+                                    <select name="discipline" class="form-control" id="discipline" required>
+                                        <option selected="selected" value="">Выберите предмет...</option>
+                                        @foreach($disciplines as $discipline)
+                                            <option value={{$discipline->id}} >
+                                                {{$discipline->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    {{--<input id="discipline" type="text" class="form-control" name="discipline"--}}
+                                           {{--value="{{ old('discipline') }}" required autofocus>--}}
 
                                     @if ($errors->has('discipline'))
                                         <span class="help-block">
