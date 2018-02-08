@@ -37,13 +37,17 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">СЭДЗ</a>
+                    <a class="navbar-brand" href="{{ url('/') }}">Главная</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        {{--<li><a href="#">Link1</a></li>--}}
+                        {{--<li><a href="#">Link2</a></li>--}}
+                        {{--<li><a href="#">Link3</a></li>--}}
+                        {{--<li><a href="#">Link4</a></li>--}}
+                        {{--<li><a href="#">Link5</a></li>--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->

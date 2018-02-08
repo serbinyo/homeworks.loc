@@ -16,8 +16,7 @@
 
                     Teacher worktop!<br>
 
-                    <a  href="/teacher/teachereg">Зарегистрировать учителя</a><br>
-                    <a  href="/teacher/usereg">Зареистрировать ученика</a>
+                    <a  href="/teacher/classrooms">В классы</a><br>
                 </div>
             </div>
         </div>

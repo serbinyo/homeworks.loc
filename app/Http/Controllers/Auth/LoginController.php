@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * По умолчанию Laravel использует для аутентификации поле email.
+     * Чтобы изменить это, определите метод username() в своём LoginController
+     *
+     * @return login_field
+     */
+    public function username()
+    {
+        return 'login';
     }
 }

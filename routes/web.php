@@ -13,29 +13,26 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('test', 'IndexController@index')->middleware('auth');;
+Route::get('/test', 'IndexController@index')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 //user
-Route::get('desktop', 'User\DesktopController@index');
+Route::get('/desktop', 'User\DesktopController@index');
 
-Route::get('statistics', 'User\StatisticsController@index');
-
-
-
+Route::get('/statistics', 'User\StatisticsController@index');
 
 
 //teacher
-Route::get('teacher/worktop', 'Teacher\WorktopController@index');
+Route::get('/teacher/worktop', 'Teacher\WorktopController@index');
 
-Route::get('teacher/sethometask', 'Teacher\SethometasksController@index');
+Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
 
-Route::get('teacher/teachereg', 'Teacher\TeacheregController@index');
+Route::get('/teacher/sethometask', 'Teacher\SethometasksController@index');
 
-Route::get('teacher/usereg', 'Teacher\UseregController@index');
+Route::get('/teacher/teachereg', 'Teacher\TeacheregController@index');
+
+Route::get('/teacher/usereg', 'Teacher\UseregController@index');
 
 
