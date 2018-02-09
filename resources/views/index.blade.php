@@ -46,11 +46,15 @@
         @if($user)
             <div class="enter_area">
                 <div class="hello_label">
-                    Вы
-                    {{ $user->login }}
-                    {{--{{$user->фамилия }}
-                    {{$user->имя }}
-                    {{$user->отчество }}--}}
+                    @if ($user->role == 't')
+                        Учитель
+                        {{ $user->teacher->lastname }}
+                        {{ $user->teacher->firstname }}
+                    @else
+                        Учащийся
+                        {{ $user->schoolkid->lastname }}
+                        {{ $user->schoolkid->firstname }}
+                    @endif
                 </div>
 
                 <table class="hello_table">
@@ -58,7 +62,8 @@
                     <tr>
                         <td>
                             @if ($user->role == 't')
-                                <a href="teacher/worktop" style="text-decoration: none" class="enter_button">В учительскую</a>
+                                <a href="teacher/worktop" style="text-decoration: none" class="enter_button">В
+                                    учительскую</a>
                             @else
                                 <a href="desktop" style="text-decoration: none" class="enter_button">За уроки</a>
                             @endif

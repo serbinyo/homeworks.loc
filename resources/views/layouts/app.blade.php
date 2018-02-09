@@ -23,71 +23,83 @@
     <link href="{{ asset('public/css/style_new.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#app-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">Главная</a>
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}" style="padding: 0px;">
+                    <img src="{{ asset('public/img/logo.jpg') }}" width="123" height="50" alt="logo">
+                </a>
+            </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        {{--<li><a href="#">Link1</a></li>--}}
-                        {{--<li><a href="#">Link2</a></li>--}}
-                        {{--<li><a href="#">Link3</a></li>--}}
-                        {{--<li><a href="#">Link4</a></li>--}}
-                        {{--<li><a href="#">Link5</a></li>--}}
-                    </ul>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    {{--<li><a href="#">Link1</a></li>--}}
+                    {{--<li><a href="#">Link2</a></li>--}}
+                    {{--<li><a href="#">Link3</a></li>--}}
+                    {{--<li><a href="#">Link4</a></li>--}}
+                    {{--<li><a href="#">Link5</a></li>--}}
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Войти</a></li>
-                            <li><a href="{{ route('register') }}">Зарегистрироваться</a></li>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a href="{{ route('login') }}">Войти</a></li>
+                        {{--<li><a href="{{ route('register') }}">Зарегистрироваться</a></li>--}}
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->login }}
-                                    {{--{{ Auth::user()->schoolkid->lastname }} --}}
-                                    <span class="caret"></span>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true">
+                                    @if (Auth::user()->role == 't')
+                                        Учитель
+                                        {{ Auth::user()->teacher->lastname }}
+                                        {{ Auth::user()->teacher->firstname }}
+                                    @else
+                                        Учащийся
+                                        {{ Auth::user()->schoolkid->lastname }}
+                                        {{ Auth::user()->schoolkid->firstname }}
+                                    @endif
+                                        <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Выход
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
-                    </ul>
-                </div>
+                            @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        @yield('content')
-    </div>
+    @yield('content')
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('public/js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('public/js/app.js') }}"></script>
 </body>
 </html>
