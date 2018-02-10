@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Добавить задачу!
                 </div>
             </div>
         </div>

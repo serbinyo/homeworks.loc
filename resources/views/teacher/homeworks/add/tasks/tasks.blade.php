@@ -14,10 +14,9 @@
                             </div>
                         @endif
 
-                        User desktop!<br>
+                        Список задач!
 
-                        <a href="/homeworks">Домашние задания</a><br>
-                        <a href="/statistics">Статистика</a><br>
+                        <a href="/teacher/homeworks/add/tasks/new">Добавить новую задачу</a><br>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Grade;
 use Illuminate\Http\Request;
 
-class UseregController extends TeacherController
+class UseRegController extends TeacherController
 {
     public function index(Grade $gradeModel)
     {

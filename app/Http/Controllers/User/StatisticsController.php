@@ -9,6 +9,6 @@ class StatisticsController extends UserController
 {
     public function index()
     {
-        return view('user.statistics', ['title' => 'ЭДЗ. Stat']);
+        return view('user.statistics.statistics', ['title' => 'ЭДЗ. Stat']);
     }
 }

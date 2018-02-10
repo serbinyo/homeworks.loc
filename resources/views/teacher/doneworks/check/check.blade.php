@@ -14,10 +14,9 @@
                             </div>
                         @endif
 
-                        Teacher worktop!<br>
+                        Контроль выполненной работы!<br>
 
-                        <a href="/teacher/homeworks">Домашние задания</a><br>
-                        <a href="/teacher/classrooms">В классы</a><br>
+                            <a href="/teacher/doneworks/check/edit">Правка</a><br>
                     </div>
                 </div>
             </div>

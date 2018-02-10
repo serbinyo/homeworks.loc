@@ -14,10 +14,7 @@
                             </div>
                         @endif
 
-                        User desktop!<br>
-
-                        <a href="/homeworks">Домашние задания</a><br>
-                        <a href="/statistics">Статистика</a><br>
+                        Выполнить дамашнее задание!<br>
                     </div>
                 </div>
             </div>

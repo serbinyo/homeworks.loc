@@ -6,10 +6,10 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 
 
-class WorktopController extends TeacherController
+class DesktopController extends TeacherController
 {
     public function index()
     {
-        return view('teacher.worktop', ['title' => 'ЭДЗ. Worktop']);
+        return view('teacher.teacher', ['title' => 'ЭДЗ. Teacher']);
     }
 }

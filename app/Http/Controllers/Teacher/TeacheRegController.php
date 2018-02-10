@@ -6,7 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Discipline;
 use Illuminate\Http\Request;
 
-class TeacheregController extends TeacherController
+class TeacheRegController extends TeacherController
 {
     public function index(Discipline $disciplineModel)
     {

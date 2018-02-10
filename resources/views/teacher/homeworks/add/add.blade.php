@@ -14,10 +14,11 @@
                             </div>
                         @endif
 
-                        User desktop!<br>
+                        Добавить домашнее задание!
 
-                        <a href="/homeworks">Домашние задания</a><br>
-                        <a href="/statistics">Статистика</a><br>
+                        <a href="/teacher/homeworks/add/tasks">Добавить задачу</a><br>
+                        <a href="/teacher/homeworks/add/tests">Добавить тест</a><br>
+                        <a href="/teacher/homeworks/add/materials">Добавить дополнительный учебный материал</a><br>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Учительская</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -14,9 +14,11 @@
                             </div>
                         @endif
 
-                        Просмотр домашнего задания!
+                        Teacher worktop!<br>
 
-                        <a href="/teacher/homeworks/view">Назначить домашнее задание</a><br>
+                        <a href="/teacher/homeworks">Домашние задания</a><br>
+                        <a href="/teacher/doneworks">Выполненные работы</a><br>
+                        <a href="/teacher/classrooms">В классы</a><br>
                     </div>
                 </div>
             </div>

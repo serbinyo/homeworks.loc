@@ -14,10 +14,9 @@
                             </div>
                         @endif
 
-                        User desktop!<br>
+                        Список дополнительных учебных материалов!
 
-                        <a href="/homeworks">Домашние задания</a><br>
-                        <a href="/statistics">Статистика</a><br>
+                        <a href="/teacher/homeworks/add/materials/new">Добавить новый материал</a><br>
                     </div>
                 </div>
             </div>

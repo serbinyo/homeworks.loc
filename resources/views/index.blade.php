@@ -62,10 +62,10 @@
                     <tr>
                         <td>
                             @if ($user->role == 't')
-                                <a href="teacher/worktop" style="text-decoration: none" class="enter_button">В
+                                <a href="/teacher" style="text-decoration: none" class="enter_button">В
                                     учительскую</a>
                             @else
-                                <a href="desktop" style="text-decoration: none" class="enter_button">За уроки</a>
+                                <a href="/desktop" style="text-decoration: none" class="enter_button">За уроки</a>
                             @endif
                         </td>
                         <td>
