@@ -27,12 +27,18 @@ Route::get('/statistics', 'User\StatisticsController@index');
 //teacher
 Route::get('/teacher/worktop', 'Teacher\WorktopController@index');
 
+Route::get('/teacher/homeworks', 'Teacher\HomeworksController@index');
+
+Route::get('/teacher/homeworks/view', 'Teacher\SetHomeworksController@index');
+
+Route::get('/teacher/homeworks/view/set', 'Teacher\SetHomeworksController@index');
+
+Route::get('/teacher/homeworks/add', 'Teacher\SetHomeworksController@index');
+
 Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
 
-Route::get('/teacher/sethometask', 'Teacher\SethometasksController@index');
+Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheregController@index');
 
-Route::get('/teacher/teachereg', 'Teacher\TeacheregController@index');
-
-Route::get('/teacher/usereg', 'Teacher\UseregController@index');
+Route::get('/teacher/classrooms/usereg', 'Teacher\UseregController@index');
 
 

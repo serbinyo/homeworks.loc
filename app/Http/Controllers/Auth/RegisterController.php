@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -64,9 +65,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        DB::beginTransaction();
         if ($data['role']=='s')
         {
-            return User::create([
+            $entity = User::create([
                 'role' => $data['role'],
                 'login' => $data['login'],
                 'password' => bcrypt($data['password']),
@@ -76,10 +78,12 @@ class RegisterController extends Controller
                 'lastname' => $data['lastname'],
                 'grades_id' => $data['grade'],
             ]);
+            DB::commit();
+            return $entity;
         }
         elseif ($data['role']=='t')
         {
-            return User::create([
+            $entity = User::create([
                 'role' => $data['role'],
                 'login' => $data['login'],
                 'email' => $data['email'],
@@ -90,6 +94,8 @@ class RegisterController extends Controller
                 'lastname' => $data['lastname'],
                 'disciplines_id' => $data['discipline']
             ]);
+            DB::commit();
+            return $entity;
         }
         else
         {

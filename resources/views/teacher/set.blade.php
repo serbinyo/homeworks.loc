@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Учительская</div>
+                <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -14,10 +14,7 @@
                         </div>
                     @endif
 
-                    Teacher worktop!<br>
-
-                    <a  href="/teacher/classrooms/teachereg">Зарегистрировать учителя</a><br>
-                    <a  href="/teacher/classrooms/usereg">Зареистрировать ученика</a>
+                    You are logged in!
                 </div>
             </div>
         </div>

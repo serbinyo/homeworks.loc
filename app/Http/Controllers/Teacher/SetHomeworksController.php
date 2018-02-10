@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 
-class SethometasksController extends TeacherController
+class SetHomeworksController extends TeacherController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SethometasksController extends TeacherController
      */
     public function index()
     {
-        return view('teacher.sethometask', ['title' => 'ЭДЗ. Sethometask']);
+        return view('teacher.set', ['title' => 'ЭДЗ. Sethometask']);
     }
 
     /**
