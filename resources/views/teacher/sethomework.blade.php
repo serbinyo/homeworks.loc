@@ -14,12 +14,15 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Назначить домашнее задание!
+                        Выбрать класс и назначить.<br><br>
 
-                        Форма добавления<br><br>
+                        {{$id}}<br><br>
 
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
+                        Выбор класса!<br><br>
+
+                        {!! Form::open(['url'=>route('homeworks.store'),'method'=>'post']) !!}
+                        {!! Form::submit('Назначить задание', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

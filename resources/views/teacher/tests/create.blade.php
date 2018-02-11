@@ -14,12 +14,12 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Добавить тест!<br><br>
 
                         Форма добавления<br><br>
 
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
+                        {!! Form::open(['url'=>route('tests.store'),'method'=>'post']) !!}
+                        {!! Form::submit('Сохранить новый тест', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

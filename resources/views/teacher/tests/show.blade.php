@@ -14,12 +14,15 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Просмотр теста!<br>
 
-                        Форма добавления<br><br>
+                        <a href="{{route('tests.edit', ['id'=>'$test->id'])}}">Изменить</a><br>
 
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
+                        <a href="{{route('setTest', ['id'=>'$test->id'])}}">Назначить тест</a><br>
+
+                        {!! Form::open(['url'=>route('tests.destroy', ['id'=>'$test->id'])]) !!}
+                        {!! Form::submit('Удалить', ['class'=>'']) !!}
+                        {{method_field('DELETE')}}
                         {!! Form::close() !!}
                     </div>
                 </div>

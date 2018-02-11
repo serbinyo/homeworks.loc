@@ -14,13 +14,10 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Список тестов!<br>
 
-                        Форма добавления<br><br>
-
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
-                        {!! Form::close() !!}
+                        <a href="{{route('tests.show', ['id'=>'$test->id'])}}">Просмотр теста</a><br>
+                        <a href="{{route('tests.create')}}">Добавить новый тест</a><br>
                     </div>
                 </div>
             </div>

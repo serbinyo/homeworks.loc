@@ -14,9 +14,16 @@
                             </div>
                         @endif
 
-                        Просмотр домашнего задания!
+                        Просмотр домашнего задания!<br>
 
-                        <a href="/teacher/works/view/set">Назначить домашнее задание</a><br>
+                        <a href="{{route('works.edit', ['id'=>'$work->id'])}}">Изменить задание</a><br>
+
+                        <a href="{{route('setHomework', ['id'=>'$work->id'])}}">Назначить задание</a><br>
+
+                        {!! Form::open(['url'=>route('works.destroy', ['id'=>'$work->id'])]) !!}
+                        {!! Form::submit('Удалить', ['class'=>'']) !!}
+                        {{method_field('DELETE')}}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

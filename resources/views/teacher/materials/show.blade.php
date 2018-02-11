@@ -14,12 +14,15 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Просмотр дополнительного учебного материала!<br>
 
-                        Форма добавления<br><br>
+                        <a href="{{route('materials.edit', ['id'=>'$material->id'])}}">Изменить</a><br>
 
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
+                        <a href="{{route('setMaterial', ['id'=>'$material->id'])}}">Назначить материал</a><br>
+
+                        {!! Form::open(['url'=>route('materials.destroy', ['id'=>'$material->id'])]) !!}
+                        {!! Form::submit('Удалить', ['class'=>'']) !!}
+                        {{method_field('DELETE')}}
                         {!! Form::close() !!}
                     </div>
                 </div>

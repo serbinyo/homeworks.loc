@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Учительская</div>
+                    <div class="panel-heading">Dashboard</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -14,11 +14,13 @@
                             </div>
                         @endif
 
-                        Teacher worktop!<br>
+                        Добавить задачу!<br><br>
 
-                        <a href="/teacher/works">Домашние задания</a><br>
-                        <a href="/teacher/doneworks">Выполненные работы</a><br>
-                        <a href="/teacher/classrooms">В классы</a><br>
+                        Форма добавления<br><br>
+
+                        {!! Form::open(['url'=>route('tasks.store'),'method'=>'post']) !!}
+                        {!! Form::submit('Сохранить новую задачу', ['class'=>'']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

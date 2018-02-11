@@ -14,7 +14,7 @@ class MaterialController extends TeacherController
      */
     public function index()
     {
-        echo __METHOD__;
+        return view('teacher.materials', ['title' => 'ЭДЗ. Материалы']);
     }
 
     /**
@@ -24,7 +24,7 @@ class MaterialController extends TeacherController
      */
     public function create()
     {
-        echo __METHOD__;
+        return view('teacher.materials.create', ['title' => 'ЭДЗ. Новый учебыный материал']);
     }
 
     /**
@@ -46,7 +46,7 @@ class MaterialController extends TeacherController
      */
     public function show($id)
     {
-        echo __METHOD__;
+        return view('teacher.materials.show', ['title' => 'ЭДЗ. Просмотр учебного материала']);
     }
 
     /**
@@ -81,5 +81,6 @@ class MaterialController extends TeacherController
     public function destroy($id)
     {
         echo __METHOD__;
+        dump($id);
     }
 }

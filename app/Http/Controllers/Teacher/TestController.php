@@ -14,7 +14,7 @@ class TestController extends TeacherController
      */
     public function index()
     {
-        echo __METHOD__;
+        return view('teacher.tests', ['title' => 'ЭДЗ. Тесты']);
     }
 
     /**
@@ -24,7 +24,7 @@ class TestController extends TeacherController
      */
     public function create()
     {
-        echo __METHOD__;
+        return view('teacher.tests.create', ['title' => 'ЭДЗ. Новый тест']);
     }
 
     /**
@@ -46,7 +46,7 @@ class TestController extends TeacherController
      */
     public function show($id)
     {
-        echo __METHOD__;
+        return view('teacher.tests.show', ['title' => 'ЭДЗ. Просмотр теста']);
     }
 
     /**
@@ -81,5 +81,6 @@ class TestController extends TeacherController
     public function destroy($id)
     {
         echo __METHOD__;
+        dump($id);
     }
 }

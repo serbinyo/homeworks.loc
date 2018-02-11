@@ -14,9 +14,10 @@
                             </div>
                         @endif
 
-                        Список задач!
+                        Список задач!<br>
 
-                        <a href="/teacher/works/add/tasks/new">Добавить новую задачу</a><br>
+                        <a href="{{route('tasks.show', ['id'=>'$task->id'])}}">Просмотр задачи</a><br>
+                        <a href="{{route('tasks.create')}}">Добавить новую задачу</a><br>
                     </div>
                 </div>
             </div>

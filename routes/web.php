@@ -76,13 +76,19 @@ Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
 
 Route::get('/teacher', 'Teacher\DesktopController@index');
 
-Route::get('/teacher/works/view/set', 'Teacher\SetWorkController@index');
+Route::get('/teacher/set/homework', 'Teacher\SetHomeworkController@create')->name('setHomework');
 
-Route::resource('/teacher/works/add/tasks', 'Teacher\TaskController');
+Route::get('/teacher/set/task', 'Teacher\SetTaskController@create')->name('setTask');
 
-Route::resource('/teacher/works/add/tests', 'Teacher\TestController');
+Route::get('/teacher/set/test', 'Teacher\SetTestController@create')->name('setTest');
 
-Route::resource('/teacher/works/add/materials', 'Teacher\MaterialController');
+Route::get('/teacher/set/material', 'Teacher\SetMaterialController@create')->name('setMaterial');
+
+Route::resource('/teacher/tasks', 'Teacher\TaskController');
+
+Route::resource('/teacher/tests', 'Teacher\TestController');
+
+Route::resource('/teacher/materials', 'Teacher\MaterialController');
 
 Route::resource('/teacher/works', 'Teacher\WorksController');
 

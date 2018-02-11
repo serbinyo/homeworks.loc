@@ -14,9 +14,10 @@
                             </div>
                         @endif
 
-                        Список дополнительных учебных материалов!
+                        Список дополнительных учебных материалов!<br>
 
-                        <a href="/teacher/works/add/materials/new">Добавить новый материал</a><br>
+                        <a href="{{route('materials.show', ['id'=>'$material->id'])}}">Просмотр материала</a><br>
+                        <a href="{{route('materials.create')}}">Добавить новый материал</a><br>
                     </div>
                 </div>
             </div>

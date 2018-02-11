@@ -15,7 +15,7 @@ class WorksController extends TeacherController
      */
     public function index()
     {
-        return view('teacher.works', ['title' => 'ЭДЗ. Домработы']);
+        return view('teacher.works', ['title' => 'ЭДЗ. Задания']);
     }
 
     /**
@@ -25,13 +25,13 @@ class WorksController extends TeacherController
      */
     public function create()
     {
-        return view ('teacher.works.create', ['title' => 'ЭДЗ. Домработы']);
+        return view('teacher.works.create', ['title' => 'ЭДЗ. Создать задание']);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,18 +42,18 @@ class WorksController extends TeacherController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view ('teacher.works.show', ['title' => 'ЭДЗ. Домработы']);
+        return view('teacher.works.show', ['title' => 'ЭДЗ. Просмотр задания']);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +64,8 @@ class WorksController extends TeacherController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,11 +76,12 @@ class WorksController extends TeacherController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         echo __METHOD__;
+        dump($id);
     }
 }

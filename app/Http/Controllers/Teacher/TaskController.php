@@ -14,7 +14,7 @@ class TaskController extends TeacherController
      */
     public function index()
     {
-        echo __METHOD__;
+        return view('teacher.tasks', ['title' => 'ЭДЗ. Задачи']);
     }
 
     /**
@@ -24,7 +24,7 @@ class TaskController extends TeacherController
      */
     public function create()
     {
-        echo __METHOD__;
+        return view('teacher.tasks.create', ['title' => 'ЭДЗ. Новая задача']);
     }
 
     /**
@@ -46,7 +46,7 @@ class TaskController extends TeacherController
      */
     public function show($id)
     {
-        echo __METHOD__;
+        return view('teacher.tasks.show', ['title' => 'ЭДЗ. Просмотр задачи']);
     }
 
     /**
@@ -81,5 +81,6 @@ class TaskController extends TeacherController
     public function destroy($id)
     {
         echo __METHOD__;
+        dump($id);
     }
 }

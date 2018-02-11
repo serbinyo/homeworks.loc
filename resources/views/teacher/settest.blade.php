@@ -14,9 +14,15 @@
                             </div>
                         @endif
 
-                        Список тестов!
+                        Добавление теста в работу!<br><br>
 
-                        <a href="/teacher/works/add/tests/new">Добавить новый тест</a><br>
+                        {{$id}}<br><br>
+
+                        Выбрать работу и добавить.<br><br>
+
+                        {!! Form::open(['url'=>'route(.store)','method'=>'post']) !!}
+                        {!! Form::submit('Добавить тест в работу', ['class'=>'']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

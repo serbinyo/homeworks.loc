@@ -10,6 +10,6 @@ class DesktopController extends TeacherController
 {
     public function index()
     {
-        return view('teacher.teacher', ['title' => 'ЭДЗ. Teacher']);
+        return view('teacher.desktop', ['title' => 'ЭДЗ. TeacherDesktop']);
     }
 }

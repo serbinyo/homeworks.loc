@@ -14,12 +14,15 @@
                             </div>
                         @endif
 
-                        Добавить домашнее задание!<br>
+                        Просмотр задачи!<br>
 
-                        Форма добавления<br><br>
+                        <a href="{{route('tasks.edit', ['id'=>'$task->id'])}}">Изменить</a><br>
 
-                        {!! Form::open(['url'=>route('works.store'),'method'=>'post']) !!}
-                        {!! Form::submit('Сохранить новое задание', ['class'=>'']) !!}
+                        <a href="{{route('setTask', ['id'=>'$task->id'])}}">Назначить задачу</a><br>
+
+                        {!! Form::open(['url'=>route('tasks.destroy', ['id'=>'$task->id'])]) !!}
+                        {!! Form::submit('Удалить', ['class'=>'']) !!}
+                        {{method_field('DELETE')}}
                         {!! Form::close() !!}
                     </div>
                 </div>
