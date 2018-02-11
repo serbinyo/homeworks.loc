@@ -14,9 +14,9 @@
                             </div>
                         @endif
 
-                        Список дополнительных учебных материалов!
+                        Просмотр домашнего задания!
 
-                        <a href="/teacher/homeworks/add/materials/new">Добавить новый материал</a><br>
+                        <a href="/teacher/works/view/set">Назначить домашнее задание</a><br>
                     </div>
                 </div>
             </div>

@@ -33,28 +33,30 @@ Route::get('/statistics', 'User\StatisticsController@index');
 
 
 //teacher
+
+/*
 Route::get('/teacher', 'Teacher\DesktopController@index');
 
 
-Route::get('/teacher/homeworks', 'Teacher\HomeworksController@index');
+Route::get('/teacher/works', 'Teacher\WorksController@index');
 
-Route::get('/teacher/homeworks/view', 'Teacher\ViewHomeworkController@index');
+Route::get('/teacher/works/view', 'Teacher\ViewWorkController@index');
 
-Route::get('/teacher/homeworks/view/set', 'Teacher\SetHomeworkController@index');
+Route::get('/teacher/works/view/set', 'Teacher\SetWorkController@index');
 
-Route::get('/teacher/homeworks/add', 'Teacher\AddHomeworkController@index');
+Route::get('/teacher/works/add', 'Teacher\AddWorkController@index');
 
-Route::get('/teacher/homeworks/add/tasks', 'Teacher\AddTaskController@index');
+Route::get('/teacher/works/add/tasks', 'Teacher\AddTaskController@index');
 
-Route::get('/teacher/homeworks/add/tasks/new', 'Teacher\NewTaskController@index');
+Route::get('/teacher/works/add/tasks/new', 'Teacher\NewTaskController@index');
 
-Route::get('/teacher/homeworks/add/tests', 'Teacher\AddTestController@index');
+Route::get('/teacher/works/add/tests', 'Teacher\AddTestController@index');
 
-Route::get('/teacher/homeworks/add/tests/new', 'Teacher\NewTestController@index');
+Route::get('/teacher/works/add/tests/new', 'Teacher\NewTestController@index');
 
-Route::get('/teacher/homeworks/add/materials', 'Teacher\AddMaterialController@index');
+Route::get('/teacher/works/add/materials', 'Teacher\AddMaterialController@index');
 
-Route::get('/teacher/homeworks/add/materials/new', 'Teacher\NewMaterialController@index');
+Route::get('/teacher/works/add/materials/new', 'Teacher\NewMaterialController@index');
 
 
 Route::get('/teacher/doneworks', 'Teacher\DoneWorksController@index');
@@ -62,6 +64,32 @@ Route::get('/teacher/doneworks', 'Teacher\DoneWorksController@index');
 Route::get('/teacher/doneworks/check', 'Teacher\CheckDoneWorksController@index');
 
 Route::get('/teacher/doneworks/check/edit', 'Teacher\EditDoneWorksController@index');
+
+
+Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
+
+Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheRegController@index');
+
+Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
+ */
+
+
+Route::get('/teacher', 'Teacher\DesktopController@index');
+
+Route::get('/teacher/works/view/set', 'Teacher\SetWorkController@index');
+
+Route::resource('/teacher/works/add/tasks', 'Teacher\TaskController');
+
+Route::resource('/teacher/works/add/tests', 'Teacher\TestController');
+
+Route::resource('/teacher/works/add/materials', 'Teacher\MaterialController');
+
+Route::resource('/teacher/works', 'Teacher\WorksController');
+
+
+
+Route::resource('/teacher/homeworks', 'Teacher\HomeworksController');
+
 
 
 Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');

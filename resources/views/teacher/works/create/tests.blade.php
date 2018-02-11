@@ -14,9 +14,9 @@
                             </div>
                         @endif
 
-                        Просмотр домашнего задания!
+                        Список тестов!
 
-                        <a href="/teacher/homeworks/view/set">Назначить домашнее задание</a><br>
+                        <a href="/teacher/works/add/tests/new">Добавить новый тест</a><br>
                     </div>
                 </div>
             </div>

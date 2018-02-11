@@ -15,8 +15,8 @@
                     @endif
                         Список домашних работ по темам<br>
 
-                        <a href="/teacher/homeworks/view">Просмотр домашнего задания</a><br>
-                        <a  href="/teacher/homeworks/add">Добавление домашнего задания</a><br>
+                        <a href="/teacher/works/id">Просмотр домашнего задания</a><br>
+                        <a  href="/teacher/works/create">Новое домашнее задание</a><br>
                 </div>
             </div>
         </div>

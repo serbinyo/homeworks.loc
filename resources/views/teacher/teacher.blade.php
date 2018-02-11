@@ -16,7 +16,7 @@
 
                         Teacher worktop!<br>
 
-                        <a href="/teacher/homeworks">Домашние задания</a><br>
+                        <a href="/teacher/works">Домашние задания</a><br>
                         <a href="/teacher/doneworks">Выполненные работы</a><br>
                         <a href="/teacher/classrooms">В классы</a><br>
                     </div>

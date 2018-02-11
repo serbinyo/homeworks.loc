@@ -14,9 +14,9 @@
                             </div>
                         @endif
 
-                        Список тестов!
+                        Список дополнительных учебных материалов!
 
-                        <a href="/teacher/homeworks/add/tests/new">Добавить новый тест</a><br>
+                        <a href="/teacher/works/add/materials/new">Добавить новый материал</a><br>
                     </div>
                 </div>
             </div>

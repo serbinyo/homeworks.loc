@@ -14,9 +14,11 @@
                             </div>
                         @endif
 
-                        Список задач!
+                        Добавить домашнее задание!<br>
 
-                        <a href="/teacher/homeworks/add/tasks/new">Добавить новую задачу</a><br>
+                        <a href="/teacher/works/add/tasks">Выбрать задачу</a><br>
+                        <a href="/teacher/works/add/tests">Выбрать тест</a><br>
+                        <a href="/teacher/works/add/materials">Выбрать дополнительный учебный материал</a><br>
                     </div>
                 </div>
             </div>

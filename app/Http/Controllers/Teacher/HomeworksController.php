@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 
-class SetHomeworkController extends TeacherController
+class HomeworksController extends TeacherController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SetHomeworkController extends TeacherController
      */
     public function index()
     {
-        return view('teacher.set', ['title' => 'ЭДЗ. Sethometask']);
+        echo __METHOD__;
     }
 
     /**
@@ -24,7 +24,7 @@ class SetHomeworkController extends TeacherController
      */
     public function create()
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -35,7 +35,7 @@ class SetHomeworkController extends TeacherController
      */
     public function store(Request $request)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -46,7 +46,7 @@ class SetHomeworkController extends TeacherController
      */
     public function show($id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -57,7 +57,7 @@ class SetHomeworkController extends TeacherController
      */
     public function edit($id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -69,7 +69,7 @@ class SetHomeworkController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -80,6 +80,6 @@ class SetHomeworkController extends TeacherController
      */
     public function destroy($id)
     {
-        //
+        echo __METHOD__;
     }
 }
