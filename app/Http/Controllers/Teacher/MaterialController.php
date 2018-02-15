@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
+use App\Material;
 
 class MaterialController extends TeacherController
 {
@@ -33,9 +34,15 @@ class MaterialController extends TeacherController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Material $material)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $result = $material->store($data, $this->teacher->getAuthIdentifier());
+        if (is_array($result) && array_key_exists('errors', $result))
+        {
+            return view('teacher.materials.create', ['title' => 'ЭДЗ. Новый учебыный материал ', 'errors' => $result['errors']]);
+        }
+        return view('teacher.materials.create', ['title' => 'ЭДЗ. Новый учебыный материал']);
     }
 
     /**

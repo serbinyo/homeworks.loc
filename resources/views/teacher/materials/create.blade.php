@@ -13,12 +13,20 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
+                        @include('common.errors')
                         Добавить дополнительный учебный материал!<br><br>
 
                         Форма добавления<br><br>
 
                         {!! Form::open(['url'=>route('materials.store'),'method'=>'post']) !!}
+                        {!! Form::label('theme', 'Тема') !!}
+                        {!! Form::text('theme', '',['required']) !!}<br>
+                        {!! Form::label('image', 'Изображние') !!}
+                        {!! Form::text('image', '',['required']) !!}<br>
+                        {!! Form::label('title', 'Заголовок') !!}
+                        {!! Form::text('title', '')!!}<br>
+                        {!! Form::label('body', 'Основной текст') !!}
+                        {!! Form::text('body', '',['required']) !!}<br>
                         {!! Form::submit('Сохранить новый материал', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>

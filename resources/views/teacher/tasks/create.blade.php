@@ -13,12 +13,19 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
+                        @include('common.errors')
                         Добавить задачу!<br><br>
 
                         Форма добавления<br><br>
 
-                        {!! Form::open(['url'=>route('tasks.store'),'method'=>'post']) !!}
+
+                        {!! Form::open(['route'=>'tasks.store','method'=>'post']) !!}
+                        {!! Form::label('theme', 'Тема задачи') !!}
+                        {!! Form::text('theme', '',['required']) !!}<br>
+                        {!! Form::label('task', 'Задание') !!}
+                        {!! Form::text('task', '', ['required']) !!}<br>
+                        {!! Form::label('answer', 'Ответ') !!}
+                        {!! Form::text('answer', '', ['required']) !!}<br>
                         {!! Form::submit('Сохранить новую задачу', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>

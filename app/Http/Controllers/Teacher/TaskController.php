@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
+use App\Task;
 
 class TaskController extends TeacherController
 {
@@ -33,9 +34,15 @@ class TaskController extends TeacherController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Task $task)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $result = $task->store($data, $this->teacher->getAuthIdentifier());
+        if (is_array($result) && array_key_exists('errors', $result))
+        {
+            return view('teacher.tasks.create', ['title' => 'ЭДЗ. Новая задача', 'errors' => $result['errors']]);
+        }
+        return view('teacher.tasks.create', ['title' => 'ЭДЗ. Новая задача']);
     }
 
     /**
@@ -70,6 +77,7 @@ class TaskController extends TeacherController
     public function update(Request $request, $id)
     {
         echo __METHOD__;
+        dump($id);
     }
 
     /**
