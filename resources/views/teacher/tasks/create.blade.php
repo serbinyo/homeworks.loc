@@ -20,12 +20,16 @@
 
 
                         {!! Form::open(['route'=>'tasks.store','method'=>'post']) !!}
-                        {!! Form::label('theme', 'Тема задачи') !!}
+
+                        {!! Form::label('theme', 'Тема задачи:') !!}<br>
                         {!! Form::text('theme', '',['required']) !!}<br>
-                        {!! Form::label('task', 'Задание') !!}
-                        {!! Form::text('task', '', ['required']) !!}<br>
-                        {!! Form::label('answer', 'Ответ') !!}
-                        {!! Form::text('answer', '', ['required']) !!}<br>
+
+                        {!! Form::label('task', 'Задание:') !!}<br>
+                        {!! Form::textarea('task', '', ['required']) !!}<br>
+
+                        {!! Form::label('answer', 'Ответ:') !!}<br>
+                        {!! Form::text('answer', '', ['required']) !!}<br><br>
+
                         {!! Form::submit('Сохранить новую задачу', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>

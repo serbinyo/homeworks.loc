@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
+use App\Test;
+use Response;
 
 class TestController extends TeacherController
 {
@@ -33,9 +35,16 @@ class TestController extends TeacherController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Test $test)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $response = $test->store($data, $this->teacher->getAuthIdentifier());
+        if (is_array($response) && array_key_exists('errors', $response))
+        {
+            //return view('teacher.tests.create', ['title' => 'ЭДЗ. Новый тест', 'errors' => $response['errors']]);
+            return Response::json(['errors'=>$response['errors']]);
+        }
+        return view('teacher.tests.create', ['title' => 'ЭДЗ. Новый тест']);
     }
 
     /**

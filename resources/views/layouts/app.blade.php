@@ -21,6 +21,8 @@
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/style_new.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{asset('public/js/jquery-3.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/homewrks.js') }}"></script>
 </head>
 <body>
 <div id="app">
@@ -97,6 +99,7 @@
     </nav>
 
     @yield('content')
+    <div class="wrap_result"></div>
 </div>
 
 <!-- Scripts -->

@@ -8,7 +8,7 @@ use Validator;
 class Task extends Model
 {
     protected $fillable = [
-        'teachers_id','theme', 'task', 'answer'
+        'teachers_id', 'theme', 'task', 'answer'
     ];
 
     public function store($data, $teachers_id)

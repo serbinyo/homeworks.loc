@@ -19,14 +19,19 @@
                         Форма добавления<br><br>
 
                         {!! Form::open(['url'=>route('materials.store'),'method'=>'post']) !!}
-                        {!! Form::label('theme', 'Тема') !!}
+
+                        {!! Form::label('theme', 'Тема:') !!}<br>
                         {!! Form::text('theme', '',['required']) !!}<br>
-                        {!! Form::label('image', 'Изображние') !!}
+
+                        {!! Form::label('image', 'Изображние:') !!}<br>
                         {!! Form::text('image', '',['required']) !!}<br>
-                        {!! Form::label('title', 'Заголовок') !!}
+
+                        {!! Form::label('title', 'Заголовок:') !!}<br>
                         {!! Form::text('title', '')!!}<br>
-                        {!! Form::label('body', 'Основной текст') !!}
-                        {!! Form::text('body', '',['required']) !!}<br>
+
+                        {!! Form::label('body', 'Основной текст:') !!}<br>
+                        {!! Form::textarea('body', '',['required']) !!}<br>
+
                         {!! Form::submit('Сохранить новый материал', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>
