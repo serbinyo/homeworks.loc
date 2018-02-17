@@ -43,8 +43,8 @@ class MaterialController extends TeacherController
             return back()->withInput()->withErrors($response['errors']);
         }
         $new_material_id = $response->id;
-        $message = 'Тест добавлен c номером ' . $new_material_id;
-        return redirect('/teacher/materials/create')->with('status', $message);
+        $message = 'Учебный материал добавлен под номером ' . $new_material_id;
+        return redirect('/teacher/materials')->with('status', $message);
     }
 
     /**
@@ -55,7 +55,13 @@ class MaterialController extends TeacherController
      */
     public function show($id)
     {
-        return view('teacher.materials.show', ['title' => 'ЭДЗ. Просмотр учебного материала']);
+        $material = new Material();
+        $material_to_show = $material->show($id);
+        return view('teacher.materials.show', [
+            'title' => 'ЭДЗ. Просмотр учебного материала',
+            'material' => $material_to_show,
+            'teacher' => $this->teacher
+        ]);
     }
 
     /**
@@ -66,7 +72,9 @@ class MaterialController extends TeacherController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $material = new Material();
+        $material_to_update = $material->show($id);
+        return view('teacher.materials.edit', ['title' => 'ЭДЗ. Новый тест', 'material_to_update'=>$material_to_update]);
     }
 
     /**
@@ -89,7 +97,9 @@ class MaterialController extends TeacherController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $material = new Material();
+        $material->kill($id);
+        $message = 'Учебный материал ' . $id . ' удален!';
+        return redirect('/teacher/materials')->with('status', $message);
     }
 }

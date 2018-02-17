@@ -18,6 +18,12 @@ class Task extends Model
         return $entities;
     }
 
+    public function show($id)
+    {
+        $entity = DB::table('tasks')->where('id',$id)->first();
+        return $entity;
+    }
+
     public function store($data, $teachers_id)
     {
         if ($err = $this->validate($data)) {
@@ -57,6 +63,6 @@ class Task extends Model
     public function kill($id)
     {
         $entity = self::find($id);
-        $entity->delete();
+        return $entity->delete();
     }
 }

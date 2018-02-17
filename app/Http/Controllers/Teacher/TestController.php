@@ -45,8 +45,8 @@ class TestController extends TeacherController
             return back()->withInput()->withErrors($response['errors']);
         }
         $new_test_id = $response->id;
-        $message = 'Тест добавлен c номером ' . $new_test_id;
-        return redirect('/teacher/tests/create')->with('status', $message);
+        $message = 'Тест добавлен под номером ' . $new_test_id;
+        return redirect('/teacher/tests')->with('status', $message);
     }
 
     /**
@@ -57,7 +57,7 @@ class TestController extends TeacherController
      */
     public function show($id)
     {
-        $test = new Test;
+        $test = new Test();
         $test_to_show = $test->show($id);
         return view('teacher.tests.show', [
             'title' => 'ЭДЗ. Просмотр теста',
@@ -74,7 +74,9 @@ class TestController extends TeacherController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $test = new Test();
+        $test_to_update = $test->show($id);
+        return view('teacher.tests.edit', ['title' => 'ЭДЗ. Новый тест', 'test_to_update'=>$test_to_update]);
     }
 
     /**
@@ -97,7 +99,9 @@ class TestController extends TeacherController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $test = new Test();
+        $test->kill($id);
+        $message = 'Задача ' . $id . ' удалена!';
+        return redirect('/teacher/tests')->with('status', $message);
     }
 }

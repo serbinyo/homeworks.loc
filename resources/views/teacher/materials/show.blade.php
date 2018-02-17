@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">
+                        Дополнительный учебный материал № : {{ $material->id }}
+                    </div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -14,16 +16,36 @@
                             </div>
                         @endif
 
+                        <a href="/teacher/materials/">Вернуться к списку учебных материалов</a><br><br>
+
                         Просмотр дополнительного учебного материала!<br>
 
-                        <a href="{{route('materials.edit', ['id'=>'$material->id'])}}">Изменить</a><br>
+                        <hr>
+                        Тема: {{$material->theme}}<br>
+                        Изображение: {{$material->image}}<br><br>
 
-                        <a href="{{route('setMaterial', ['id'=>'$material->id'])}}">Назначить материал</a><br>
+                        Заголовок: {{ $material->title }}<br><br>
 
-                        {!! Form::open(['url'=>route('materials.destroy', ['id'=>'$material->id'])]) !!}
-                        {!! Form::submit('Удалить', ['class'=>'']) !!}
-                        {{method_field('DELETE')}}
-                        {!! Form::close() !!}
+                        {!! nl2br($material->body) !!}<br><br>
+
+                        <a href="{{route('setMaterial', ['id'=>$material->id])}}">
+                            Назначить
+                        </a><br>
+
+                        <hr>
+
+                        @if ($teacher->id === $material->teachers_id)
+                            <a href="{{route('materials.edit', ['id'=>$material->id])}}">Изменить</a><br>
+
+                            {!! Form::open(['url'=>route('materials.destroy', ['id'=>$material->id])]) !!}
+                            {!! Form::submit('Удалить', ['class'=>'']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
+                        @else
+                            <p>
+                                Вы не можете править и удалять тесты которые не создавали
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

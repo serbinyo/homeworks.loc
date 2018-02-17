@@ -18,10 +18,20 @@ class Material extends Model
         return $entities;
     }
 
+    public function show($id)
+    {
+        $entity = DB::table('materials')->where('id',$id)->first();
+        return $entity;
+    }
+
     public function store($data, $teachers_id)
     {
         if ($err = $this->validate($data)) {
             return $err;
+        }
+
+        if ($data['image'] == '') {
+            $data['image'] = 'no image';
         }
 
         $newMaterial = [
@@ -50,10 +60,6 @@ class Material extends Model
                 'body.required' => 'Необходимо указать основной текст'
             ]);
 
-        if ($data['image'] == '') {
-            $data['image'] = 'no image';
-        }
-
         if ($validator->fails()) {
             return ['errors' => $validator->errors()];
         }
@@ -62,6 +68,6 @@ class Material extends Model
     public function kill($id)
     {
         $entity = self::find($id);
-        $entity->delete();
+        return $entity->delete();
     }
 }

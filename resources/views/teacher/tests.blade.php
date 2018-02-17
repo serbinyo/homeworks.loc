@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Список тестов!</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -17,9 +17,8 @@
                         <a href="/teacher">Вернуться в учительскую</a><br><br>
                         <a href="{{route('tests.create')}}">Добавить новый тест</a><br><br>
 
-                        Список тестов!<br><br>
-                        <hr>
 
+                        <hr>
                         @foreach($tests as $test)
 
                             Тест №: {{ $test->id }}<br>

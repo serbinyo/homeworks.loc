@@ -18,8 +18,7 @@
 
                         Форма добавления задачи<br><br>
 
-
-                        {!! Form::open(['route'=>'tasks.store','method'=>'post', 'class'=>'form-horizontal']) !!}
+                        {!! Form::model($task_to_update, ['route' => ['tasks.update', $task_to_update->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
                             {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
@@ -39,7 +38,7 @@
                             {!! Form::label('task', 'Условие задачи: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('task', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('task', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('task'))
                                     <span class="help-block">
@@ -65,7 +64,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Сохранить новую задачу', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Обновить задачу', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
 

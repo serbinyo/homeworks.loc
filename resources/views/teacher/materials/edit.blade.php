@@ -18,7 +18,7 @@
 
                         Форма добавления<br><br>
 
-                        {!! Form::open(['url'=>route('materials.store'),'method'=>'post', 'class'=>'form-horizontal']) !!}
+                        {!! Form::model($material_to_update, ['route' => ['materials.update', $material_to_update->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
                             {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
@@ -78,7 +78,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Сохранить новый материал', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Обновить материал', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
 

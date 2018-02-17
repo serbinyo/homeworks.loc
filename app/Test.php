@@ -20,8 +20,14 @@ class Test extends Model
 
     public function show($id)
     {
-        $entitie = DB::table('tests')->where('id',$id)->first();
-        return $entitie;
+        $entity = DB::table('tests')->where('id',$id)->first();
+        return $entity;
+    }
+
+    public function get($id)
+    {
+        $entity = DB::table('tests')->where('id',$id)->get();
+        return $entity;
     }
 
     public function store($data, $teachers_id)
@@ -75,6 +81,6 @@ class Test extends Model
     public function kill($id)
     {
         $entity = self::find($id);
-        $entity->delete();
+        return $entity->delete();
     }
 }

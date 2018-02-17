@@ -43,8 +43,8 @@ class TaskController extends TeacherController
             return back()->withInput()->withErrors($response['errors']);
         }
         $new_task_id = $response->id;
-        $message = 'Задача добавленна добавлена c номером ' . $new_task_id;
-        return redirect('/teacher/tasks/create')->with('status', $message);
+        $message = 'Задача добавлена под номером ' . $new_task_id;
+        return redirect('/teacher/tasks')->with('status', $message);
     }
 
     /**
@@ -55,7 +55,14 @@ class TaskController extends TeacherController
      */
     public function show($id)
     {
-        return view('teacher.tasks.show', ['title' => 'ЭДЗ. Просмотр задачи']);
+        $task = new Task();
+        $task_to_show = $task->show($id);
+        return view('teacher.tasks.show', [
+            'title' => 'ЭДЗ. Просмотр задачи',
+            'task' => $task_to_show,
+            'teacher' => $this->teacher
+
+        ]);
     }
 
     /**
@@ -66,7 +73,9 @@ class TaskController extends TeacherController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $task = new Task();
+        $task_to_update = $task->show($id);
+        return view('teacher.tasks.edit', ['title' => 'ЭДЗ. Новый тест', 'task_to_update'=>$task_to_update]);
     }
 
     /**
@@ -90,7 +99,9 @@ class TaskController extends TeacherController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $task = new Task();
+        $task->kill($id);
+        $message = 'Задача ' . $id . ' удалена!';
+        return redirect('/teacher/tasks')->with('status', $message);
     }
 }

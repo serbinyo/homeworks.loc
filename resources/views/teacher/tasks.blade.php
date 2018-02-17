@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Список задач</div>
+                    <div class="panel-heading">Список задач!</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -17,9 +17,7 @@
                         <a href="/teacher">Вернуться в учительскую</a><br><br>
                         <a href="{{route('tasks.create')}}">Добавить новую задачу</a><br><br>
 
-                        Список задач!<br><br>
                         <hr>
-
                         @foreach($tasks as $task)
 
                             Тест №: {{ $task->id }}<br>

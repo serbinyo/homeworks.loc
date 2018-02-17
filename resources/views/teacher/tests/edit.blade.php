@@ -18,7 +18,7 @@
 
                         Форма добавления<br><br>
 
-                        {!! Form::open(['url'=>route('tests.store'),'method'=>'post', 'class'=>'form-horizontal']) !!}
+                        {!! Form::model($test_to_update, ['route' => ['tests.update', $test_to_update->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
                             {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
@@ -38,7 +38,7 @@
                             {!! Form::label('task', 'Вопрос: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('task', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('task', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('task'))
                                     <span class="help-block">
@@ -52,7 +52,7 @@
                             {!! Form::label('option_a', 'Вариант ответа A: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('option_a', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('option_a', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('option_a'))
                                     <span class="help-block">
@@ -66,7 +66,7 @@
                             {!! Form::label('option_b', 'Вариант ответа B: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('option_b', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('option_b', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('option_b'))
                                     <span class="help-block">
@@ -80,7 +80,7 @@
                             {!! Form::label('option_c', 'Вариант ответа C: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('option_c', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('option_c', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('option_c'))
                                     <span class="help-block">
@@ -94,7 +94,7 @@
                             {!! Form::label('option_d', 'Вариант ответа D: ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::textarea('option_d', null, ['required', 'class'=>'form-control']) !!}
+                                {!! Form::textarea('option_d', null,['required', 'class'=>'form-control']) !!}
 
                                 @if ($errors->has('option_d'))
                                     <span class="help-block">
@@ -130,10 +130,9 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Сохранить новый тест', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Обновить тест', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
-
                         {!! Form::close() !!}
                     </div>
                 </div>
