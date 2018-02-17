@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
                         },
                     datatype: 'JSON',
                     success: function (html) {
-                        if (html.error) {
+                        if (html.errors) {
                             $('.wrap_result').css('color', 'red').append('<br/><strong>Заполните все поля</strong>').delay(900).fadeOut(500);
                         }
                         else if (html.success) {

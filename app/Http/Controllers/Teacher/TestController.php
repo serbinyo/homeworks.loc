@@ -14,9 +14,10 @@ class TestController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Test $test)
     {
-        return view('teacher.tests', ['title' => 'ЭДЗ. Тесты']);
+        $all_tests = $test->showAll();
+        return view('teacher.tests', ['title' => 'ЭДЗ. Тесты', 'tests' => $all_tests]);
     }
 
     /**
@@ -41,10 +42,11 @@ class TestController extends TeacherController
         $response = $test->store($data, $this->teacher->getAuthIdentifier());
         if (is_array($response) && array_key_exists('errors', $response))
         {
-            //return view('teacher.tests.create', ['title' => 'ЭДЗ. Новый тест', 'errors' => $response['errors']]);
-            return Response::json(['errors'=>$response['errors']]);
+            return back()->withInput()->withErrors($response['errors']);
         }
-        return view('teacher.tests.create', ['title' => 'ЭДЗ. Новый тест']);
+        $new_test_id = $response->id;
+        $message = 'Тест добавлен c номером ' . $new_test_id;
+        return redirect('/teacher/tests/create')->with('status', $message);
     }
 
     /**
@@ -55,7 +57,13 @@ class TestController extends TeacherController
      */
     public function show($id)
     {
-        return view('teacher.tests.show', ['title' => 'ЭДЗ. Просмотр теста']);
+        $test = new Test;
+        $test_to_show = $test->show($id);
+        return view('teacher.tests.show', [
+            'title' => 'ЭДЗ. Просмотр теста',
+            'test' => $test_to_show,
+            'teacher' => $this->teacher
+        ]);
     }
 
     /**

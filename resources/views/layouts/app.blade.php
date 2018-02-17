@@ -22,7 +22,7 @@
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/style_new.css') }}" rel="stylesheet" type="text/css">
     <script src="{{asset('public/js/jquery-3.2.1.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/homewrks.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('') }}"></script>
 </head>
 <body>
 <div id="app">
@@ -74,7 +74,7 @@
                                         {{ Auth::user()->schoolkid->lastname }}
                                         {{ Auth::user()->schoolkid->firstname }}
                                     @endif
-                                        <span class="caret"></span>
+                                    <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">

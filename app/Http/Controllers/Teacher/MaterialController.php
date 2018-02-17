@@ -13,9 +13,10 @@ class MaterialController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Material $material)
     {
-        return view('teacher.materials', ['title' => 'ЭДЗ. Материалы']);
+        $all_materials = $material->showAll();
+        return view('teacher.materials', ['title' => 'ЭДЗ. Материалы', 'materials' => $all_materials]);
     }
 
     /**
@@ -31,24 +32,25 @@ class MaterialController extends TeacherController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Material $material)
     {
         $data = $request->except('_token');
-        $result = $material->store($data, $this->teacher->getAuthIdentifier());
-        if (is_array($result) && array_key_exists('errors', $result))
-        {
-            return view('teacher.materials.create', ['title' => 'ЭДЗ. Новый учебыный материал ', 'errors' => $result['errors']]);
+        $response = $material->store($data, $this->teacher->getAuthIdentifier());
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
         }
-        return view('teacher.materials.create', ['title' => 'ЭДЗ. Новый учебыный материал']);
+        $new_material_id = $response->id;
+        $message = 'Тест добавлен c номером ' . $new_material_id;
+        return redirect('/teacher/materials/create')->with('status', $message);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +61,7 @@ class MaterialController extends TeacherController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +72,8 @@ class MaterialController extends TeacherController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +84,7 @@ class MaterialController extends TeacherController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

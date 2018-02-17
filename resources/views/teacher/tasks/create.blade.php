@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Добавить задачу!</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,24 +13,62 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @include('common.errors')
-                        Добавить задачу!<br><br>
 
-                        Форма добавления<br><br>
+                        <a href="/teacher/tasks/">Вернуться к задачам</a><br><br>
+
+                        Форма добавления задачи<br><br>
 
 
-                        {!! Form::open(['route'=>'tasks.store','method'=>'post']) !!}
+                        {!! Form::open(['route'=>'tasks.store','method'=>'post', 'class'=>'form-horizontal']) !!}
 
-                        {!! Form::label('theme', 'Тема задачи:') !!}<br>
-                        {!! Form::text('theme', '',['required']) !!}<br>
+                        <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
+                            {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
 
-                        {!! Form::label('task', 'Задание:') !!}<br>
-                        {!! Form::textarea('task', '', ['required']) !!}<br>
+                            <div class="col-md-6">
+                                {!! Form::text('theme', old('theme'), ['required','class'=>'form-control']) !!}
 
-                        {!! Form::label('answer', 'Ответ:') !!}<br>
-                        {!! Form::text('answer', '', ['required']) !!}<br><br>
+                                @if ($errors->has('theme'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('theme') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                        {!! Form::submit('Сохранить новую задачу', ['class'=>'']) !!}
+                        <div class="form-group{{ $errors->has('task') ? ' has-error' : '' }}">
+                            {!! Form::label('task', 'Условие задачи: ', ['class'=>'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::textarea('task', '',['required', 'class'=>'form-control']) !!}
+
+                                @if ($errors->has('task'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('task') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
+                            {!! Form::label('answer', 'Тема', ['class'=>'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::text('answer', '', ['required','class'=>'form-control']) !!}
+
+                                @if ($errors->has('answer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                {!! Form::submit('Сохранить новую задачу', ['class' => 'btn btn-primary']) !!}
+                            </div>
+                        </div>
+
                         {!! Form::close() !!}
                     </div>
                 </div>

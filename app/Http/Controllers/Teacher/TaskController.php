@@ -13,9 +13,10 @@ class TaskController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Task $task)
     {
-        return view('teacher.tasks', ['title' => 'ЭДЗ. Задачи']);
+        $all_tasks = $task->showAll();
+        return view('teacher.tasks', ['title' => 'ЭДЗ. Задачи', 'tasks' => $all_tasks]);
     }
 
     /**
@@ -31,24 +32,25 @@ class TaskController extends TeacherController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Task $task)
     {
         $data = $request->except('_token');
-        $result = $task->store($data, $this->teacher->getAuthIdentifier());
-        if (is_array($result) && array_key_exists('errors', $result))
-        {
-            return view('teacher.tasks.create', ['title' => 'ЭДЗ. Новая задача', 'errors' => $result['errors']]);
+        $response = $task->store($data, $this->teacher->getAuthIdentifier());
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
         }
-        return view('teacher.tasks.create', ['title' => 'ЭДЗ. Новая задача']);
+        $new_task_id = $response->id;
+        $message = 'Задача добавленна добавлена c номером ' . $new_task_id;
+        return redirect('/teacher/tasks/create')->with('status', $message);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +61,7 @@ class TaskController extends TeacherController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +72,8 @@ class TaskController extends TeacherController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +85,7 @@ class TaskController extends TeacherController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

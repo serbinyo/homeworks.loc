@@ -14,10 +14,24 @@
                             </div>
                         @endif
 
-                        Список дополнительных учебных материалов!<br>
+                        <a href="/teacher">Вернуться в учительскую</a><br><br>
+                        <a href="{{route('materials.create')}}">Добавить новый материал</a><br><br>
 
-                        <a href="{{route('materials.show', ['id'=>'$material->id'])}}">Просмотр материала</a><br>
-                        <a href="{{route('materials.create')}}">Добавить новый материал</a><br>
+                        Список дополнительных учебных материалов!<br><br>
+                        <hr>
+
+                        @foreach($materials as $material)
+
+                            Материал №: {{ $material->id }}<br>
+                            Тема: {{$material->theme}}<br>
+                            Заголовок: {{$material->title}}<br>
+                            <a href="{{route('materials.show', ['id'=>$material->id])}}">
+                                Просмотр материала
+                            </a><br>
+                            <hr>
+
+                        @endforeach
+                        {{$materials->links()}}
                     </div>
                 </div>
             </div>

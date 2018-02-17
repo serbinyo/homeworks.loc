@@ -14,10 +14,24 @@
                             </div>
                         @endif
 
-                        Список тестов!<br>
+                        <a href="/teacher">Вернуться в учительскую</a><br><br>
+                        <a href="{{route('tests.create')}}">Добавить новый тест</a><br><br>
 
-                        <a href="{{route('tests.show', ['id'=>'$test->id'])}}">Просмотр теста</a><br>
-                        <a href="{{route('tests.create')}}">Добавить новый тест</a><br>
+                        Список тестов!<br><br>
+                        <hr>
+
+                        @foreach($tests as $test)
+
+                            Тест №: {{ $test->id }}<br>
+                            Тема: {{$test->theme}}<br>
+                            Вопрос: {{$test->task}}<br>
+                            <a href="{{route('tests.show', ['id'=>$test->id])}}">
+                                Просмотр теста
+                            </a><br>
+                            <hr>
+
+                        @endforeach
+                        {{$tests->links()}}
                     </div>
                 </div>
             </div>

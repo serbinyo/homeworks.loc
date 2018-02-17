@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class Test extends Model
@@ -10,6 +11,18 @@ class Test extends Model
     protected $fillable = [
         'teachers_id', 'theme', 'task', 'option_a', 'option_b', 'option_c', 'option_d', 'answer'
     ];
+
+    public function showAll()
+    {
+        $entities = DB::table('tests')->orderBy('id', 'desc')->paginate(10);
+        return $entities;
+    }
+
+    public function show($id)
+    {
+        $entitie = DB::table('tests')->where('id',$id)->first();
+        return $entitie;
+    }
 
     public function store($data, $teachers_id)
     {
@@ -53,8 +66,9 @@ class Test extends Model
                 'option_d.required' => 'Необходимо указать ответ D',
                 'answer.required' => 'Необходимо указать ответ',
             ]);
+
         if ($validator->fails()) {
-            return ['errors' => $validator->errors()->all()];
+            return ['errors' => $validator->errors()];
         }
     }
 

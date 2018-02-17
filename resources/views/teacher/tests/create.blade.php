@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Добавить тест!</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,46 +13,127 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @include('common.errors')
-                        Добавить тест!<br><br>
+
+                        <a href="/teacher/tests/">Вернуться к списку тестов</a><br><br>
 
                         Форма добавления<br><br>
 
-                        {!! Form::open(['url'=>route('tests.store'),'method'=>'post', 'id'=>'addform']) !!}
+                        {!! Form::open(['url'=>route('tests.store'),'method'=>'post', 'class'=>'form-horizontal']) !!}
 
-                        {!! Form::label('theme', 'Тема') !!}
-                        {!! Form::text('theme', '',['']) !!}<br>
+                        <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
+                            {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
 
-                        {!! Form::label('task', 'Вопрос: ') !!}<br>
-                        {!! Form::textarea('task', '',['']) !!}<br>
+                            <div class="col-md-6">
+                                {!! Form::text('theme', old('theme'), ['required','class'=>'form-control']) !!}
 
-                        {!! Form::label('option_a', 'Вариант ответа A: ') !!}<br>
-                        {!! Form::textarea('option_a', '')!!}<br>
+                                @if ($errors->has('theme'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('theme') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                        {!! Form::label('option_b', 'Вариант ответа B:') !!}<br>
-                        {!! Form::textarea('option_b', '',['']) !!}<br>
+                        <div class="form-group{{ $errors->has('task') ? ' has-error' : '' }}">
+                            {!! Form::label('task', 'Вопрос: ', ['class'=>'col-md-4 control-label']) !!}
 
-                        {!! Form::label('option_c', 'Вариант ответа C:') !!}<br>
-                        {!! Form::textarea('option_c', '')!!}<br>
+                            <div class="col-md-6">
+                                {!! Form::textarea('task', '',['required', 'class'=>'form-control']) !!}
 
-                        {!! Form::label('option_d', 'Вариант ответа D:') !!}<br>
-                        {!! Form::textarea('option_d', '',['']) !!}<br><br>
+                                @if ($errors->has('task'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('task') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                        {!! Form::label('ans_label', 'Укажите правильный вариант ответа:') !!}<br>
+                        <div class="form-group{{ $errors->has('option_a') ? ' has-error' : '' }}">
+                            {!! Form::label('option_a', 'Вариант ответа A: ', ['class'=>'col-md-4 control-label']) !!}
 
-                        {!! Form::label('ans_opt_a', 'Вариант A') !!}
-                        {!! Form::radio('answer', 'A', false, ['id' => 'ans_opt_a','']) !!}
+                            <div class="col-md-6">
+                                {!! Form::textarea('option_a', '',['required', 'class'=>'form-control']) !!}
 
-                        {!! Form::label('ans_opt_b', 'Вариант B') !!}
-                        {!! Form::radio('answer','B', false, ['id' => 'ans_opt_b','']) !!}
+                                @if ($errors->has('option_a'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('option_a') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-                        {!! Form::label('ans_opt_c', 'Вариант C') !!}
-                        {!! Form::radio('answer','C', false, ['id' => 'ans_opt_c','']) !!}
+                        <div class="form-group{{ $errors->has('option_b') ? ' has-error' : '' }}">
+                            {!! Form::label('option_b', 'Вариант ответа B: ', ['class'=>'col-md-4 control-label']) !!}
 
-                        {!! Form::label('ans_opt_d', 'Вариант D') !!}
-                        {!! Form::radio('answer','D', false, ['id' => 'ans_opt_d','']) !!}<br>
+                            <div class="col-md-6">
+                                {!! Form::textarea('option_b', '',['required', 'class'=>'form-control']) !!}
 
-                        {!! Form::submit('Сохранить новый тест', ['class' => '', 'id' => "addform-submit"]) !!}
+                                @if ($errors->has('option_b'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('option_b') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('option_c') ? ' has-error' : '' }}">
+                            {!! Form::label('option_c', 'Вариант ответа C: ', ['class'=>'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::textarea('option_c', '',['required', 'class'=>'form-control']) !!}
+
+                                @if ($errors->has('option_c'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('option_c') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('option_d') ? ' has-error' : '' }}">
+                            {!! Form::label('option_d', 'Вариант ответа D: ', ['class'=>'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::textarea('option_d', '',['required', 'class'=>'form-control']) !!}
+
+                                @if ($errors->has('option_d'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('option_d') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
+                            {!! Form::label('ans_label', 'Укажите правильный ответ:' , ['class'=>'col-md-4 control-label']) !!}
+
+                            <div class="col-md-6">
+                                {!! Form::label('ans_opt_a', 'Вариант A') !!}
+                                {!! Form::radio('answer', 'A', false, ['id' => 'ans_opt_a', 'required', 'class'=>'form-control']) !!}
+
+                                {!! Form::label('ans_opt_b', 'Вариант B') !!}
+                                {!! Form::radio('answer','B', false, ['id' => 'ans_opt_b','', 'class'=>'form-control']) !!}
+
+                                {!! Form::label('ans_opt_c', 'Вариант C') !!}
+                                {!! Form::radio('answer','C', false, ['id' => 'ans_opt_c','', 'class'=>'form-control']) !!}
+
+                                {!! Form::label('ans_opt_d', 'Вариант D') !!}
+                                {!! Form::radio('answer','D', false, ['id' => 'ans_opt_d','', 'class'=>'form-control']) !!}
+
+                                @if ($errors->has('answer'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('answer') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                {!! Form::submit('Сохранить новый тест', ['class' => 'btn btn-primary']) !!}
+                            </div>
+                        </div>
+
                         {!! Form::close() !!}
                     </div>
                 </div>
