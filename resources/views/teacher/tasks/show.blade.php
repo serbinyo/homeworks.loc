@@ -29,6 +29,10 @@
 
                         Ответ: {{ $task->answer }}<br><br>
 
+                        Добавил: {{$author_fio}}<br><br>
+
+                        Дата добавления: {{ $task->created_at }}<br><br>
+
                         <a href="{{route('setTask', ['id'=>$task->id])}}">
                             Назначить задачу
                         </a><br>
@@ -47,6 +51,9 @@
                                 Вы не можете править и удалять тесты которые не создавали
                             </p>
                         @endif
+                        <div class="err_message">
+                            @include('common.errors')
+                        </div>
                     </div>
                 </div>
             </div>

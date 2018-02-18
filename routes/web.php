@@ -22,11 +22,11 @@ Auth::routes();
 Route::get('/desktop', 'User\DesktopController@index');
 
 
-Route::get('/homeworks', 'User\UserHomeworksController@index');
+//Route::get('/homeworks', 'User\UserHomeworksController@index');
 
-Route::get('/homeworks/view', 'User\UserViewHomeworkController@index');
+//Route::get('/homeworks/view', 'User\UserViewHomeworkController@index');
 
-Route::get('/homeworks/view/solve', 'User\UserSolveHomeworkController@index');
+//Route::get('/homeworks/view/solve', 'User\UserSolveHomeworkController@index');
 
 
 Route::get('/statistics', 'User\StatisticsController@index');

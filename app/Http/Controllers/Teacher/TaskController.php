@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Task;
+use App\Teacher;
 
 class TaskController extends TeacherController
 {
@@ -13,10 +14,14 @@ class TaskController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Task $task)
+    public function index(Task $task, Teacher $author)
     {
         $all_tasks = $task->getAllPaginated();
-        return view('teacher.tasks', ['title' => 'ЭДЗ. Задачи', 'tasks' => $all_tasks]);
+        return view('teacher.tasks', [
+            'title' => 'ЭДЗ. Задачи',
+            'tasks' => $all_tasks,
+            'author' => $author
+        ]);
     }
 
     /**
@@ -38,7 +43,7 @@ class TaskController extends TeacherController
     public function store(Request $request, Task $task)
     {
         $data = $request->except('_token');
-        $response = $task->store($data, $this->teacher->getAuthIdentifier());
+        $response = $task->store($data, $this->user->teacher->id);
 
         if (is_array($response) && array_key_exists('errors', $response)) {
             return back()->withInput()->withErrors($response['errors']);
@@ -59,10 +64,15 @@ class TaskController extends TeacherController
     {
         $task = new Task();
         $task_to_show = $task->getOne($id);
+
+        $author = new Teacher();
+        $author_fio = $author->getFIO($task_to_show->teachers_id);
+
         return view('teacher.tasks.show', [
             'title' => 'ЭДЗ. Просмотр задачи',
             'task' => $task_to_show,
-            'teacher' => $this->teacher
+            'teacher' => $this->user->teacher,
+            'author_fio' => $author_fio
         ]);
     }
 
@@ -75,10 +85,12 @@ class TaskController extends TeacherController
     public function edit($id)
     {
         $task = new Task();
-        $task_to_update = $task->getOne($id);
+        $task_for_update = $task->getOne($id);
+        $this->authorize('update', $task_for_update);
+
         return view('teacher.tasks.edit', [
             'title' => 'ЭДЗ. Редактирование задачи',
-            'task_to_update'=>$task_to_update
+            'task_to_update' => $task_for_update
         ]);
     }
 
@@ -91,16 +103,25 @@ class TaskController extends TeacherController
      */
     public function update(Request $request, $id)
     {
+
         $data = $request->except('_token');
         $task = new Task();
-        $response = $task->edit($id, $this->teacher->getAuthIdentifier(), $data);
+        $task_for_update = $task->getOne($id);
 
-        if (is_array($response) && array_key_exists('errors', $response)) {
-            return back()->withInput()->withErrors($response['errors']);
+        if ($this->user->can('update', $task_for_update)) {
+
+            $response = $task->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+            $message = 'Задача под номером ' . $id . ' обновлена';
+            return redirect('/teacher/tasks/' . $id)->with('status', $message);
+        } else {
+            $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
+            return redirect('/teacher/tasks/' . $id)->withErrors($message);
         }
-
-        $message = 'Задача под номером ' . $id . ' обновлена';
-        return redirect('/teacher/tasks/' . $id)->with('status', $message);
     }
 
     /**

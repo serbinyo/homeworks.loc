@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Material;
+use App\Teacher;
 
 class MaterialController extends TeacherController
 {
@@ -13,10 +14,14 @@ class MaterialController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Material $material)
+    public function index(Material $material, Teacher $author)
     {
         $all_materials = $material->getAllPaginated();
-        return view('teacher.materials', ['title' => 'ЭДЗ. Материалы', 'materials' => $all_materials]);
+        return view('teacher.materials', [
+            'title' => 'ЭДЗ. Материалы',
+            'materials' => $all_materials,
+            'author' => $author
+        ]);
     }
 
     /**
@@ -38,7 +43,7 @@ class MaterialController extends TeacherController
     public function store(Request $request, Material $material)
     {
         $data = $request->except('_token');
-        $response = $material->store($data, $this->teacher->getAuthIdentifier());
+        $response = $material->store($data, $this->user->teacher->id);
         if (is_array($response) && array_key_exists('errors', $response)) {
             return back()->withInput()->withErrors($response['errors']);
         }
@@ -57,10 +62,15 @@ class MaterialController extends TeacherController
     {
         $material = new Material();
         $material_to_show = $material->getOne($id);
+
+        $author = new Teacher();
+        $author_fio = $author->getFIO($material_to_show->teachers_id);
+
         return view('teacher.materials.show', [
             'title' => 'ЭДЗ. Просмотр учебного материала',
             'material' => $material_to_show,
-            'teacher' => $this->teacher
+            'teacher' => $this->user->teacher,
+            'author_fio' => $author_fio
         ]);
     }
 
@@ -74,9 +84,11 @@ class MaterialController extends TeacherController
     {
         $material = new Material();
         $material_to_update = $material->getOne($id);
+        $this->authorize('update', $material_to_update);
+
         return view('teacher.materials.edit', [
-            'title' => 'ЭДЗ. Редактирование материала',
-            'material_to_update'=>$material_to_update]
+                'title' => 'ЭДЗ. Редактирование материала',
+                'material_to_update' => $material_to_update]
         );
     }
 
@@ -91,14 +103,22 @@ class MaterialController extends TeacherController
     {
         $data = $request->except('_token');
         $material = new Material();
-        $response = $material->edit($id, $this->teacher->getAuthIdentifier(), $data);
 
-        if (is_array($response) && array_key_exists('errors', $response)) {
-            return back()->withInput()->withErrors($response['errors']);
+        $material_for_update = $material->getOne($id);
+
+        if ($this->user->can('update', $material_for_update)) {
+
+            $response = $material->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+
+            $message = 'Материал под номером ' . $id . ' обновлен';
+            return redirect('/teacher/materials/' . $id)->with('status', $message);
         }
-
-        $message = 'Материал под номером ' . $id . ' обновлен';
-        return redirect('/teacher/materials/' . $id)->with('status', $message);
+        $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
+        return redirect('/teacher/tests/' . $id)->withErrors($message);
     }
 
     /**

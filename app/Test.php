@@ -23,14 +23,14 @@ class Test extends Model
         return $entity;
     }
 
-    public function store($data, $teachers_id)
+    public function store($data, $teacher_id)
     {
         if ($err = $this->validate($data)) {
             return $err;
         }
 
         $newMaterial = [
-            'teachers_id' => $teachers_id,
+            'teachers_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
             'option_a' => $data['option_a'],

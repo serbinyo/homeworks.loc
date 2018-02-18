@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Test;
+use App\Teacher;
 
 class TestController extends TeacherController
 {
@@ -13,10 +14,14 @@ class TestController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Test $test)
+    public function index(Test $test, Teacher $author)
     {
         $all_tests = $test->getAllPaginated();
-        return view('teacher.tests', ['title' => 'ЭДЗ. Тесты', 'tests' => $all_tests]);
+        return view('teacher.tests', [
+            'title' => 'ЭДЗ. Тесты',
+            'tests' => $all_tests,
+            'author' => $author
+        ]);
     }
 
     /**
@@ -32,15 +37,14 @@ class TestController extends TeacherController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Test $test)
     {
         $data = $request->except('_token');
-        $response = $test->store($data, $this->teacher->getAuthIdentifier());
-        if (is_array($response) && array_key_exists('errors', $response))
-        {
+        $response = $test->store($data, $this->user->teacher->id);
+        if (is_array($response) && array_key_exists('errors', $response)) {
             return back()->withInput()->withErrors($response['errors']);
         }
         $new_test_id = $response->id;
@@ -51,61 +55,76 @@ class TestController extends TeacherController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $test = new Test();
         $test_to_show = $test->getOne($id);
+
+        $author = new Teacher();
+        $author_fio = $author->getFIO($test_to_show->teachers_id);
+
         return view('teacher.tests.show', [
             'title' => 'ЭДЗ. Просмотр теста',
             'test' => $test_to_show,
-            'teacher' => $this->teacher
+            'teacher' => $this->user->teacher,
+            'author_fio' => $author_fio
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $test = new Test();
         $test_to_update = $test->getOne($id);
+        $this->authorize('update', $test_to_update);
+
         return view('teacher.tests.edit', [
             'title' => 'ЭДЗ. Новый тест',
-            'test_to_update'=>$test_to_update
+            'test_to_update' => $test_to_update
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->except('_token');
         $test = new Test();
-        $response = $test->edit($id, $this->teacher->getAuthIdentifier(), $data);
 
-        if (is_array($response) && array_key_exists('errors', $response)) {
-            return back()->withInput()->withErrors($response['errors']);
+        $test_for_update = $test->getOne($id);
+
+        if ($this->user->can('update', $test_for_update)) {
+
+            $response = $test->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+
+            $message = 'Тест под номером ' . $id . ' обновлен';
+            return redirect('/teacher/tests/' . $id)->with('status', $message);
         }
-
-        $message = 'Тест под номером ' . $id . ' обновлен';
-        return redirect('/teacher/tests/' . $id)->with('status', $message);
+        $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
+        return redirect('/teacher/tests/' . $id)->withErrors($message);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

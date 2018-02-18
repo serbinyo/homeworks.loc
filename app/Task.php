@@ -23,14 +23,14 @@ class Task extends Model
         return $entity;
     }
 
-    public function store($data, $teachers_id)
+    public function store($data, $teacher_id)
     {
         if ($err = $this->validate($data)) {
             return $err;
         }
 
         $newTask = [
-            'teachers_id' => $teachers_id,
+            'teachers_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
             'answer' => $data['answer']
@@ -40,7 +40,7 @@ class Task extends Model
         return $this;
     }
 
-    public function edit($id, $teacher_id, $data)
+    public function edit($id, $user_id, $data)
     {
         if ($err = $this->validate($data)) {
             return $err;
@@ -48,7 +48,7 @@ class Task extends Model
 
         $entity = Task::find($id);
 
-        $entity->teachers_id = $teacher_id;
+        $entity->teachers_id = $user_id;
         $entity->theme = $data['theme'];
         $entity->task = $data['task'];
         $entity->answer = $data['answer'];

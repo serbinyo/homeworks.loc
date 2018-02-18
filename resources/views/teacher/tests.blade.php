@@ -26,7 +26,11 @@
 
                             Тест №: {{ $test->id }}<br>
                             Тема: {{$test->theme}}<br>
-                            Вопрос: {{$test->task}}<br>
+                            Вопрос: {{$test->task}}<br><br>
+
+                            Добавил: {{$author->getFIO($test->teachers_id)}}<br>
+                            Дата добавления: {{ $test->created_at }}<br><br>
+
                             <a href="{{route('tests.show', ['id'=>$test->id])}}">
                                 Просмотр теста
                             </a><br>

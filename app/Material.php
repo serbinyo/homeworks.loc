@@ -24,7 +24,7 @@ class Material extends Model
         return $entity;
     }
 
-    public function store($data, $teachers_id)
+    public function store($data, $teacher_id)
     {
         if ($err = $this->validate($data)) {
             return $err;
@@ -35,7 +35,7 @@ class Material extends Model
         }
 
         $newMaterial = [
-            'teachers_id' => $teachers_id,
+            'teachers_id' => $teacher_id,
             'theme' => $data['theme'],
             'image' => $data['image'],
             'title' => $data['title'],

@@ -25,7 +25,11 @@
 
                             Материал №: {{ $material->id }}<br>
                             Тема: {{$material->theme}}<br>
-                            Заголовок: {{$material->title}}<br>
+                            Заголовок: {{$material->title}}<br><br>
+
+                            Добавил: {{$author->getFIO($material->teachers_id)}}<br>
+                            Дата добавления: {{ $material->created_at }}<br><br>
+
                             <a href="{{route('materials.show', ['id'=>$material->id])}}">
                                 Просмотр материала
                             </a><br>

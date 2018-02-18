@@ -24,4 +24,13 @@ class Teacher  extends Authenticatable
     {
         return $this->belongsTo('App\User');
     }
+
+    public function getFIO($id)
+    {
+        $teacher = Teacher::find($id);
+        $fio = $teacher->firstname . ' '
+            . $teacher->middlename . ' '
+            . $teacher->lastname;
+        return $fio;
+    }
 }

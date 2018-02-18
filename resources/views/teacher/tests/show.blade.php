@@ -16,10 +16,10 @@
                             </div>
                         @endif
 
-                            <a href="/teacher">Учительская</a> >>
-                            <a href="/teacher/tests/">Список тестов</a> >>
-                            Просмотр теста
-                            <br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/tests/">Список тестов</a> >>
+                        Просмотр теста
+                        <br><br>
 
                         Просмотр теста!<br>
 
@@ -37,6 +37,9 @@
 
                         Ответ: {{ $test->answer }}<br><br>
 
+                        Добавил: {{$author_fio}}<br><br>
+
+                        Дата добавления: {{ $test->created_at }}<br><br>
 
                         <a href="{{route('setTest', ['id'=>$test->id])}}">
                             Назначить тест
@@ -56,6 +59,9 @@
                                 Вы не можете править и удалять тесты которые не создавали
                             </p>
                         @endif
+                        <div class="err_message">
+                            @include('common.errors')
+                        </div>
                     </div>
                 </div>
             </div>

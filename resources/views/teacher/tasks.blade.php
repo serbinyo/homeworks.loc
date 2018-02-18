@@ -25,7 +25,11 @@
 
                             Тест №: {{ $task->id }}<br>
                             Тема: {{$task->theme}}<br>
-                            Задача: {{$task->task}}<br>
+                            Задача: {{$task->task}}<br><br>
+
+                            Добавил: {{$author->getFIO($task->teachers_id)}}<br>
+                            Дата добавления: {{ $task->created_at }}<br><br>
+
                             <a href="{{route('tasks.show', ['id'=>$task->id])}}">
                                 Просмотр задачи
                             </a><br>

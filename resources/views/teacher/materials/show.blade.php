@@ -31,6 +31,10 @@
 
                         {!! nl2br($material->body) !!}<br><br>
 
+                        Добавил: {{$author_fio}}<br><br>
+
+                        Дата добавления: {{ $material->created_at }}<br><br>
+
                         <a href="{{route('setMaterial', ['id'=>$material->id])}}">
                             Назначить
                         </a><br>
@@ -49,6 +53,9 @@
                                 Вы не можете править и удалять тесты которые не создавали
                             </p>
                         @endif
+                        <div class="err_message">
+                            @include('common.errors')
+                        </div>
                     </div>
                 </div>
             </div>
