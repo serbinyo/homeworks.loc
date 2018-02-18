@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Validator;
 
 class Test extends Model
@@ -12,21 +11,15 @@ class Test extends Model
         'teachers_id', 'theme', 'task', 'option_a', 'option_b', 'option_c', 'option_d', 'answer'
     ];
 
-    public function showAll()
+    public function getAllPaginated()
     {
-        $entities = DB::table('tests')->orderBy('id', 'desc')->paginate(10);
+        $entities = Test::orderBy('id', 'desc')->paginate(10);
         return $entities;
     }
 
-    public function show($id)
+    public function getOne($id)
     {
-        $entity = DB::table('tests')->where('id',$id)->first();
-        return $entity;
-    }
-
-    public function get($id)
-    {
-        $entity = DB::table('tests')->where('id',$id)->get();
+        $entity = Test::find($id);
         return $entity;
     }
 
@@ -49,6 +42,27 @@ class Test extends Model
         $this->fill($newMaterial);
         $this->save();
         return $this;
+    }
+
+    public function edit($id, $teacher_id, $data)
+    {
+        if ($err = $this->validate($data)) {
+            return $err;
+        }
+
+        $entity = Test::find($id);
+
+        $entity->teachers_id = $teacher_id;
+        $entity->theme = $data['theme'];
+        $entity->task = $data['task'];
+        $entity->option_a = $data['option_a'];
+        $entity->option_b = $data['option_b'];
+        $entity->option_c = $data['option_c'];
+        $entity->option_d = $data['option_d'];
+        $entity->answer = $data['answer'];
+
+        $entity->save();
+        return $entity;
     }
 
     public function validate($data)
@@ -80,7 +94,7 @@ class Test extends Model
 
     public function kill($id)
     {
-        $entity = self::find($id);
+        $entity = Test::find($id);
         return $entity->delete();
     }
 }

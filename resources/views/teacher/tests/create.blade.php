@@ -14,7 +14,10 @@
                             </div>
                         @endif
 
-                        <a href="/teacher/tests/">Вернуться к списку тестов</a><br><br>
+                            <a href="/teacher">Учительская</a> >>
+                            <a href="/teacher/tests/">Список тестов</a> >>
+                            Новый тест
+                            <br><br>
 
                         Форма добавления<br><br>
 

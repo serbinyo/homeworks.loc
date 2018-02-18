@@ -12,15 +12,15 @@ class Material extends Model
         'teachers_id', 'theme', 'image', 'title', 'body'
     ];
 
-    public function showAll()
+    public function getAllPaginated()
     {
-        $entities = DB::table('materials')->orderBy('id', 'desc')->paginate(10);
+        $entities = Material::orderBy('id', 'desc')->paginate(10);
         return $entities;
     }
 
-    public function show($id)
+    public function getOne($id)
     {
-        $entity = DB::table('materials')->where('id',$id)->first();
+        $entity = Material::find($id);
         return $entity;
     }
 
@@ -46,6 +46,28 @@ class Material extends Model
         return $this;
     }
 
+    public function edit($id, $teacher_id, $data)
+    {
+        if ($err = $this->validate($data)) {
+            return $err;
+        }
+
+        $entity = Material::find($id);
+
+        $entity->teachers_id = $teacher_id;
+        $entity->theme = $data['theme'];
+        $entity->image = $data['image'];
+        $entity->title = $data['title'];
+        $entity->body = $data['body'];
+
+        if ($entity->image == ''){
+            $entity->image = 'no image';
+        }
+
+        $entity->save();
+        return $entity;
+    }
+
     public function validate($data)
     {
         $validator = Validator::make($data,
@@ -67,7 +89,7 @@ class Material extends Model
 
     public function kill($id)
     {
-        $entity = self::find($id);
+        $entity = Material::find($id);
         return $entity->delete();
     }
 }

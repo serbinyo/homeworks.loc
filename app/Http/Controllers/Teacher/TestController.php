@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Test;
-use Response;
 
 class TestController extends TeacherController
 {
@@ -16,7 +15,7 @@ class TestController extends TeacherController
      */
     public function index(Test $test)
     {
-        $all_tests = $test->showAll();
+        $all_tests = $test->getAllPaginated();
         return view('teacher.tests', ['title' => 'ЭДЗ. Тесты', 'tests' => $all_tests]);
     }
 
@@ -58,7 +57,7 @@ class TestController extends TeacherController
     public function show($id)
     {
         $test = new Test();
-        $test_to_show = $test->show($id);
+        $test_to_show = $test->getOne($id);
         return view('teacher.tests.show', [
             'title' => 'ЭДЗ. Просмотр теста',
             'test' => $test_to_show,
@@ -75,8 +74,11 @@ class TestController extends TeacherController
     public function edit($id)
     {
         $test = new Test();
-        $test_to_update = $test->show($id);
-        return view('teacher.tests.edit', ['title' => 'ЭДЗ. Новый тест', 'test_to_update'=>$test_to_update]);
+        $test_to_update = $test->getOne($id);
+        return view('teacher.tests.edit', [
+            'title' => 'ЭДЗ. Новый тест',
+            'test_to_update'=>$test_to_update
+        ]);
     }
 
     /**
@@ -88,7 +90,16 @@ class TestController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $test = new Test();
+        $response = $test->edit($id, $this->teacher->getAuthIdentifier(), $data);
+
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+
+        $message = 'Тест под номером ' . $id . ' обновлен';
+        return redirect('/teacher/tests/' . $id)->with('status', $message);
     }
 
     /**
@@ -101,7 +112,7 @@ class TestController extends TeacherController
     {
         $test = new Test();
         $test->kill($id);
-        $message = 'Задача ' . $id . ' удалена!';
+        $message = 'Тест ' . $id . ' удален!';
         return redirect('/teacher/tests')->with('status', $message);
     }
 }

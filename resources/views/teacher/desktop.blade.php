@@ -14,8 +14,6 @@
                             </div>
                         @endif
 
-                        Teacher worktop!<br>
-
                         <a href="{{route('works.index')}}">Домашние задания</a><br><br>
 
                         <a href="{{route('tasks.index')}}">Задачи</a><br>

@@ -15,7 +15,7 @@ class TaskController extends TeacherController
      */
     public function index(Task $task)
     {
-        $all_tasks = $task->showAll();
+        $all_tasks = $task->getAllPaginated();
         return view('teacher.tasks', ['title' => 'ЭДЗ. Задачи', 'tasks' => $all_tasks]);
     }
 
@@ -39,9 +39,11 @@ class TaskController extends TeacherController
     {
         $data = $request->except('_token');
         $response = $task->store($data, $this->teacher->getAuthIdentifier());
+
         if (is_array($response) && array_key_exists('errors', $response)) {
             return back()->withInput()->withErrors($response['errors']);
         }
+
         $new_task_id = $response->id;
         $message = 'Задача добавлена под номером ' . $new_task_id;
         return redirect('/teacher/tasks')->with('status', $message);
@@ -56,12 +58,11 @@ class TaskController extends TeacherController
     public function show($id)
     {
         $task = new Task();
-        $task_to_show = $task->show($id);
+        $task_to_show = $task->getOne($id);
         return view('teacher.tasks.show', [
             'title' => 'ЭДЗ. Просмотр задачи',
             'task' => $task_to_show,
             'teacher' => $this->teacher
-
         ]);
     }
 
@@ -74,8 +75,11 @@ class TaskController extends TeacherController
     public function edit($id)
     {
         $task = new Task();
-        $task_to_update = $task->show($id);
-        return view('teacher.tasks.edit', ['title' => 'ЭДЗ. Новый тест', 'task_to_update'=>$task_to_update]);
+        $task_to_update = $task->getOne($id);
+        return view('teacher.tasks.edit', [
+            'title' => 'ЭДЗ. Редактирование задачи',
+            'task_to_update'=>$task_to_update
+        ]);
     }
 
     /**
@@ -87,8 +91,16 @@ class TaskController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
-        dump($id);
+        $data = $request->except('_token');
+        $task = new Task();
+        $response = $task->edit($id, $this->teacher->getAuthIdentifier(), $data);
+
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+
+        $message = 'Задача под номером ' . $id . ' обновлена';
+        return redirect('/teacher/tasks/' . $id)->with('status', $message);
     }
 
     /**

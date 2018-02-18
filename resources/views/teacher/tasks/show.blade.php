@@ -16,7 +16,10 @@
                             </div>
                         @endif
 
-                        <a href="/teacher/tasks/">Вернуться к списку задач</a><br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/tasks/">Список задач</a> >>
+                        Просмотр задачи
+                        <br><br>
 
                         Просмотр задачи!<br>
 
@@ -32,18 +35,18 @@
 
                         <hr>
 
-                            @if ($teacher->id === $task->teachers_id)
-                                <a href="{{route('tasks.edit', ['id'=>$task->id])}}">Изменить</a><br>
+                        @if ($teacher->id === $task->teachers_id)
+                            <a href="{{route('tasks.edit', ['id'=>$task->id])}}">Изменить</a><br>
 
-                                {!! Form::open(['url'=>route('tasks.destroy', ['id'=>$task->id])]) !!}
-                                {!! Form::submit('Удалить', ['class'=>'']) !!}
-                                {{method_field('DELETE')}}
-                                {!! Form::close() !!}
-                            @else
-                                <p>
-                                    Вы не можете править и удалять тесты которые не создавали
-                                </p>
-                            @endif
+                            {!! Form::open(['url'=>route('tasks.destroy', ['id'=>$task->id])]) !!}
+                            {!! Form::submit('Удалить', ['class'=>'']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
+                        @else
+                            <p>
+                                Вы не можете править и удалять тесты которые не создавали
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

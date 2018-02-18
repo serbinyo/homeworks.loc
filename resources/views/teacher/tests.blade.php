@@ -14,7 +14,10 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Вернуться в учительскую</a><br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        Список тестов
+                        <br><br>
+
                         <a href="{{route('tests.create')}}">Добавить новый тест</a><br><br>
 
 

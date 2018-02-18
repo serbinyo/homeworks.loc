@@ -15,7 +15,7 @@ class MaterialController extends TeacherController
      */
     public function index(Material $material)
     {
-        $all_materials = $material->showAll();
+        $all_materials = $material->getAllPaginated();
         return view('teacher.materials', ['title' => 'ЭДЗ. Материалы', 'materials' => $all_materials]);
     }
 
@@ -56,7 +56,7 @@ class MaterialController extends TeacherController
     public function show($id)
     {
         $material = new Material();
-        $material_to_show = $material->show($id);
+        $material_to_show = $material->getOne($id);
         return view('teacher.materials.show', [
             'title' => 'ЭДЗ. Просмотр учебного материала',
             'material' => $material_to_show,
@@ -73,8 +73,11 @@ class MaterialController extends TeacherController
     public function edit($id)
     {
         $material = new Material();
-        $material_to_update = $material->show($id);
-        return view('teacher.materials.edit', ['title' => 'ЭДЗ. Новый тест', 'material_to_update'=>$material_to_update]);
+        $material_to_update = $material->getOne($id);
+        return view('teacher.materials.edit', [
+            'title' => 'ЭДЗ. Редактирование материала',
+            'material_to_update'=>$material_to_update]
+        );
     }
 
     /**
@@ -86,7 +89,16 @@ class MaterialController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $material = new Material();
+        $response = $material->edit($id, $this->teacher->getAuthIdentifier(), $data);
+
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+
+        $message = 'Материал под номером ' . $id . ' обновлен';
+        return redirect('/teacher/materials/' . $id)->with('status', $message);
     }
 
     /**

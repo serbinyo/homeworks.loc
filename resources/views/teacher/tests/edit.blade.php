@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Добавить тест!</div>
+                    <div class="panel-heading">Редактировать тест!</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -14,11 +14,16 @@
                             </div>
                         @endif
 
-                        <a href="/teacher/tests/">Вернуться к списку тестов</a><br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/tests/">Список задач</a> >>
+                        <a href="{{route('tests.show', ['id'=>$test_to_update->id])}}">Просмотр теста</a> >>
+                        Редактирование
+                        <br><br>
 
                         Форма добавления<br><br>
 
-                        {!! Form::model($test_to_update, ['route' => ['tests.update', $test_to_update->id], 'class'=>'form-horizontal']) !!}
+                        {!! Form::model($test_to_update, ['method'=>'put', 'route' => ['tests.update',
+                        $test_to_update->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
                             {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}

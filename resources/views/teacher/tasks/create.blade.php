@@ -14,12 +14,15 @@
                             </div>
                         @endif
 
-                        <a href="/teacher/tasks/">Вернуться к задачам</a><br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/tasks/">Список задач</a> >>
+                        Новая задача
+                        <br><br>
 
                         Форма добавления задачи<br><br>
 
 
-                        {!! Form::open(['route'=>'tasks.store','method'=>'post', 'class'=>'form-horizontal']) !!}
+                        {!! Form::open(['route'=>'tasks.store', 'method'=>'post', 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
                             {!! Form::label('theme', 'Тема', ['class'=>'col-md-4 control-label']) !!}
@@ -50,7 +53,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
-                            {!! Form::label('answer', 'Тема', ['class'=>'col-md-4 control-label']) !!}
+                            {!! Form::label('answer', 'Ответ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
                                 {!! Form::text('answer', null, ['required','class'=>'form-control']) !!}

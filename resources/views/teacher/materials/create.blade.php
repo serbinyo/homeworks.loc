@@ -14,7 +14,10 @@
                             </div>
                         @endif
 
-                        <a href="/teacher/materials/">Вернуться к списку материалов</a><br><br>
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/materials/">Список материалов</a> >>
+                        Новый учебный материал
+                        <br><br>
 
                         Форма добавления<br><br>
 
