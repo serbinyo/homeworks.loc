@@ -11,7 +11,7 @@ class TeacheRegController extends TeacherController
     public function index(Discipline $disciplineModel)
     {
         $disciplines = $disciplineModel->getAll();
-        return view('teacher.teachereg', ['title' => 'ЭДЗ. Teacher Registrate',
+        return view('teacher.classrooms.teacherreg', ['title' => 'ЭДЗ. Teacher Registrate',
             'disciplines' => $disciplines]);
     }
 }

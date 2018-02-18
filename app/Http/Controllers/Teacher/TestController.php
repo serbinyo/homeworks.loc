@@ -103,7 +103,6 @@ class TestController extends TeacherController
     {
         $data = $request->except('_token');
         $test = new Test();
-
         $test_for_update = $test->getOne($id);
 
         if ($this->user->can('update', $test_for_update)) {
@@ -113,11 +112,10 @@ class TestController extends TeacherController
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
             }
-
             $message = 'Тест под номером ' . $id . ' обновлен';
             return redirect('/teacher/tests/' . $id)->with('status', $message);
         }
-        $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
+        $message = 'ОШИБКА. Нет права редактирования !!!';
         return redirect('/teacher/tests/' . $id)->withErrors($message);
     }
 
@@ -130,8 +128,13 @@ class TestController extends TeacherController
     public function destroy($id)
     {
         $test = new Test();
-        $test->kill($id);
-        $message = 'Тест ' . $id . ' удален!';
-        return redirect('/teacher/tests')->with('status', $message);
+        $test_for_delete = $test->getOne($id);
+        if ($this->user->can('update', $test_for_delete)) {
+            $test->kill($id);
+            $message = 'Тест ' . $id . ' удален!';
+            return redirect('/teacher/tests')->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права удаления !!!';
+        return redirect('/teacher/tests/' . $id)->withErrors($message);
     }
 }

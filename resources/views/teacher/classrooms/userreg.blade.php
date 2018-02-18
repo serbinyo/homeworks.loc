@@ -4,11 +4,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <a href="/teacher/worktop">В учительскую</a>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Регистрация ученика</div>
+                    <div class="panel-heading">Регистрация ученика!</div>
 
                     <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <a href="/teacher">Учительская</a> >>
+                        <a href="/teacher/classrooms">Классы</a> >>
+                        Регистрация ученика
+                        <br><br>
+
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
@@ -88,7 +98,7 @@
                                         @endforeach
                                     </select>
                                     {{--<input id="grade" type="text" class="form-control" name="grade"--}}
-                                           {{--value="{{ old('grade') }}" required autofocus>--}}
+                                    {{--value="{{ old('grade') }}" required autofocus>--}}
 
                                     @if ($errors->has('grade'))
                                         <span class="help-block">
@@ -113,7 +123,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля</label>
+                                <label for="password-confirm" class="col-md-4 control-label">Подтверждение
+                                    пароля</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"

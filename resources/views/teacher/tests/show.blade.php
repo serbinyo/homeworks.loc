@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Тест № : {{ $test->id }}<br>
+                        Просмотр теста!
                     </div>
 
                     <div class="panel-body">
@@ -21,7 +21,7 @@
                         Просмотр теста
                         <br><br>
 
-                        Просмотр теста!<br>
+                        Тест № : {{ $test->id }}<br>
 
                         <hr>
                         Тема: {{$test->theme}}<br>

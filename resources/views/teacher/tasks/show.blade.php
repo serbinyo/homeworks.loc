@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Задача № : {{ $task->id }}<br>
+                        Просмотр задачи!
                     </div>
 
                     <div class="panel-body">
@@ -21,7 +21,8 @@
                         Просмотр задачи
                         <br><br>
 
-                        Просмотр задачи!<br>
+
+                        Задача № : {{ $task->id }}<br>
 
                         <hr>
                         Тема: {{$task->theme}}<br><br>

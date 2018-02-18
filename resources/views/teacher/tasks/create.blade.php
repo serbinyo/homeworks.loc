@@ -19,9 +19,6 @@
                         Новая задача
                         <br><br>
 
-                        Форма добавления задачи<br><br>
-
-
                         {!! Form::open(['route'=>'tasks.store', 'method'=>'post', 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">

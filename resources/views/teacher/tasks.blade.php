@@ -23,9 +23,9 @@
                         <hr>
                         @foreach($tasks as $task)
 
-                            Тест №: {{ $task->id }}<br>
+                            Задача №: {{ $task->id }}<br>
                             Тема: {{$task->theme}}<br>
-                            Задача: {{$task->task}}<br><br>
+                            Условие: {{$task->task}}<br><br>
 
                             Добавил: {{$author->getFIO($task->teachers_id)}}<br>
                             Дата добавления: {{ $task->created_at }}<br><br>

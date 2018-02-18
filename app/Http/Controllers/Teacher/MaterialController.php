@@ -103,7 +103,6 @@ class MaterialController extends TeacherController
     {
         $data = $request->except('_token');
         $material = new Material();
-
         $material_for_update = $material->getOne($id);
 
         if ($this->user->can('update', $material_for_update)) {
@@ -113,12 +112,11 @@ class MaterialController extends TeacherController
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
             }
-
             $message = 'Материал под номером ' . $id . ' обновлен';
             return redirect('/teacher/materials/' . $id)->with('status', $message);
         }
-        $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
-        return redirect('/teacher/tests/' . $id)->withErrors($message);
+        $message = 'ОШИБКА. Нет права редактирования !!!';
+        return redirect('/teacher/materials/' . $id)->withErrors($message);
     }
 
     /**
@@ -130,8 +128,13 @@ class MaterialController extends TeacherController
     public function destroy($id)
     {
         $material = new Material();
-        $material->kill($id);
-        $message = 'Учебный материал ' . $id . ' удален!';
-        return redirect('/teacher/materials')->with('status', $message);
+        $material_for_delete = $material->getOne($id);
+        if ($this->user->can('update', $material_for_delete)) {
+            $material->kill($id);
+            $message = 'Учебный материал ' . $id . ' удален!';
+            return redirect('/teacher/materials')->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права удаления !!!';
+        return redirect('/teacher/materials/' . $id)->withErrors($message);
     }
 }

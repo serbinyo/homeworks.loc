@@ -11,7 +11,7 @@ class UseRegController extends TeacherController
     public function index(Grade $gradeModel)
     {
         $grades = $gradeModel->getAll();
-        return view('teacher.usereg', ['title' => 'ЭДЗ. User Registrate',
+        return view('teacher.classrooms.userreg', ['title' => 'ЭДЗ. User Registrate',
             'grades' => $grades]);
     }
 }

@@ -103,7 +103,6 @@ class TaskController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-
         $data = $request->except('_token');
         $task = new Task();
         $task_for_update = $task->getOne($id);
@@ -112,16 +111,14 @@ class TaskController extends TeacherController
 
             $response = $task->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
 
-
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
             }
             $message = 'Задача под номером ' . $id . ' обновлена';
             return redirect('/teacher/tasks/' . $id)->with('status', $message);
-        } else {
-            $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
-            return redirect('/teacher/tasks/' . $id)->withErrors($message);
         }
+        $message = 'ОШИБКА. На автор. Нет прав редактирования !!!';
+        return redirect('/teacher/tasks/' . $id)->withErrors($message);
     }
 
     /**
@@ -133,8 +130,13 @@ class TaskController extends TeacherController
     public function destroy($id)
     {
         $task = new Task();
-        $task->kill($id);
-        $message = 'Задача ' . $id . ' удалена!';
-        return redirect('/teacher/tasks')->with('status', $message);
+        $task_for_delete = $task->getOne($id);
+        if ($this->user->can('update', $task_for_delete)) {
+            $task->kill($id);
+            $message = 'Задача ' . $id . ' удалена!';
+            return redirect('/teacher/tasks')->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права удаления !!!';
+        return redirect('/teacher/tasks/' . $id)->withErrors($message);
     }
 }

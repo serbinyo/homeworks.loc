@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Дополнительный учебный материал № : {{ $material->id }}
+                        Просмотр дополнительного учебного материала!
                     </div>
 
                     <div class="panel-body">
@@ -21,7 +21,8 @@
                         Просмотр материала
                         <br><br>
 
-                        Просмотр дополнительного учебного материала!<br>
+
+                        Дополнительный учебный материал № : {{ $material->id }}
 
                         <hr>
                         Тема: {{$material->theme}}<br>

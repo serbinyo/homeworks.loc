@@ -19,8 +19,6 @@
                         Новый учебный материал
                         <br><br>
 
-                        Форма добавления<br><br>
-
                         {!! Form::open(['url'=>route('materials.store'),'method'=>'post', 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('theme') ? ' has-error' : '' }}">
