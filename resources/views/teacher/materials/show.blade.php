@@ -42,7 +42,7 @@
 
                         <hr>
 
-                        @if ($teacher->id === $material->teachers_id)
+                        @if ($teacher->id === $material->teacher_id)
                             <a href="{{route('materials.edit', ['id'=>$material->id])}}">Изменить</a><br>
 
                             {!! Form::open(['url'=>route('materials.destroy', ['id'=>$material->id])]) !!}

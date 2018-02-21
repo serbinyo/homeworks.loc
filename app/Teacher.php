@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Teacher  extends Authenticatable
+class Teacher extends Authenticatable
 {
     use Notifiable;
 
@@ -17,12 +17,17 @@ class Teacher  extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'middlename', 'lastname', 'disciplines_id'
+        'firstname', 'middlename', 'lastname', 'discipline_id'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function discipline()
+    {
+        return $this->belongsTo('App\Discipline');
     }
 
     public function getFIO($id)
@@ -32,5 +37,10 @@ class Teacher  extends Authenticatable
             . $teacher->middlename . ' '
             . $teacher->lastname;
         return $fio;
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
     }
 }

@@ -3,24 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Validator;
 
-class Material extends Model
+class Work extends Model
 {
     protected $fillable = [
-        'teacher_id', 'theme', 'image', 'title', 'body'
+        'teacher_id', 'theme'
     ];
 
     public function getAllPaginated()
     {
-        $entities = Material::orderBy('id', 'desc')->paginate(10);
+        $entities = Work::orderBy('id', 'desc')->paginate(10);
         return $entities;
     }
 
     public function getOne($id)
     {
-        $entity = Material::find($id);
+        $entity = Work::find($id);
         return $entity;
     }
 
@@ -30,39 +29,25 @@ class Material extends Model
             return $err;
         }
 
-        if ($data['image'] == '') {
-            $data['image'] = 'no image';
-        }
-
-        $newMaterial = [
+        $newWork = [
             'teacher_id' => $teacher_id,
             'theme' => $data['theme'],
-            'image' => $data['image'],
-            'title' => $data['title'],
-            'body' => $data['body']
         ];
-        $this->fill($newMaterial);
+        $this->fill($newWork);
         $this->save();
         return $this;
     }
 
-    public function edit($id, $teacher_id, $data)
+    public function edit($id, $user_id, $data)
     {
         if ($err = $this->validate($data)) {
             return $err;
         }
 
-        $entity = Material::find($id);
+        $entity = Work::find($id);
 
-        $entity->teacher_id = $teacher_id;
+        $entity->teacher_id = $user_id;
         $entity->theme = $data['theme'];
-        $entity->image = $data['image'];
-        $entity->title = $data['title'];
-        $entity->body = $data['body'];
-
-        if ($entity->image == ''){
-            $entity->image = 'no image';
-        }
 
         $entity->save();
         return $entity;
@@ -73,13 +58,9 @@ class Material extends Model
         $validator = Validator::make($data,
             [
                 'theme' => 'required',
-                'title' => 'required',
-                'body' => 'required'
             ],
             [
                 'theme.required' => 'Необходимо указать тему',
-                'title.required' => 'Необходимо указать заголовок',
-                'body.required' => 'Необходимо указать основной текст'
             ]);
 
         if ($validator->fails()) {
@@ -89,7 +70,7 @@ class Material extends Model
 
     public function kill($id)
     {
-        $entity = Material::find($id);
+        $entity = Work::find($id);
         return $entity->delete();
     }
 }

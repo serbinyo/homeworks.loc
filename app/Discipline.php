@@ -3,18 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Discipline extends Model
 {
     public function getAll()
     {
-        return DB::table('disciplines')->get();
+        return Discipline::get();
     }
 
     public function showAll()
     {
-        $entities = DB::table('disciplines')->orderBy('id')->paginate(10);
+        $entities = Discipline::orderBy('id')->paginate(10);
         return $entities;
+    }
+
+    public function teachers()
+    {
+        return $this->hasMany('App\Teacher', 'discipline_id');
     }
 }

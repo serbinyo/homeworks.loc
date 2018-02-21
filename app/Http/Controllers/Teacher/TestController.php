@@ -64,7 +64,7 @@ class TestController extends TeacherController
         $test_to_show = $test->getOne($id);
 
         $author = new Teacher();
-        $author_fio = $author->getFIO($test_to_show->teachers_id);
+        $author_fio = $author->getFIO($test_to_show->teacher_id);
 
         return view('teacher.tests.show', [
             'title' => 'ЭДЗ. Просмотр теста',

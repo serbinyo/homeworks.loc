@@ -3,27 +3,27 @@
 namespace App\Policies;
 
 use App\User;
-use App\Test;
+use App\Work;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TestPolicy
+class WorkPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the test.
+     * Determine whether the user can view the work.
      *
      * @param  \App\User  $user
-     * @param  \App\Test  $test
+     * @param  \App\Work  $work
      * @return mixed
      */
-    public function view(User $user, Test $test)
+    public function view(User $user, Work $work)
     {
         //
     }
 
     /**
-     * Determine whether the user can create tests.
+     * Determine whether the user can create works.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -34,25 +34,25 @@ class TestPolicy
     }
 
     /**
-     * Determine whether the user can update the test.
+     * Determine whether the user can update the work.
      *
      * @param  \App\User  $user
-     * @param  \App\Test  $test
+     * @param  \App\Work  $work
      * @return mixed
      */
-    public function update(User $user, Test $test)
+    public function update(User $user, Work $work)
     {
-        return $user->teacher->id === $test->teacher_id;
+        return $user->teacher->id === $work->teacher_id;
     }
 
     /**
-     * Determine whether the user can delete the test.
+     * Determine whether the user can delete the work.
      *
      * @param  \App\User  $user
-     * @param  \App\Test  $test
+     * @param  \App\Work  $work
      * @return mixed
      */
-    public function delete(User $user, Test $test)
+    public function delete(User $user, Work $work)
     {
         //
     }

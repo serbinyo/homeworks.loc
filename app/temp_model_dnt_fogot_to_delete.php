@@ -11,7 +11,7 @@ class crud_model_temp extends Model
         '','', '', ''
     ];
 
-    public function store($data, $teachers_id)
+    public function store($data, $teacher_id)
     {
         $validator = Validator::make($data,
             [
@@ -29,7 +29,7 @@ class crud_model_temp extends Model
             return ['errors' => $validator->errors()];
         }
         $newMaterial = [
-            'teachers_id' => $teachers_id,
+            'teacher_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
             'answer' => $data['answer']

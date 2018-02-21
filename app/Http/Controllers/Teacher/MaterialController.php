@@ -64,7 +64,7 @@ class MaterialController extends TeacherController
         $material_to_show = $material->getOne($id);
 
         $author = new Teacher();
-        $author_fio = $author->getFIO($material_to_show->teachers_id);
+        $author_fio = $author->getFIO($material_to_show->teacher_id);
 
         return view('teacher.materials.show', [
             'title' => 'ЭДЗ. Просмотр учебного материала',

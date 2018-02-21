@@ -92,7 +92,7 @@ class RegisterController extends Controller
                 'firstname' => $data['firstname'],
                 'middlename' => $data['middlename'],
                 'lastname' => $data['lastname'],
-                'disciplines_id' => $data['discipline']
+                'discipline_id' => $data['discipline']
             ]);
             DB::commit();
             return $entity;

@@ -27,7 +27,7 @@
                             Тема: {{$material->theme}}<br>
                             Заголовок: {{$material->title}}<br><br>
 
-                            Добавил: {{$author->getFIO($material->teachers_id)}}<br>
+                            Добавил: {{$author->getFIO($material->teacher_id)}}<br>
                             Дата добавления: {{ $material->created_at }}<br><br>
 
                             <a href="{{route('materials.show', ['id'=>$material->id])}}">

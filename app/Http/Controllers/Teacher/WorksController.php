@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
+use App\Teacher;
+use App\Work;
 use Illuminate\Http\Request;
 
 
@@ -13,9 +15,14 @@ class WorksController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Work $work, Teacher $author)
     {
-        return view('teacher.works', ['title' => 'ЭДЗ. Задания']);
+        $all_works = $work->getAllPaginated();
+        return view('teacher.works', [
+            'title' => 'ЭДЗ. Задания',
+            'works' => $all_works,
+            'author' => $author
+        ]);
     }
 
     /**
@@ -34,9 +41,16 @@ class WorksController extends TeacherController
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Work $work)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $response = $work->store($data, $this->user->teacher->id);
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+        $new_work_id = $response->id;
+        $message = 'Работа добавлена под номером ' . $new_work_id;
+        return redirect('/teacher/works')->with('status', $message);
     }
 
     /**
@@ -47,7 +61,18 @@ class WorksController extends TeacherController
      */
     public function show($id)
     {
-        return view('teacher.works.show', ['title' => 'ЭДЗ. Просмотр задания']);
+        $work = new Work();
+        $work_to_show = $work->getOne($id);
+
+        $author = new Teacher();
+        $author_fio = $author->getFIO($work_to_show->teacher_id);
+
+        return view('teacher.works.show', [
+            'title' => 'ЭДЗ. Просмотр работы',
+            'work' => $work_to_show,
+            'teacher' => $this->user->teacher,
+            'author_fio' => $author_fio
+        ]);
     }
 
     /**
@@ -58,7 +83,14 @@ class WorksController extends TeacherController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $work = new Work();
+        $work_to_update = $work->getOne($id);
+        $this->authorize('update', $work_to_update);
+
+        return view('teacher.works.edit', [
+            'title' => 'ЭДЗ. Новый тест',
+            'work_to_update' => $work_to_update
+        ]);
     }
 
     /**
@@ -70,7 +102,22 @@ class WorksController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $work = new Work();
+        $work_for_update = $work->getOne($id);
+
+        if ($this->user->can('update', $work_for_update)) {
+
+            $response = $work->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+            $message = 'Работа под номером ' . $id . ' обновлена';
+            return redirect('/teacher/works/' . $id)->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права редактирования !!!';
+        return redirect('/teacher/works/' . $id)->withErrors($message);
     }
 
     /**
@@ -81,7 +128,14 @@ class WorksController extends TeacherController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $work = new Work();
+        $work_for_delete = $work->getOne($id);
+        if ($this->user->can('update', $work_for_delete)) {
+            $work->kill($id);
+            $message = 'Работа ' . $id . ' удалена!';
+            return redirect('/teacher/works')->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права удаления !!!';
+        return redirect('/teacher/works/' . $id)->withErrors($message);
     }
 }

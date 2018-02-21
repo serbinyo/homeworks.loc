@@ -8,7 +8,7 @@ use Validator;
 class Test extends Model
 {
     protected $fillable = [
-        'teachers_id', 'theme', 'task', 'option_a', 'option_b', 'option_c', 'option_d', 'answer'
+        'teacher_id', 'theme', 'task', 'option_a', 'option_b', 'option_c', 'option_d', 'answer'
     ];
 
     public function getAllPaginated()
@@ -30,7 +30,7 @@ class Test extends Model
         }
 
         $newMaterial = [
-            'teachers_id' => $teacher_id,
+            'teacher_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
             'option_a' => $data['option_a'],
@@ -52,7 +52,7 @@ class Test extends Model
 
         $entity = Test::find($id);
 
-        $entity->teachers_id = $teacher_id;
+        $entity->teacher_id = $teacher_id;
         $entity->theme = $data['theme'];
         $entity->task = $data['task'];
         $entity->option_a = $data['option_a'];

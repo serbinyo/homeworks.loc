@@ -3,17 +3,31 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class Task extends Model
 {
     protected $fillable = [
-        'teachers_id', 'theme', 'task', 'answer'
+        'teacher_id', 'theme', 'task', 'answer'
     ];
 
     public function getAllPaginated()
     {
         $entities = Task::orderBy('id', 'desc')->paginate(10);
+        return $entities;
+    }
+
+    public function tasksToShow($discipline_id)
+    {
+        $entities = DB::table('tasks')
+            ->join('teachers', 'tasks.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('disciplines.id', $discipline_id)
+            ->select('tasks.*')
+            ->orderBy('tasks.id', 'desc')
+            ->paginate(10);
         return $entities;
     }
 
@@ -30,7 +44,7 @@ class Task extends Model
         }
 
         $newTask = [
-            'teachers_id' => $teacher_id,
+            'teacher_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
             'answer' => $data['answer']
@@ -48,7 +62,7 @@ class Task extends Model
 
         $entity = Task::find($id);
 
-        $entity->teachers_id = $user_id;
+        $entity->teacher_id = $user_id;
         $entity->theme = $data['theme'];
         $entity->task = $data['task'];
         $entity->answer = $data['answer'];
@@ -80,5 +94,10 @@ class Task extends Model
     {
         $entity = Task::find($id);
         return $entity->delete();
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
     }
 }

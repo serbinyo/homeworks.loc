@@ -27,7 +27,7 @@
                             Тема: {{$task->theme}}<br>
                             Условие: {{$task->task}}<br><br>
 
-                            Добавил: {{$author->getFIO($task->teachers_id)}}<br>
+                            Добавил: {{$author->getFIO($task->teacher_id)}}<br>
                             Дата добавления: {{ $task->created_at }}<br><br>
 
                             <a href="{{route('tasks.show', ['id'=>$task->id])}}">

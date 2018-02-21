@@ -42,7 +42,7 @@ class MaterialPolicy
      */
     public function update(User $user, Material $material)
     {
-        return $user->teacher->id === $material->teachers_id;
+        return $user->teacher->id === $material->teacher_id;
     }
 
     /**

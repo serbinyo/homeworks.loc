@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Teacher;
+use App\Discipline;
 
 class TaskController extends TeacherController
 {
@@ -16,7 +17,22 @@ class TaskController extends TeacherController
      */
     public function index(Task $task, Teacher $author)
     {
-        $all_tasks = $task->getAllPaginated();
+
+        $discipline_id = $this->user->teacher->discipline_id;
+        $all_tasks = $task->tasksToShow($discipline_id);
+
+        //$all_tasks = Task::with(['teacher', 'teacher.discipline'])->where([0],1)->paginate(10);
+        //dump($all_tasks);
+
+        //$discipline = Discipline::with(['teachers', 'teachers.tasks'])->where('id', $discipline_id)->paginate(10);
+        //$all_tasks = $discipline[0]->teachers[0]->tasks;
+
+        //$discipline->each(function ($item, $key) {
+        //dump($item . ' -> ' . $key);
+        //});
+
+
+        //$all_tasks = $task->getAllPaginated();
         return view('teacher.tasks', [
             'title' => 'ЭДЗ. Задачи',
             'tasks' => $all_tasks,
@@ -66,7 +82,7 @@ class TaskController extends TeacherController
         $task_to_show = $task->getOne($id);
 
         $author = new Teacher();
-        $author_fio = $author->getFIO($task_to_show->teachers_id);
+        $author_fio = $author->getFIO($task_to_show->teacher_id);
 
         return view('teacher.tasks.show', [
             'title' => 'ЭДЗ. Просмотр задачи',

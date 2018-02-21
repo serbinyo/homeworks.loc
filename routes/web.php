@@ -104,4 +104,9 @@ Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheRegController@index')
 
 Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
 
+Event::listen('illuminate.query', function($sql)
+{
+    dd($sql);
+});
+
 
