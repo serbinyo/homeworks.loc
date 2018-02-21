@@ -6,7 +6,6 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Teacher;
-use App\Discipline;
 
 class TaskController extends TeacherController
 {
@@ -80,6 +79,8 @@ class TaskController extends TeacherController
     {
         $task = new Task();
         $task_to_show = $task->getOne($id);
+
+       //todo сделать проверку в Policy что бы учителя не могли просматривать задачи и остальное из предмета который они не ведут
 
         $author = new Teacher();
         $author_fio = $author->getFIO($task_to_show->teacher_id);

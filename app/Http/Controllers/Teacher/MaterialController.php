@@ -16,7 +16,8 @@ class MaterialController extends TeacherController
      */
     public function index(Material $material, Teacher $author)
     {
-        $all_materials = $material->getAllPaginated();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $all_materials = $material->materialsToShow($discipline_id);
         return view('teacher.materials', [
             'title' => 'ЭДЗ. Материалы',
             'materials' => $all_materials,

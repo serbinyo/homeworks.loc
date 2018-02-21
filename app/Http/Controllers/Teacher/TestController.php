@@ -16,7 +16,8 @@ class TestController extends TeacherController
      */
     public function index(Test $test, Teacher $author)
     {
-        $all_tests = $test->getAllPaginated();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $all_tests = $test->testsToShow($discipline_id);
         return view('teacher.tests', [
             'title' => 'ЭДЗ. Тесты',
             'tests' => $all_tests,

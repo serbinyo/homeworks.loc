@@ -17,7 +17,7 @@ class Schoolkid extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname','middlename', 'lastname', 'grades_id'
+        'firstname','middlename', 'lastname', 'grade_id'
     ];
 
     public function user()

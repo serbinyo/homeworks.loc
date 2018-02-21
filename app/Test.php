@@ -3,7 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Validator;
+
+
 
 class Test extends Model
 {
@@ -14,6 +17,18 @@ class Test extends Model
     public function getAllPaginated()
     {
         $entities = Test::orderBy('id', 'desc')->paginate(10);
+        return $entities;
+    }
+
+    public function testsToShow($discipline_id)
+    {
+        $entities = DB::table('tests')
+            ->join('teachers', 'tests.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('disciplines.id', $discipline_id)
+            ->select('tests.*')
+            ->orderBy('tests.id', 'desc')
+            ->paginate(10);
         return $entities;
     }
 

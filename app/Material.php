@@ -18,6 +18,18 @@ class Material extends Model
         return $entities;
     }
 
+    public function materialsToShow($discipline_id)
+    {
+        $entities = DB::table('materials')
+            ->join('teachers', 'materials.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('disciplines.id', $discipline_id)
+            ->select('materials.*')
+            ->orderBy('materials.id', 'desc')
+            ->paginate(10);
+        return $entities;
+    }
+
     public function getOne($id)
     {
         $entity = Material::find($id);
