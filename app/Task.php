@@ -95,8 +95,10 @@ class Task extends Model
         return $entity->delete();
     }
 
-    public function teacher()
+    //Eloquent: Relationships
+
+    public function works()
     {
-        return $this->belongsTo('App\Teacher');
+        return $this->belongsToMany('App\Work');
     }
 }

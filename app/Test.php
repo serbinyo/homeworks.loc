@@ -112,4 +112,11 @@ class Test extends Model
         $entity = Test::find($id);
         return $entity->delete();
     }
+
+    //Eloquent: Relationships
+
+    public function works()
+    {
+        return $this->belongsToMany('App\Work');
+    }
 }

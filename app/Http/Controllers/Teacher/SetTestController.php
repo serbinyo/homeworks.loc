@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\TeacherController;
+use App\Test;
+use App\Work;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class SetTestController extends Controller
+class SetTestController extends TeacherController
 {
-    public function create(Request $request)
+
+    public function set(Request $request, Test $test, Work $work)
     {
         $data = $request->except('_token');
-        return view('teacher.settest', ['title' => 'ЭДЗ. Создать ДЗ', 'id' => $data['id']]);
+        $test = $test->getOne($data['test_id']);
+        $work = $work->getOne($data['work_id']);
+
+        $hasTask = $work->tests()->where('id', $data['test_id'])->exists();
+        if ($hasTask) {
+            $message = 'Тест уже добавлен в задание №: ' . $data['work_id'];
+            return redirect('/teacher/tests')->withErrors($message);
+        } else {
+            $test->works()->attach($work);
+            $message = 'Тест добавлен к заданию №: ' . $data['work_id'];
+            return redirect('/teacher/tests')->with('status', $message);
+        }
     }
 }

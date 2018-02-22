@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
+use App\Work;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Teacher;
@@ -19,6 +20,10 @@ class TaskController extends TeacherController
 
         $discipline_id = $this->user->teacher->discipline_id;
         $all_tasks = $task->tasksToShow($discipline_id);
+
+        $work = new Work();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $discipline_works = $work->getDisciplineWorks($discipline_id);
 
         //$all_tasks = Task::with(['teacher', 'teacher.discipline'])->where([0],1)->paginate(10);
         //dump($all_tasks);
@@ -77,6 +82,10 @@ class TaskController extends TeacherController
      */
     public function show($id)
     {
+        $work = new Work();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $discipline_works = $work->getDisciplineWorks($discipline_id);
+
         $task = new Task();
         $task_to_show = $task->getOne($id);
 
@@ -89,7 +98,8 @@ class TaskController extends TeacherController
             'title' => 'ЭДЗ. Просмотр задачи',
             'task' => $task_to_show,
             'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio
+            'author_fio' => $author_fio,
+            'works' => $discipline_works
         ]);
     }
 

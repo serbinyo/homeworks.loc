@@ -41,9 +41,25 @@
 
                         Дата добавления: {{ $test->created_at }}<br><br>
 
-                        <a href="{{route('setTest', ['id'=>$test->id])}}">
-                            Назначить тест
-                        </a><br>
+                        {!! Form::open(['url'=>route('setTest')]) !!}
+                        {!! Form::hidden('test_id', $test->id) !!}
+                        <div class="form-group{{ $errors->has('work_id') ? ' has-error' : '' }}">
+                            <label for="work_id" class="col-md-4 control-label">Добавить тест к работе:</label>
+
+                            <div class="col-md-6">
+                                <select name="work_id" class="form-control" id="work_id" required>
+                                    <option selected="selected" value="">Выберите работу...</option>
+                                    @foreach($works as $work)
+                                        <option value={{$work->id}} >
+                                            N: {{$work->id}}
+                                            {{$work->theme}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {!! Form::submit('Добавить к работе', ['class'=>'']) !!}
+                        {!! Form::close() !!}
 
                         <hr>
 

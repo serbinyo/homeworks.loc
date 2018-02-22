@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Material;
 use App\Teacher;
+use App\Work;
 
 class MaterialController extends TeacherController
 {
@@ -61,6 +62,10 @@ class MaterialController extends TeacherController
      */
     public function show($id)
     {
+        $work = new Work();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $discipline_works = $work->getDisciplineWorks($discipline_id);
+
         $material = new Material();
         $material_to_show = $material->getOne($id);
 
@@ -71,7 +76,8 @@ class MaterialController extends TeacherController
             'title' => 'ЭДЗ. Просмотр учебного материала',
             'material' => $material_to_show,
             'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio
+            'author_fio' => $author_fio,
+            'works' => $discipline_works
         ]);
     }
 

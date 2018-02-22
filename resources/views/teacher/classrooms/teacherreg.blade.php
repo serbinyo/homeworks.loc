@@ -112,8 +112,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    {{--<input id="discipline" type="text" class="form-control" name="discipline"--}}
-                                    {{--value="{{ old('discipline') }}" required autofocus>--}}
 
                                     @if ($errors->has('discipline'))
                                         <span class="help-block">

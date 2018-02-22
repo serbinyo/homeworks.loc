@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
+use App\Work;
 use Illuminate\Http\Request;
 use App\Test;
 use App\Teacher;
@@ -61,6 +62,10 @@ class TestController extends TeacherController
      */
     public function show($id)
     {
+        $work = new Work();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $discipline_works = $work->getDisciplineWorks($discipline_id);
+
         $test = new Test();
         $test_to_show = $test->getOne($id);
 
@@ -71,7 +76,8 @@ class TestController extends TeacherController
             'title' => 'ЭДЗ. Просмотр теста',
             'test' => $test_to_show,
             'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio
+            'author_fio' => $author_fio,
+            'works' => $discipline_works
         ]);
     }
 

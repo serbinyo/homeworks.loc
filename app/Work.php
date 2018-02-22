@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class Work extends Model
@@ -14,6 +15,18 @@ class Work extends Model
     public function getAllPaginated()
     {
         $entities = Work::orderBy('id', 'desc')->paginate(10);
+        return $entities;
+    }
+
+    public function getDisciplineWorks($discipline_id)
+    {
+        $entities = DB::table('works')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('disciplines.id', $discipline_id)
+            ->select('works.*')
+            ->orderBy('works.id', 'desc')
+            ->get();
         return $entities;
     }
 
@@ -72,5 +85,22 @@ class Work extends Model
     {
         $entity = Work::find($id);
         return $entity->delete();
+    }
+
+    //Eloquent: Relationships
+
+    public function tasks()
+    {
+        return $this->belongsToMany('App\Task');
+    }
+
+    public function tests()
+    {
+        return $this->belongsToMany('App\Test');
+    }
+
+    public function materials()
+    {
+        return $this->belongsToMany('App\Material');
     }
 }

@@ -26,13 +26,11 @@
                         @foreach($works as $work)
 
                             Работа №: {{ $work->id }}<br>
-                            Тема: {{$work->theme}}<br><br>
-
+                            Тема: {{$work->theme}}<br>
                             Добавил: {{$author->getFIO($work->teacher_id)}}<br>
-                            Дата добавления: {{ $work->created_at }}<br><br>
-
+                            Дата добавления: {{ $work->created_at }}<br>
                             <a href="{{route('works.show', ['id'=>$work->id])}}">
-                                Просмотр задачи
+                                Просмотр работы
                             </a><br>
                             <hr>
 

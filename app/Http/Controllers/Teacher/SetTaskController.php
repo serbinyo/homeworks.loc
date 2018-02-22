@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\TeacherController;
+use App\Task;
+use App\Work;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class SetTaskController extends Controller
+class SetTaskController extends TeacherController
 {
-    public function create(Request $request)
+    public function set(Request $request, Task $task, Work $work)
     {
         $data = $request->except('_token');
-        return view('teacher.settask', ['title' => 'ЭДЗ. Создать ДЗ', 'id' => $data['id']]);
+        $task = $task->getOne($data['task_id']);
+        $work = $work->getOne($data['work_id']);
+
+
+        $hasTask = $work->tasks()->where('id', $data['task_id'])->exists();
+        if ($hasTask) {
+            $message = 'Задача уже добавлена в работу №: ' . $data['work_id'];
+            return redirect('/teacher/tasks')->withErrors($message);
+        } else {
+            $task->works()->attach($work);
+            $message = 'Задача добавлена к работе №: ' . $data['work_id'];
+            return redirect('/teacher/tasks')->with('status', $message);
+        }
     }
 }

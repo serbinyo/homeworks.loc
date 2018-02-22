@@ -104,4 +104,11 @@ class Material extends Model
         $entity = Material::find($id);
         return $entity->delete();
     }
+
+    //Eloquent: Relationships
+
+    public function works()
+    {
+        return $this->belongsToMany('App\Work');
+    }
 }
