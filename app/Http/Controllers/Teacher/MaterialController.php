@@ -18,7 +18,7 @@ class MaterialController extends TeacherController
     public function index(Material $material, Teacher $author)
     {
         $discipline_id = $this->user->teacher->discipline_id;
-        $all_materials = $material->materialsToShow($discipline_id);
+        $all_materials = $material->getDisciplineMaterialsPaginated($discipline_id);
         return view('teacher.materials', [
             'title' => 'ЭДЗ. Материалы',
             'materials' => $all_materials,
@@ -63,8 +63,8 @@ class MaterialController extends TeacherController
     public function show($id)
     {
         $work = new Work();
-        $discipline_id = $this->user->teacher->discipline_id;
-        $discipline_works = $work->getDisciplineWorks($discipline_id);
+        $teacher_id = $this->user->teacher->id;
+        $teacher_works = $work->getTeacherWorks($teacher_id);
 
         $material = new Material();
         $material_to_show = $material->getOne($id);
@@ -77,7 +77,7 @@ class MaterialController extends TeacherController
             'material' => $material_to_show,
             'teacher' => $this->user->teacher,
             'author_fio' => $author_fio,
-            'works' => $discipline_works
+            'works' => $teacher_works
         ]);
     }
 

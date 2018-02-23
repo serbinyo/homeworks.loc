@@ -20,7 +20,7 @@ class SetMaterialController extends TeacherController
             $message = 'Материал уже добавлен в задание №: ' . $data['work_id'];
             return redirect('/teacher/materials')->withErrors($message);
         } else {
-            $material->works()->attach($work);
+            $work->materials()->attach($material);
             $message = 'Учебный материал добавлен к заданию №: ' . $data['work_id'];
             return redirect('/teacher/materials')->with('status', $message);
         }

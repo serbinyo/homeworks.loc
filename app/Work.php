@@ -18,12 +18,24 @@ class Work extends Model
         return $entities;
     }
 
-    public function getDisciplineWorks($discipline_id)
+    public function getDisciplineWorksPaginated($discipline_id)
     {
         $entities = DB::table('works')
             ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
             ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
             ->where('disciplines.id', $discipline_id)
+            ->select('works.*')
+            ->orderBy('works.id', 'desc')
+            ->paginate(10);
+        return $entities;
+    }
+
+    public function getTeacherWorks($teacher_id)
+    {
+        $entities = DB::table('works')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('teachers.id', $teacher_id)
             ->select('works.*')
             ->orderBy('works.id', 'desc')
             ->get();

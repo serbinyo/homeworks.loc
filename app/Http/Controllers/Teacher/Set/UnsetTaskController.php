@@ -14,7 +14,7 @@ class UnsetTaskController extends TeacherController
         $data = $request->except('_token');
         $task = $task->getOne($data['task_id']);
         $work = $work->getOne($data['work_id']);
-        $task->works()->detach($work);
+        $work->tasks()->detach($task);
         $message = 'Задача откреплена от работы';
         return back()->with('status', $message);
     }

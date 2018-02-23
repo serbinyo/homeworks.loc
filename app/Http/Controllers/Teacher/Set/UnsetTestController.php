@@ -14,7 +14,7 @@ class UnsetTestController extends TeacherController
         $data = $request->except('_token');
         $test = $test->getOne($data['test_id']);
         $work = $work->getOne($data['work_id']);
-        $test->works()->detach($work);
+        $work->tests()->detach($test);
         $message = 'Тест откреплен от работы';
         return back()->with('status', $message);
     }

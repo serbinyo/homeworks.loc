@@ -40,11 +40,13 @@
                                     {!! nl2br($task->task)!!}<br>
                                     Ответ: {{$task->answer}}<br>
 
-                                    {!! Form::open(['url'=>route('unsetTask')]) !!}
-                                    {!! Form::hidden('task_id', $task->id) !!}
-                                    {!! Form::hidden('work_id', $work->id) !!}
-                                    {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
-                                    {!! Form::close() !!}
+                                    @if ($teacher->id === $work->teacher_id)
+                                        {!! Form::open(['url'=>route('unsetTask')]) !!}
+                                        {!! Form::hidden('task_id', $task->id) !!}
+                                        {!! Form::hidden('work_id', $work->id) !!}
+                                        {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
+                                        {!! Form::close() !!}
+                                    @endif
                                     <hr>
                                 @endforeach
                             @else
@@ -66,11 +68,13 @@
                                     D: {!! nl2br($test->option_d) !!}<br>
                                     Ответ: {{$test->answer}}<br>
 
-                                    {!! Form::open(['url'=>route('unsetTest')]) !!}
-                                    {!! Form::hidden('test_id', $test->id) !!}
-                                    {!! Form::hidden('work_id', $work->id) !!}
-                                    {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
-                                    {!! Form::close() !!}
+                                    @if ($teacher->id === $work->teacher_id)
+                                        {!! Form::open(['url'=>route('unsetTest')]) !!}
+                                        {!! Form::hidden('test_id', $test->id) !!}
+                                        {!! Form::hidden('work_id', $work->id) !!}
+                                        {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
+                                        {!! Form::close() !!}
+                                    @endif
                                     <hr>
                                 @endforeach
                             @else
@@ -91,11 +95,13 @@
                                 Изображение: {{$material->image}}<br>
                                 {!! nl2br($material->body) !!}<br>
 
-                                {!! Form::open(['url'=>route('unsetMaterial')]) !!}
-                                {!! Form::hidden('material_id', $material->id) !!}
-                                {!! Form::hidden('work_id', $work->id) !!}
-                                {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
-                                {!! Form::close() !!}
+                                @if ($teacher->id === $work->teacher_id)
+                                    {!! Form::open(['url'=>route('unsetMaterial')]) !!}
+                                    {!! Form::hidden('material_id', $material->id) !!}
+                                    {!! Form::hidden('work_id', $work->id) !!}
+                                    {!! Form::submit('Открепить от работы', ['class'=>'']) !!}
+                                    {!! Form::close() !!}
+                                @endif
                                 <hr>
                             @endforeach
                         @endif
@@ -105,7 +111,7 @@
                         Дата создания: {{ $work->created_at }}<br>
 
                         @if ($teacher->id === $work->teacher_id)
-                            <a href="{{route('works.edit', ['id'=>$work->id])}}">Изменить</a><br>
+                            <a href="{{route('works.edit', ['id'=>$work->id])}}">Изменить тему</a><br>
 
                             {!! Form::open(['url'=>route('works.destroy', ['id'=>$work->id])]) !!}
                             {!! Form::submit('Удалить', ['class'=>'']) !!}

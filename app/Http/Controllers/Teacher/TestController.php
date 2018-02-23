@@ -18,7 +18,7 @@ class TestController extends TeacherController
     public function index(Test $test, Teacher $author)
     {
         $discipline_id = $this->user->teacher->discipline_id;
-        $all_tests = $test->testsToShow($discipline_id);
+        $all_tests = $test->getDisciplineTestsPaginated($discipline_id);
         return view('teacher.tests', [
             'title' => 'ЭДЗ. Тесты',
             'tests' => $all_tests,
@@ -63,8 +63,8 @@ class TestController extends TeacherController
     public function show($id)
     {
         $work = new Work();
-        $discipline_id = $this->user->teacher->discipline_id;
-        $discipline_works = $work->getDisciplineWorks($discipline_id);
+        $teacher_id = $this->user->teacher->id;
+        $teacher_works = $work->getTeacherWorks($teacher_id);
 
         $test = new Test();
         $test_to_show = $test->getOne($id);
@@ -77,7 +77,7 @@ class TestController extends TeacherController
             'test' => $test_to_show,
             'teacher' => $this->user->teacher,
             'author_fio' => $author_fio,
-            'works' => $discipline_works
+            'works' => $teacher_works
         ]);
     }
 

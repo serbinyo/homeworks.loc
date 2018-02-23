@@ -21,7 +21,7 @@ class SetTaskController extends TeacherController
             $message = 'Задача уже добавлена в работу №: ' . $data['work_id'];
             return redirect('/teacher/tasks')->withErrors($message);
         } else {
-            $task->works()->attach($work);
+            $work->tasks()->attach($task);
             $message = 'Задача добавлена к работе №: ' . $data['work_id'];
             return redirect('/teacher/tasks')->with('status', $message);
         }

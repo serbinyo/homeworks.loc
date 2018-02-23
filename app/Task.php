@@ -18,7 +18,7 @@ class Task extends Model
         return $entities;
     }
 
-    public function tasksToShow($discipline_id)
+    public function getDisciplineTasksPaginated($discipline_id)
     {
         $entities = DB::table('tasks')
             ->join('teachers', 'tasks.teacher_id', '=', 'teachers.id')

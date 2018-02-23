@@ -45,7 +45,7 @@
                                 <select name="work_id" class="form-control" id="work_id" required>
                                     <option selected="selected" value="">Выберите работу...</option>
                                     @foreach($works as $work)
-                                        <option value={{$work->id}} >
+                                        <option value={{$work->id}}>
                                             N: {{$work->id}}
                                             {{$work->theme}}
                                         </option>

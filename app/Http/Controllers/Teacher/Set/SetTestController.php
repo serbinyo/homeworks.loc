@@ -21,7 +21,7 @@ class SetTestController extends TeacherController
             $message = 'Тест уже добавлен в задание №: ' . $data['work_id'];
             return redirect('/teacher/tests')->withErrors($message);
         } else {
-            $test->works()->attach($work);
+            $work->tests()->attach($test);
             $message = 'Тест добавлен к заданию №: ' . $data['work_id'];
             return redirect('/teacher/tests')->with('status', $message);
         }

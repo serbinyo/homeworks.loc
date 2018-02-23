@@ -18,10 +18,8 @@
                         Список работ
                         <br><br>
 
-                        <a href="{{route('works.create')}}">Создать работу</a><br><br>
+                        <a href="{{route('works.create')}}">Создать работу</a>
 
-
-                        <a href="{{route('works.show', ['id'=>'$work->id'])}}">Просмотр задания</a><br>
                         <hr>
                         @foreach($works as $work)
 

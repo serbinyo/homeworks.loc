@@ -17,10 +17,15 @@ class WorksController extends TeacherController
      */
     public function index(Work $work, Teacher $author)
     {
-        $all_works = $work->getAllPaginated();
+        //$all_works = $work->getAllPaginated();
+
+        $work = new Work();
+        $discipline_id = $this->user->teacher->discipline_id;
+        $discipline_works = $work->getDisciplineWorksPaginated($discipline_id);
+
         return view('teacher.works', [
-            'title' => 'ЭДЗ. Задания',
-            'works' => $all_works,
+            'title' => 'ЭДЗ. Работы',
+            'works' => $discipline_works,
             'author' => $author
         ]);
     }

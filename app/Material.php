@@ -18,7 +18,7 @@ class Material extends Model
         return $entities;
     }
 
-    public function materialsToShow($discipline_id)
+    public function getDisciplineMaterialsPaginated($discipline_id)
     {
         $entities = DB::table('materials')
             ->join('teachers', 'materials.teacher_id', '=', 'teachers.id')

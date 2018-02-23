@@ -20,7 +20,7 @@ class Test extends Model
         return $entities;
     }
 
-    public function testsToShow($discipline_id)
+    public function getDisciplineTestsPaginated($discipline_id)
     {
         $entities = DB::table('tests')
             ->join('teachers', 'tests.teacher_id', '=', 'teachers.id')

@@ -14,7 +14,7 @@ class UnsetMaterialController extends TeacherController
         $data = $request->except('_token');
         $material = $material->getOne($data['material_id']);
         $work = $work->getOne($data['work_id']);
-        $material->works()->detach($work);
+        $work->materials()->detach($material);
         $message = 'Материал откреплен от работы';
         return back()->with('status', $message);
     }
