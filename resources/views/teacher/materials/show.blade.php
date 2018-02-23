@@ -32,9 +32,8 @@
 
                         {!! nl2br($material->body) !!}<br><br>
 
-                        Добавил: {{$author_fio}}<br><br>
-
-                        Дата добавления: {{ $material->created_at }}<br><br>
+                        Создал: {{$author_fio}}<br>
+                        Дата создания: {{ $material->created_at }}<br><br>
 
 
                         {!! Form::open(['url'=>route('setMaterial')]) !!}

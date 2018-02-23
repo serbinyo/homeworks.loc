@@ -25,21 +25,20 @@
 
                         <hr>
                         Тема: {{$test->theme}}<br>
-                        Вопрос: {{$test->task}}<br><br>
+                        Вопрос: {!! nl2br($test->task) !!}<br><br>
 
-                        Вариант A: {{ $test->option_a }}<br><br>
+                        Вариант A: {!! nl2br($test->option_a) !!}<br><br>
 
-                        Вариант B: {{ $test->option_b }}<br><br>
+                        Вариант B: {!! nl2br($test->option_b) !!}<br><br>
 
-                        Вариант C: {{ $test->option_c }}<br><br>
+                        Вариант C: {!! nl2br($test->option_c) !!}<br><br>
 
-                        Вариант D: {{ $test->option_d }}<br><br>
+                        Вариант D: {!! nl2br($test->option_d) !!}<br><br>
 
                         Ответ: {{ $test->answer }}<br><br>
 
-                        Добавил: {{$author_fio}}<br><br>
-
-                        Дата добавления: {{ $test->created_at }}<br><br>
+                        Создал: {{$author_fio}}<br>
+                        Дата создания: {{ $test->created_at }}<br><br>
 
                         {!! Form::open(['url'=>route('setTest')]) !!}
                         {!! Form::hidden('test_id', $test->id) !!}

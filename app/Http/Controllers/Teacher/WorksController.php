@@ -63,6 +63,11 @@ class WorksController extends TeacherController
     {
         $work = new Work();
         $work_to_show = $work->getOne($id);
+        $work_content = [
+            'tasks' => $work_to_show->tasks->all(),
+            'tests' => $work_to_show->tests->all(),
+            'materials' => $work_to_show->materials->all()
+        ];
 
         $author = new Teacher();
         $author_fio = $author->getFIO($work_to_show->teacher_id);
@@ -71,7 +76,8 @@ class WorksController extends TeacherController
             'title' => 'ЭДЗ. Просмотр работы',
             'work' => $work_to_show,
             'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio
+            'author_fio' => $author_fio,
+            'work_content' => $work_content
         ]);
     }
 

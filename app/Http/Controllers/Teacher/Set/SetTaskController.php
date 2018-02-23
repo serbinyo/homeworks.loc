@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Teacher\Set;
 
 use App\Http\Controllers\TeacherController;
 use App\Task;
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class SetTaskController extends TeacherController
 {
-    public function set(Request $request, Task $task, Work $work)
+    public function __invoke(Request $request, Task $task, Work $work)
     {
         $data = $request->except('_token');
         $task = $task->getOne($data['task_id']);

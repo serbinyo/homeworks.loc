@@ -26,13 +26,12 @@
 
                         <hr>
                         Тема: {{$task->theme}}<br><br>
-                        Условие задачи: {{$task->task}}<br><br>
+                        Условие задачи: {!! nl2br($task->task)!!}<br><br>
 
                         Ответ: {{ $task->answer }}<br><br>
 
-                        Добавил: {{$author_fio}}<br><br>
-
-                        Дата добавления: {{ $task->created_at }}<br><br>
+                        Создал: {{$author_fio}}<br>
+                        Дата создания: {{ $task->created_at }}<br><br>
 
 
                         {!! Form::open(['url'=>route('setTask')]) !!}
