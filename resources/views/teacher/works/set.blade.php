@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Задать работу</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -14,14 +14,15 @@
                             </div>
                         @endif
 
-                        Добавление теста в работу!<br><br>
+                        Здесь вы можете выбрать и
+                        класс и назначить.<br><br>
 
-                        {{$id}}<br><br>
+                        {{$work_id}}<br><br>
 
-                        Выбрать работу и добавить.<br><br>
+                        Выбор класса!<br><br>
 
-                        {!! Form::open(['url'=>'route(.store)','method'=>'post']) !!}
-                        {!! Form::submit('Добавить тест в работу', ['class'=>'']) !!}
+                        {!! Form::open(['url'=>route('homeworks.store'),'method'=>'post']) !!}
+                        {!! Form::submit('Назначить задание', ['class'=>'']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

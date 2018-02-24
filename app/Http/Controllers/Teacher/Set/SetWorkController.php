@@ -7,9 +7,17 @@ use App\Schoolkid;
 use App\Work;
 use Illuminate\Http\Request;
 
-class SetHomeworkController extends TeacherController
+class SetWorkController extends TeacherController
 {
-    public function __invoke(Request $request, Work $work, Schoolkid $schoolkid)
+    public function index($id)
+    {
+        return view('teacher.works.set', [
+            'title' => 'ЭДЗ. TeacherSetWork',
+            'work_id' => $id
+        ]);
+    }
+
+    public function set(Request $request, Work $work, Schoolkid $schoolkid)
     {
         $data = $request->except('_token');
 

@@ -18,7 +18,8 @@ Route::get('/test', 'IndexController@index')->middleware('auth');
 Auth::routes();
 
 
-//user
+//USER
+
 Route::get('/desktop', 'User\DesktopController@index');
 
 
@@ -32,53 +33,19 @@ Route::get('/desktop', 'User\DesktopController@index');
 Route::get('/statistics', 'User\StatisticsController@index');
 
 
-//teacher
-
-/*
-Route::get('/teacher', 'Teacher\DesktopController@index');
-
-
-Route::get('/teacher/works', 'Teacher\WorksController@index');
-
-Route::get('/teacher/works/view', 'Teacher\ViewWorkController@index');
-
-Route::get('/teacher/works/view/set', 'Teacher\SetWorkController@index');
-
-Route::get('/teacher/works/add', 'Teacher\AddWorkController@index');
-
-Route::get('/teacher/works/add/tasks', 'Teacher\AddTaskController@index');
-
-Route::get('/teacher/works/add/tasks/new', 'Teacher\NewTaskController@index');
-
-Route::get('/teacher/works/add/tests', 'Teacher\AddTestController@index');
-
-Route::get('/teacher/works/add/tests/new', 'Teacher\NewTestController@index');
-
-Route::get('/teacher/works/add/materials', 'Teacher\AddMaterialController@index');
-
-Route::get('/teacher/works/add/materials/new', 'Teacher\NewMaterialController@index');
-
-
-Route::get('/teacher/doneworks', 'Teacher\DoneWorksController@index');
-
-Route::get('/teacher/doneworks/check', 'Teacher\CheckDoneWorksController@index');
-
-Route::get('/teacher/doneworks/check/edit', 'Teacher\EditDoneWorksController@index');
-
-
-Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
-
-Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheRegController@index');
-
-Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
- */
-
+//TEACHER
 
 Route::get('/teacher', 'Teacher\DesktopController@index');
 
 //Set-Unset
 
-Route::post('/teacher/set/homework', 'Teacher\Set\SetHomeworkController')->name('setHomework');
+Route::get('/teacher/set/work/{id}', 'Teacher\Set\SetWorkController@index')->name('indexSet');
+
+Route::post('/teacher/set/work', 'Teacher\Set\SetWorkController@set')->name('setWork');
+
+Route::get('/teacher/set/individually/{id}', 'Teacher\Set\SetIndividuallyController@index')->name('indexIndividually');
+
+Route::post('/teacher/set/individually', 'Teacher\Set\SetIndividuallyController@set')->name('setIndividually');
 
 Route::post('/teacher/set/task', 'Teacher\Set\SetTaskController')->name('setTask');
 
@@ -113,10 +80,3 @@ Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
 Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheRegController@index');
 
 Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
-
-Event::listen('illuminate.query', function($sql)
-{
-    dd($sql);
-});
-
-

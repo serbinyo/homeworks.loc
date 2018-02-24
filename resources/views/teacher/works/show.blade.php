@@ -106,11 +106,14 @@
                             @endforeach
                         @endif
 
-                            {!! Form::open(['url'=>route('setHomework')]) !!}
-                            {!! Form::hidden('schoolkid_id', 2) !!}
-                            {!! Form::hidden('work_id', $work->id) !!}
-                            {!! Form::submit('Назначить работу ученику 2 - Данилу Волкову', ['class'=>'']) !!}
-                            {!! Form::close() !!}
+                        <a href="{{route('indexSet', ['id'=>$work->id])}}">Задать</a><br>
+                        <a href="{{route('indexIndividually', ['id'=>$work->id])}}">Задать индивидуально</a><br>
+
+                        {!! Form::open(['url'=>route('setWork')]) !!}
+                        {!! Form::hidden('schoolkid_id', 2) !!}
+                        {!! Form::hidden('work_id', $work->id) !!}
+                        {!! Form::submit('Назначить работу ученику 2 - Данилу Волкову', ['class'=>'']) !!}
+                        {!! Form::close() !!}
 
 
                         Создал: {{$author_fio}}<br>
