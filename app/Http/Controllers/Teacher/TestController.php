@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
+use App\Teacher;
+use App\Test;
 use App\Work;
 use Illuminate\Http\Request;
-use App\Test;
-use App\Teacher;
 
 class TestController extends TeacherController
 {
@@ -62,23 +62,28 @@ class TestController extends TeacherController
      */
     public function show($id)
     {
-        $work = new Work();
-        $teacher_id = $this->user->teacher->id;
-        $teacher_works = $work->getTeacherWorks($teacher_id);
-
         $test = new Test();
         $test_to_show = $test->getOne($id);
 
-        $author = new Teacher();
-        $author_fio = $author->getFIO($test_to_show->teacher_id);
+        if ($this->user->can('view', $test_to_show)) {
 
-        return view('teacher.tests.show', [
-            'title' => 'ЭДЗ. Просмотр теста',
-            'test' => $test_to_show,
-            'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio,
-            'works' => $teacher_works
-        ]);
+            $work = new Work();
+            $teacher_id = $this->user->teacher->id;
+            $teacher_works = $work->getTeacherWorks($teacher_id);
+
+            $author = new Teacher();
+            $author_fio = $author->getFIO($test_to_show->teacher_id);
+
+            return view('teacher.tests.show', [
+                'title' => 'ЭДЗ. Просмотр теста',
+                'test' => $test_to_show,
+                'teacher' => $this->user->teacher,
+                'author_fio' => $author_fio,
+                'works' => $teacher_works
+            ]);
+        }
+        $message = 'ОШИБКА. Нет права просмотра !!!';
+        return redirect('/teacher/tests/')->withErrors($message);
     }
 
     /**
@@ -91,12 +96,15 @@ class TestController extends TeacherController
     {
         $test = new Test();
         $test_to_update = $test->getOne($id);
-        $this->authorize('update', $test_to_update);
+        if ($this->user->can('update', $test_to_update)) {
 
-        return view('teacher.tests.edit', [
-            'title' => 'ЭДЗ. Новый тест',
-            'test_to_update' => $test_to_update
-        ]);
+            return view('teacher.tests.edit', [
+                'title' => 'ЭДЗ. Новый тест',
+                'test_to_update' => $test_to_update
+            ]);
+        }
+        $message = 'ОШИБКА. Нет права редактирования';
+        return redirect('/teacher/tests/' . $id)->withErrors($message);
     }
 
     /**
@@ -110,9 +118,9 @@ class TestController extends TeacherController
     {
         $data = $request->except('_token');
         $test = new Test();
-        $test_for_update = $test->getOne($id);
+        $test_to_update = $test->getOne($id);
 
-        if ($this->user->can('update', $test_for_update)) {
+        if ($this->user->can('update', $test_to_update)) {
 
             $response = $test->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
 
@@ -135,8 +143,8 @@ class TestController extends TeacherController
     public function destroy($id)
     {
         $test = new Test();
-        $test_for_delete = $test->getOne($id);
-        if ($this->user->can('update', $test_for_delete)) {
+        $test_to_delete = $test->getOne($id);
+        if ($this->user->can('update', $test_to_delete)) {
             $test->kill($id);
             $message = 'Тест ' . $id . ' удален!';
             return redirect('/teacher/tests')->with('status', $message);

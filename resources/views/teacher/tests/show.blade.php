@@ -15,6 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                            @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/tests/">Список тестов</a> >>
@@ -74,9 +75,6 @@
                                 Вы не можете править и удалять тесты которые не создавали
                             </p>
                         @endif
-                        <div class="err_message">
-                            @include('common.errors')
-                        </div>
                     </div>
                 </div>
             </div>

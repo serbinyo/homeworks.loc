@@ -19,7 +19,7 @@ class TestPolicy
      */
     public function view(User $user, Test $test)
     {
-        //
+        return $user->teacher->discipline->id === $test->teacher->discipline->id;
     }
 
     /**

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class SetTestController extends TeacherController
 {
 
-    public function set(Request $request, Test $test, Work $work)
+    public function __invoke(Request $request, Test $test, Work $work)
     {
         $data = $request->except('_token');
         $test = $test->getOne($data['test_id']);

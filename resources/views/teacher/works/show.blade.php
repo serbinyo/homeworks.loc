@@ -106,6 +106,12 @@
                             @endforeach
                         @endif
 
+                            {!! Form::open(['url'=>route('setHomework')]) !!}
+                            {!! Form::hidden('schoolkid_id', 2) !!}
+                            {!! Form::hidden('work_id', $work->id) !!}
+                            {!! Form::submit('Назначить работу ученику 2 - Данилу Волкову', ['class'=>'']) !!}
+                            {!! Form::close() !!}
+
 
                         Создал: {{$author_fio}}<br>
                         Дата создания: {{ $work->created_at }}<br>
@@ -122,9 +128,6 @@
                                 Вы не можете править и удалять работы которые не создавали
                             </p>
                         @endif
-                        <div class="err_message">
-                            @include('common.errors')
-                        </div>
                     </div>
                 </div>
             </div>

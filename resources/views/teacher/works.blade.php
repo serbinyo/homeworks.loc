@@ -13,6 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         Список работ

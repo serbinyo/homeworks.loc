@@ -19,7 +19,7 @@ class MaterialPolicy
      */
     public function view(User $user, Material $material)
     {
-        //
+        return $user->teacher->discipline->id === $material->teacher->discipline->id;
     }
 
     /**

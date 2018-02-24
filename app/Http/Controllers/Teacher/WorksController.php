@@ -68,22 +68,29 @@ class WorksController extends TeacherController
     {
         $work = new Work();
         $work_to_show = $work->getOne($id);
-        $work_content = [
-            'tasks' => $work_to_show->tasks->all(),
-            'tests' => $work_to_show->tests->all(),
-            'materials' => $work_to_show->materials->all()
-        ];
 
-        $author = new Teacher();
-        $author_fio = $author->getFIO($work_to_show->teacher_id);
+        if ($this->user->can('view', $work_to_show)) {
 
-        return view('teacher.works.show', [
-            'title' => 'ЭДЗ. Просмотр работы',
-            'work' => $work_to_show,
-            'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio,
-            'work_content' => $work_content
-        ]);
+            $work_content = [
+                'tasks' => $work_to_show->tasks->all(),
+                'tests' => $work_to_show->tests->all(),
+                'materials' => $work_to_show->materials->all()
+            ];
+
+            $author = new Teacher();
+            $author_fio = $author->getFIO($work_to_show->teacher_id);
+
+            return view('teacher.works.show', [
+                'title' => 'ЭДЗ. Просмотр работы',
+                'work' => $work_to_show,
+                'teacher' => $this->user->teacher,
+                'author_fio' => $author_fio,
+                'work_content' => $work_content
+            ]);
+        }
+
+        $message = 'ОШИБКА. Нет права просмотра !!!';
+        return redirect('/teacher/works/')->withErrors($message);
     }
 
     /**

@@ -18,7 +18,7 @@
                             </div>
                         @endif
 
-                        <a href="{{route('works.index')}}">Домашние задания</a><br><br>
+                        <a href="{{route('works.index')}}">Работы</a><br><br>
 
                         <a href="{{route('tasks.index')}}">Задачи</a><br>
                         <a href="{{route('tests.index')}}">Тесты</a><br>

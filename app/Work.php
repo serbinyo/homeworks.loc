@@ -101,6 +101,11 @@ class Work extends Model
 
     //Eloquent: Relationships
 
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
+    }
+
     public function tasks()
     {
         return $this->belongsToMany('App\Task');
@@ -114,5 +119,12 @@ class Work extends Model
     public function materials()
     {
         return $this->belongsToMany('App\Material');
+    }
+
+    public function schoolkids()
+    {
+        return $this->belongsToMany('App\Schoolkid', 'homeworks')
+            ->withPivot('date_to_completion')
+            ->withTimestamps();
     }
 }

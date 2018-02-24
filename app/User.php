@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //Eloquent: Relationships
+
     public function schoolkid()
     {
         return $this->hasOne('App\Schoolkid');

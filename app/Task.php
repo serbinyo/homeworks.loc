@@ -97,6 +97,11 @@ class Task extends Model
 
     //Eloquent: Relationships
 
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher');
+    }
+
     public function works()
     {
         return $this->belongsToMany('App\Work');

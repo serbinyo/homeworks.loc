@@ -78,25 +78,28 @@ class TaskController extends TeacherController
      */
     public function show($id)
     {
-        $work = new Work();
-        $teacher_id = $this->user->teacher->id;
-        $teacher_works = $work->getTeacherWorks($teacher_id);
-
         $task = new Task();
         $task_to_show = $task->getOne($id);
 
-       //todo сделать проверку в Policy что бы учителя не могли просматривать задачи и остальное из предмета который они не ведут
+        if ($this->user->can('view', $task_to_show)) {
 
-        $author = new Teacher();
-        $author_fio = $author->getFIO($task_to_show->teacher_id);
+            $work = new Work();
+            $teacher_id = $this->user->teacher->id;
+            $teacher_works = $work->getTeacherWorks($teacher_id);
 
-        return view('teacher.tasks.show', [
-            'title' => 'ЭДЗ. Просмотр задачи',
-            'task' => $task_to_show,
-            'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio,
-            'works' => $teacher_works
-        ]);
+            $author = new Teacher();
+            $author_fio = $author->getFIO($task_to_show->teacher_id);
+
+            return view('teacher.tasks.show', [
+                'title' => 'ЭДЗ. Просмотр задачи',
+                'task' => $task_to_show,
+                'teacher' => $this->user->teacher,
+                'author_fio' => $author_fio,
+                'works' => $teacher_works
+            ]);
+        }
+        $message = 'ОШИБКА. Нет права просмотра !!!';
+        return redirect('/teacher/tasks/')->withErrors($message);
     }
 
     /**
@@ -108,13 +111,15 @@ class TaskController extends TeacherController
     public function edit($id)
     {
         $task = new Task();
-        $task_for_update = $task->getOne($id);
-        $this->authorize('update', $task_for_update);
-
-        return view('teacher.tasks.edit', [
-            'title' => 'ЭДЗ. Редактирование задачи',
-            'task_to_update' => $task_for_update
-        ]);
+        $task_to_update = $task->getOne($id);
+        if ($this->user->can('update', $task_to_update)) {
+            return view('teacher.tasks.edit', [
+                'title' => 'ЭДЗ. Редактирование задачи',
+                'task_to_update' => $task_to_update
+            ]);
+        }
+        $message = 'ОШИБКА. Нет права редактирования';
+        return redirect('/teacher/tasks/' . $id)->withErrors($message);
     }
 
     /**
@@ -128,9 +133,9 @@ class TaskController extends TeacherController
     {
         $data = $request->except('_token');
         $task = new Task();
-        $task_for_update = $task->getOne($id);
+        $task_to_update = $task->getOne($id);
 
-        if ($this->user->can('update', $task_for_update)) {
+        if ($this->user->can('update', $task_to_update)) {
 
             $response = $task->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
 
@@ -153,8 +158,8 @@ class TaskController extends TeacherController
     public function destroy($id)
     {
         $task = new Task();
-        $task_for_delete = $task->getOne($id);
-        if ($this->user->can('update', $task_for_delete)) {
+        $task_to_delete = $task->getOne($id);
+        if ($this->user->can('update', $task_to_delete)) {
             $task->kill($id);
             $message = 'Задача ' . $id . ' удалена!';
             return redirect('/teacher/tasks')->with('status', $message);

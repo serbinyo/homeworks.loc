@@ -19,7 +19,7 @@ class WorkPolicy
      */
     public function view(User $user, Work $work)
     {
-        //
+        return $user->teacher->discipline->id === $work->teacher->discipline->id;
     }
 
     /**

@@ -9,7 +9,7 @@ use App\Work;
 
 class SetMaterialController extends TeacherController
 {
-    public function set(Request $request, Material $material, Work $work)
+    public function __invoke(Request $request, Material $material, Work $work)
     {
         $data = $request->except('_token');
         $material = $material->getOne($data['material_id']);

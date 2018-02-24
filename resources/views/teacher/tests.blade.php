@@ -13,9 +13,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <div class="err_message">
-                            @include('common.errors')
-                        </div>
+
+                        @include('common.errors')
+
 
                         <a href="/teacher">Учительская</a> >>
                         Список тестов

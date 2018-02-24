@@ -78,17 +78,17 @@ Route::get('/teacher', 'Teacher\DesktopController@index');
 
 //Set-Unset
 
-Route::post('/teacher/set/homework', 'Teacher\Set\SetHomeworkController@set')->name('setHomework');
+Route::post('/teacher/set/homework', 'Teacher\Set\SetHomeworkController')->name('setHomework');
 
 Route::post('/teacher/set/task', 'Teacher\Set\SetTaskController')->name('setTask');
 
 Route::post('/teacher/unset/task/', 'Teacher\Set\UnsetTaskController')->name('unsetTask');
 
-Route::post('/teacher/set/test', 'Teacher\Set\SetTestController@set')->name('setTest');
+Route::post('/teacher/set/test', 'Teacher\Set\SetTestController')->name('setTest');
 
 Route::post('/teacher/unset/test/', 'Teacher\Set\UnsetTestController')->name('unsetTest');
 
-Route::post('/teacher/set/material', 'Teacher\Set\SetMaterialController@set')->name('setMaterial');
+Route::post('/teacher/set/material', 'Teacher\Set\SetMaterialController')->name('setMaterial');
 
 Route::post('/teacher/unset/material/', 'Teacher\Set\UnsetMaterialController')->name('unsetMaterial');
 

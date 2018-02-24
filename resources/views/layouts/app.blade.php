@@ -66,7 +66,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false" aria-haspopup="true">
                                     @if (Auth::user()->role == 't')
-                                        Учитель
+                                        {{ Auth::user()->teacher->discipline->name }}
                                         {{ Auth::user()->teacher->lastname }}
                                         {{ Auth::user()->teacher->firstname }}
                                     @else

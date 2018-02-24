@@ -19,7 +19,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+        return $user->teacher->discipline->id === $task->teacher->discipline->id;
     }
 
     /**

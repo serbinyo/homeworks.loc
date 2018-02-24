@@ -62,23 +62,28 @@ class MaterialController extends TeacherController
      */
     public function show($id)
     {
-        $work = new Work();
-        $teacher_id = $this->user->teacher->id;
-        $teacher_works = $work->getTeacherWorks($teacher_id);
-
         $material = new Material();
         $material_to_show = $material->getOne($id);
 
-        $author = new Teacher();
-        $author_fio = $author->getFIO($material_to_show->teacher_id);
+        if ($this->user->can('view', $material_to_show)) {
 
-        return view('teacher.materials.show', [
-            'title' => 'ЭДЗ. Просмотр учебного материала',
-            'material' => $material_to_show,
-            'teacher' => $this->user->teacher,
-            'author_fio' => $author_fio,
-            'works' => $teacher_works
-        ]);
+            $work = new Work();
+            $teacher_id = $this->user->teacher->id;
+            $teacher_works = $work->getTeacherWorks($teacher_id);
+
+            $author = new Teacher();
+            $author_fio = $author->getFIO($material_to_show->teacher_id);
+
+            return view('teacher.materials.show', [
+                'title' => 'ЭДЗ. Просмотр учебного материала',
+                'material' => $material_to_show,
+                'teacher' => $this->user->teacher,
+                'author_fio' => $author_fio,
+                'works' => $teacher_works
+            ]);
+        }
+        $message = 'ОШИБКА. Нет права просмотра !!!';
+        return redirect('/teacher/materials/')->withErrors($message);
     }
 
     /**
@@ -91,12 +96,15 @@ class MaterialController extends TeacherController
     {
         $material = new Material();
         $material_to_update = $material->getOne($id);
-        $this->authorize('update', $material_to_update);
+        if ($this->user->can('update', $material_to_update)) {
 
-        return view('teacher.materials.edit', [
-                'title' => 'ЭДЗ. Редактирование материала',
-                'material_to_update' => $material_to_update]
-        );
+            return view('teacher.materials.edit', [
+                    'title' => 'ЭДЗ. Редактирование материала',
+                    'material_to_update' => $material_to_update]
+            );
+        }
+        $message = 'ОШИБКА. Нет права редактирования';
+        return redirect('/teacher/materials/' . $id)->withErrors($message);
     }
 
     /**
@@ -110,9 +118,9 @@ class MaterialController extends TeacherController
     {
         $data = $request->except('_token');
         $material = new Material();
-        $material_for_update = $material->getOne($id);
+        $material_to_update = $material->getOne($id);
 
-        if ($this->user->can('update', $material_for_update)) {
+        if ($this->user->can('update', $material_to_update)) {
 
             $response = $material->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
 
@@ -135,8 +143,8 @@ class MaterialController extends TeacherController
     public function destroy($id)
     {
         $material = new Material();
-        $material_for_delete = $material->getOne($id);
-        if ($this->user->can('update', $material_for_delete)) {
+        $material_to_delete = $material->getOne($id);
+        if ($this->user->can('update', $material_to_delete)) {
             $material->kill($id);
             $message = 'Учебный материал ' . $id . ' удален!';
             return redirect('/teacher/materials')->with('status', $message);
