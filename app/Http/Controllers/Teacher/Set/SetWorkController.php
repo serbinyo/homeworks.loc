@@ -29,20 +29,47 @@ class SetWorkController extends TeacherController
     public function set(Request $request, Work $work, Schoolkid $schoolkid, Grade $grade)
     {
         $data = $request->except('_token');
-        $grade_id = $data['grade'];
-        $grade = $grade->getOne($grade_id);
-        dd($grade->schoolkids);
+        $work_to_set = $work->getOne($data['work_id']);
 
+        if ($this->user->can('view', $work_to_set)) {
 
+            $grade_id = $data['grade'];
+            $grade = $grade->getOne($grade_id);
+            $allKids = $grade->schoolkids->count();
+            $hasHomeworkKids = 0;
 
-        $schoolkid = $schoolkid->getOne($data['schoolkid_id']);
-        $work = $work->getOne($data['work_id']);
+            if ($allKids !== 0) {
+                foreach ($grade->schoolkids as $kid) {
 
+                    $hasHomework = $schoolkid->hasHomework($kid, $work_to_set);
 
+                    if (!$hasHomework) {
+                        $schoolkid->setHomework($kid, $work_to_set, $data['date']);
+                    } else {
+                        $hasHomeworkKids = $hasHomeworkKids + 1;
+                    }
+                }
 
-        //todo запретить повторно назначать одну и туже работу одному и тому же ученику
-
-        $work->schoolkids()->attach($schoolkid, ['date_to_completion' => '2018-09-13']);
-        //return view('teacher.sethomework', ['title' => 'ЭДЗ. Создать ДЗ', 'id' => $data['id']]);
+                if ($allKids === $hasHomeworkKids) {
+                    $message = 'Работа '
+                        . $data['work_id']
+                        . ' уже заданна '
+                        . $grade->name
+                        . ' классу';
+                    return back()->withErrors($message);
+                } else {
+                    $message = 'Работа '
+                        . $data['work_id']
+                        . ' заданна '
+                        . $grade->name
+                        . ' классу';
+                    return back()->with('status', $message);
+                }
+            }
+            $message = 'В классе нет учеников';
+            return back()->withErrors($message);
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/teacher/works/')->withErrors($message);
     }
 }

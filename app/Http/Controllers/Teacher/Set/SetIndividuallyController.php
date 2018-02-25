@@ -5,18 +5,34 @@ namespace App\Http\Controllers\Teacher\Set;
 use App\Http\Controllers\TeacherController;
 use App\Schoolkid;
 use App\Work;
+use App\Grade;
 use Illuminate\Http\Request;
 
 class SetIndividuallyController extends TeacherController
 {
-    public function index($id, Work $work)
+    public function index($id, Request $request, Work $work, Grade $grade)
     {
+        $data = $request->except('_token');
+
+        if (array_key_exists('grade', $data)) {
+            $grades = null;
+            $grade_to_show = $grade->getOne($data['grade']);
+            $schoolkids = $grade_to_show->schoolkids;
+        } else {
+            $grade_to_show = null;
+            $schoolkids = null;
+            $grades = $grade->getAll();
+        }
+
         $work_to_set = $work->getOne($id);
 
         if ($this->user->can('view', $work_to_set)) {
             return view('teacher.works.set_individually', [
                 'title' => 'ЭДЗ. TeacherSetIndividually',
-                'work_id' => $id
+                'work_id' => $id,
+                'grades' => $grades,
+                'grade' => $grade_to_show,
+                'schoolkids' => $schoolkids
             ]);
         }
         $message = 'ОШИБКА. Нет прав';
@@ -27,10 +43,10 @@ class SetIndividuallyController extends TeacherController
     {
         $data = $request->except('_token');
 
-        $schoolkid = $schoolkid->getOne($data['schoolkid_id']);
-        $work = $work->getOne($data['work_id']);
+        $kid = $schoolkid->getOne($data['schoolkid_id']);
+        $work_to_set = $work->getOne($data['work_id']);
 
-        $hasHomework = $work->schoolkids()->where('schoolkid_id', $data['schoolkid_id'])->exists();
+        $hasHomework = $schoolkid->hasHomework($kid, $work_to_set);
         if ($hasHomework) {
             $message = 'Работа '
                 . $data['work_id']
@@ -39,7 +55,7 @@ class SetIndividuallyController extends TeacherController
                 . $schoolkid->lastname;
             return back()->withErrors($message);
         } else {
-            $work->schoolkids()->attach($schoolkid, ['date_to_completion' => '2018-09-13']);
+            $schoolkid->setHomework($kid, $work_to_set, $data['date']);
             $message = 'Работа '
                 . $data['work_id']
                 . ' добавлена ученику: '

@@ -26,7 +26,9 @@
 
                         Выбор класса!<br><br>
 
+
                         {!! Form::open(['url'=>route('setWork'), 'class'=>'form-horizontal']) !!}
+                        {!! Form::hidden('work_id', $work_id) !!}
                         <div class="form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
                             <label for="grade" class="col-md-4 control-label">Класс</label>
 
@@ -47,6 +49,24 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+                            <label for="date" class="col-md-4 control-label">Дата</label>
+
+                            <div class="col-md-6">
+                                {!! Form::text('date', old('date'), ['required',
+                                'class'=>'form-control',
+                                'placeholder' => 'ГГГГ-ММ-ДД'
+                                ]) !!}
+
+                                @if ($errors->has('date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Назначить работу классу', ['class'=>'btn btn-primary']) !!}

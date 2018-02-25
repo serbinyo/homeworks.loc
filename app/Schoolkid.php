@@ -17,13 +17,23 @@ class Schoolkid extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname','middlename', 'lastname', 'grade_id'
+        'firstname', 'middlename', 'lastname', 'grade_id'
     ];
 
     public function getOne($id)
     {
         $entity = Schoolkid::find($id);
         return $entity;
+    }
+
+    public function hasHomework($kid, $work)
+    {
+        return $kid->works()->where('work_id', $work->id)->exists();
+    }
+
+    public function setHomework($kid, $work, $date)
+    {
+        return $kid->works()->attach($work, ['date_to_completion' => $date]);
     }
 
     //Eloquent: Relationships
