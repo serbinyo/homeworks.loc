@@ -45,7 +45,7 @@
 
                                 <div class="col-md-6">
                                     <input id="lastname" type="text" class="form-control" name="lastname"
-                                           value="{{ old('lastname') }}" required autofocus>
+                                           value="{{ old('lastname') }}" required>
 
                                     @if ($errors->has('lastname'))
                                         <span class="help-block">
@@ -60,7 +60,7 @@
 
                                 <div class="col-md-6">
                                     <input id="firstname" type="text" class="form-control" name="firstname"
-                                           value="{{ old('firstname') }}" required autofocus>
+                                           value="{{ old('firstname') }}" required>
 
                                     @if ($errors->has('firstname'))
                                         <span class="help-block">
@@ -75,7 +75,7 @@
 
                                 <div class="col-md-6">
                                     <input id="middlename" type="text" class="form-control" name="middlename"
-                                           value="{{ old('middlename') }}" required autofocus>
+                                           value="{{ old('middlename') }}" placeholder="не обязательно">
 
                                     @if ($errors->has('middlename'))
                                         <span class="help-block">
@@ -97,8 +97,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    {{--<input id="grade" type="text" class="form-control" name="grade"--}}
-                                    {{--value="{{ old('grade') }}" required autofocus>--}}
 
                                     @if ($errors->has('grade'))
                                         <span class="help-block">
@@ -135,7 +133,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Зарегистрировать
                                     </button>
                                 </div>
                             </div>

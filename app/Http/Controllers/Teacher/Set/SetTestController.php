@@ -16,7 +16,7 @@ class SetTestController extends TeacherController
         $test = $test->getOne($data['test_id']);
         $work = $work->getOne($data['work_id']);
 
-        $hasTask = $work->tests()->where('id', $data['test_id'])->exists();
+        $hasTask = $work->tests()->where('test_id', $data['test_id'])->exists();
         if ($hasTask) {
             $message = 'Тест уже добавлен в задание №: ' . $data['work_id'];
             return redirect('/teacher/tests')->withErrors($message);

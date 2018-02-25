@@ -17,6 +17,8 @@ class Discipline extends Model
         return $entities;
     }
 
+    //Eloquent: Relationships
+
     public function teachers()
     {
         return $this->hasMany('App\Teacher', 'discipline_id');

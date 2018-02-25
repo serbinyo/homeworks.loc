@@ -15,7 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            @include('common.errors')
+                        @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/tasks/">Список задач</a> >>
@@ -24,14 +24,14 @@
 
 
                         Задача № : {{ $task->id }}<br>
-
+                        Добавил: {{$author_fio}}
                         <hr>
+                            
                         Тема: {{$task->theme}}<br><br>
                         Условие задачи: {!! nl2br($task->task)!!}<br><br>
 
                         Ответ: {{ $task->answer }}<br><br>
 
-                        Создал: {{$author_fio}}<br>
                         Дата создания: {{ $task->created_at }}<br><br>
 
 
@@ -52,7 +52,7 @@
                                 </select>
                             </div>
                         </div>
-                        {!! Form::submit('Добавить к работе', ['class'=>'']) !!}
+                        {!! Form::submit('Прикрепить к работе', ['class'=>'']) !!}
                         {!! Form::close() !!}
 
                         <hr>

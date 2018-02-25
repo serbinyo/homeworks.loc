@@ -15,7 +15,7 @@ class SetMaterialController extends TeacherController
         $material = $material->getOne($data['material_id']);
         $work = $work->getOne($data['work_id']);
 
-        $hasTask = $work->materials()->where('id', $data['material_id'])->exists();
+        $hasTask = $work->materials()->where('material_id', $data['material_id'])->exists();
         if ($hasTask) {
             $message = 'Материал уже добавлен в задание №: ' . $data['work_id'];
             return redirect('/teacher/materials')->withErrors($message);

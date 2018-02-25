@@ -39,4 +39,9 @@ class Schoolkid extends Authenticatable
             ->withPivot('date_to_completion')
             ->withTimestamps();
     }
+
+    public function grade()
+    {
+        return $this->belongsTo('App\Grade');
+    }
 }

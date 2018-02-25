@@ -15,7 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            @include('common.errors')
+                        @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/tests/">Список тестов</a> >>
@@ -23,6 +23,7 @@
                         <br><br>
 
                         Тест № : {{ $test->id }}<br>
+                        Добавил: {{$author_fio}}
 
                         <hr>
                         Тема: {{$test->theme}}<br>
@@ -38,7 +39,6 @@
 
                         Ответ: {{ $test->answer }}<br><br>
 
-                        Создал: {{$author_fio}}<br>
                         Дата создания: {{ $test->created_at }}<br><br>
 
                         {!! Form::open(['url'=>route('setTest')]) !!}
@@ -58,7 +58,7 @@
                                 </select>
                             </div>
                         </div>
-                        {!! Form::submit('Добавить к работе', ['class'=>'']) !!}
+                        {!! Form::submit('Прикрепить к работе', ['class'=>'']) !!}
                         {!! Form::close() !!}
 
                         <hr>

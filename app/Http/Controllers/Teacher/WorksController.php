@@ -88,7 +88,6 @@ class WorksController extends TeacherController
                 'work_content' => $work_content
             ]);
         }
-
         $message = 'ОШИБКА. Нет права просмотра !!!';
         return redirect('/teacher/works/')->withErrors($message);
     }

@@ -9,12 +9,18 @@ use Illuminate\Http\Request;
 
 class SetIndividuallyController extends TeacherController
 {
-    public function index($id)
+    public function index($id, Work $work)
     {
-        return view('teacher.works.set_individually', [
-            'title' => 'ЭДЗ. TeacherSetIndividually',
-            'work_id' => $id
-        ]);
+        $work_to_set = $work->getOne($id);
+
+        if ($this->user->can('view', $work_to_set)) {
+            return view('teacher.works.set_individually', [
+                'title' => 'ЭДЗ. TeacherSetIndividually',
+                'work_id' => $id
+            ]);
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/teacher/works/')->withErrors($message);
     }
 
     public function set(Request $request, Work $work, Schoolkid $schoolkid)
@@ -24,9 +30,22 @@ class SetIndividuallyController extends TeacherController
         $schoolkid = $schoolkid->getOne($data['schoolkid_id']);
         $work = $work->getOne($data['work_id']);
 
-        //todo запретить повторно назначать одну и туже работу одному и тому же ученику
-
-        $work->schoolkids()->attach($schoolkid, ['date_to_completion'=>'2018-09-13']);
-        //return view('teacher.sethomework', ['title' => 'ЭДЗ. Создать ДЗ', 'id' => $data['id']]);
+        $hasHomework = $work->schoolkids()->where('schoolkid_id', $data['schoolkid_id'])->exists();
+        if ($hasHomework) {
+            $message = 'Работа '
+                . $data['work_id']
+                . ' уже добавлена ученику: '
+                . $schoolkid->firstname . ' '
+                . $schoolkid->lastname;
+            return back()->withErrors($message);
+        } else {
+            $work->schoolkids()->attach($schoolkid, ['date_to_completion' => '2018-09-13']);
+            $message = 'Работа '
+                . $data['work_id']
+                . ' добавлена ученику: '
+                . $schoolkid->firstname . ' '
+                . $schoolkid->lastname;
+            return back()->with('status', $message);
+        }
     }
 }

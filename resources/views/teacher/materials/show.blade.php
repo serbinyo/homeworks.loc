@@ -15,7 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            @include('common.errors')
+                        @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/materials/">Список материалов</a> >>
@@ -23,7 +23,8 @@
                         <br><br>
 
 
-                        Дополнительный учебный материал № : {{ $material->id }}
+                        Дополнительный учебный материал № : {{ $material->id }}<br>
+                        Добавил: {{$author_fio}}
 
                         <hr>
                         Тема: {{$material->theme}}<br>
@@ -33,7 +34,7 @@
 
                         {!! nl2br($material->body) !!}<br><br>
 
-                        Создал: {{$author_fio}}<br>
+
                         Дата создания: {{ $material->created_at }}<br><br>
 
 
@@ -54,7 +55,7 @@
                                 </select>
                             </div>
                         </div>
-                        {!! Form::submit('Добавить к работе', ['class'=>'']) !!}
+                        {!! Form::submit('Прикрепить к работе', ['class'=>'']) !!}
                         {!! Form::close() !!}
 
                         <hr>

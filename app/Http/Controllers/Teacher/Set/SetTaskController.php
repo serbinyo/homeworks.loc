@@ -16,7 +16,7 @@ class SetTaskController extends TeacherController
         $work = $work->getOne($data['work_id']);
 
 
-        $hasTask = $work->tasks()->where('id', $data['task_id'])->exists();
+        $hasTask = $work->tasks()->where('task_id', $data['task_id'])->exists();
         if ($hasTask) {
             $message = 'Задача уже добавлена в работу №: ' . $data['work_id'];
             return redirect('/teacher/tasks')->withErrors($message);

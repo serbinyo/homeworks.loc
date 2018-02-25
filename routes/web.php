@@ -39,13 +39,13 @@ Route::get('/teacher', 'Teacher\DesktopController@index');
 
 //Set-Unset
 
-Route::get('/teacher/set/work/{id}', 'Teacher\Set\SetWorkController@index')->name('indexSet');
+Route::get('/teacher/works/{id}/set', 'Teacher\Set\SetWorkController@index')->name('indexSet');
 
-Route::post('/teacher/set/work', 'Teacher\Set\SetWorkController@set')->name('setWork');
+Route::post('/teacher/works/set', 'Teacher\Set\SetWorkController@set')->name('setWork');
 
-Route::get('/teacher/set/individually/{id}', 'Teacher\Set\SetIndividuallyController@index')->name('indexIndividually');
+Route::get('/teacher/works/{id}/individually', 'Teacher\Set\SetIndividuallyController@index')->name('indexIndividually');
 
-Route::post('/teacher/set/individually', 'Teacher\Set\SetIndividuallyController@set')->name('setIndividually');
+Route::post('/teacher/works/individually', 'Teacher\Set\SetIndividuallyController@set')->name('setIndividually');
 
 Route::post('/teacher/set/task', 'Teacher\Set\SetTaskController')->name('setTask');
 

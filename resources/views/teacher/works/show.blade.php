@@ -17,11 +17,13 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/works/">Список работ</a>
-
+                        <a href="/teacher/works/">Список работ</a> >>
+                        Просмотр работы
                         <br><br>
+
                         <p class="works_show_blok_title">Работа № : {{ $work->id }}<br>
-                            Тема: {{$work->theme}}</p>
+                            Тема: {{$work->theme}}<br>
+                            Создал: {{$author_fio}}</p>
                         <hr>
 
 
@@ -107,17 +109,9 @@
                         @endif
 
                         <a href="{{route('indexSet', ['id'=>$work->id])}}">Задать</a><br>
-                        <a href="{{route('indexIndividually', ['id'=>$work->id])}}">Задать индивидуально</a><br>
+                        <a href="{{route('indexIndividually', ['id'=>$work->id])}}">Задать индивидуально</a><br><br>
 
-                        {!! Form::open(['url'=>route('setWork')]) !!}
-                        {!! Form::hidden('schoolkid_id', 2) !!}
-                        {!! Form::hidden('work_id', $work->id) !!}
-                        {!! Form::submit('Назначить работу ученику 2 - Данилу Волкову', ['class'=>'']) !!}
-                        {!! Form::close() !!}
-
-
-                        Создал: {{$author_fio}}<br>
-                        Дата создания: {{ $work->created_at }}<br>
+                        Дата создания: {{ $work->created_at }}<br><br>
 
                         @if ($teacher->id === $work->teacher_id)
                             <a href="{{route('works.edit', ['id'=>$work->id])}}">Изменить тему</a><br>
