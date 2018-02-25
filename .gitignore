@@ -9,6 +9,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
-
-!/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php
