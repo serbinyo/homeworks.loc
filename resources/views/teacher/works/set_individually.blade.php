@@ -58,10 +58,7 @@
                             </div>
                             {!! Form::close() !!}<br>
 
-
                         @else
-
-
 
                             {!! Form::open(['url'=>route('setIndividually')]) !!}
                             {!! Form::hidden('work_id', $work_id) !!}
@@ -77,7 +74,13 @@
 
                                 <div class="col-md-6">
                                     <select name="schoolkid_id" class="form-control" id="schoolkid_id" required>
-                                        <option selected="selected" value="">Выберите ученика...</option>
+                                        <option selected="selected" value="">
+                                            {{($schoolkids->count() == 0)
+                                                ? 'В классе нет учеников'
+                                                : 'Выберите ученика...'
+                                                }}
+
+                                        </option>
                                         @foreach($schoolkids as $schoolkid)
                                             <option value={{$schoolkid->id}}>
                                                 {{$schoolkid->id}}
@@ -115,11 +118,11 @@
                                 </div>
                             </div><br><br>
 
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        {!! Form::submit('Назначить работу', ['class'=>'btn btn-primary']) !!}
-                                    </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    {!! Form::submit('Назначить работу', ['class'=>'btn btn-primary']) !!}
                                 </div>
+                            </div>
                             {!! Form::close() !!}<br>
 
                         @endif
