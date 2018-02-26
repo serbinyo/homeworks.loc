@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Teacher\Lists;
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Grade;
 
-class GradeListController extends TeacherController
+class GradeController extends TeacherController
 {
     /**
      * Display a listing of the resource.

@@ -31,8 +31,9 @@
                             <? $i = 0 ?>
                             @foreach($schoolkids as $schoolkid)
 
-                                {{++$i}}
-                                {{$schoolkid->lastname}}
+                                Порядковый номер: {{++$i}}
+                                ID: {{$schoolkid->id }}
+                                ФИО: {{$schoolkid->lastname}}
                                 {{$schoolkid->firstname}}
                                 {{$schoolkid->middlename}}<br>
 

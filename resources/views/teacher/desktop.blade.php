@@ -8,7 +8,10 @@
                     <div class="panel-heading">
                         Учительская <br>
                         Предмет: {{$discipline}}<br>
-                        Учитель: {{$teacher_fio}}<br>
+                        Учитель:
+                        {{$teacher->firstname}}
+                        {{$teacher->middlename}}
+                        {{$teacher->lastname}}<br>
                     </div>
 
                     <div class="panel-body">
@@ -25,6 +28,7 @@
                         <a href="{{route('materials.index')}}">Дополнительные учебные материалы</a><br><br>
 
                         {{--<a href="/teacher/doneworks">Выполненные работы</a><br>--}}
+                        <a href="{{ route('account.show', $teacher->id) }}">Профайл</a><br>
                         <a href="/teacher/lists">Списки</a><br><br>
 
                         <a href="/teacher/register">Зарегистрировать учителя</a><br>

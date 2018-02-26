@@ -31,8 +31,9 @@
                             <? $i = 0 ?>
                             @foreach($teachers as $teacher)
 
-                                {{++$i}}
-                                {{$teacher->lastname}}
+                                Порядковый номер: {{++$i}}
+                                ID: {{$teacher->id }}
+                                ФИО: {{$teacher->lastname }}
                                 {{$teacher->firstname}}
                                 {{$teacher->middlename}}<br>
 

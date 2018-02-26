@@ -10,7 +10,7 @@ class DesktopController extends TeacherController
     {
         return view('teacher.desktop', [
             'title' => 'ЭДЗ. TeacherDesktop',
-            'teacher_fio' => $this->user->teacher->getFIO($this->user->teacher->id),
+            'teacher' => $this->user->teacher,
             'discipline' => $this->user->teacher->discipline->name
         ]);
     }

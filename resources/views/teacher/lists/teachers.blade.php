@@ -30,6 +30,7 @@
                                 {{$teacher->discipline->name}}
                             </a>,
                             Логин: {{$teacher->user->login}}
+                            ID: {{$teacher->id }}
 
                             <hr>
 

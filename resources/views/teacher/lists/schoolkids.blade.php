@@ -30,6 +30,7 @@
                                 {{$schoolkid->grade->name}}
                             </a>,
                             Логин: {{$schoolkid->user->login}}
+                            ID: {{$schoolkid->id }}
 
                             <hr>
 

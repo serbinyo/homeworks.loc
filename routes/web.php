@@ -75,17 +75,19 @@ Route::resource('/teacher/works', 'Teacher\WorksController');
 
 Route::get('/teacher/lists', 'Teacher\ListsController@index');
 
-Route::get('/teacher/lists/grades/view', 'Teacher\Lists\GradeListController@view_by_get')->name('gradeView');
+Route::get('/teacher/lists/grades/view', 'Teacher\GradeController@view_by_get')->name('gradeView');
 
-Route::resource('/teacher/lists/grades', 'Teacher\Lists\GradeListController');
+Route::resource('/teacher/lists/grades', 'Teacher\GradeController');
 
-Route::get('/teacher/lists/disciplines/view', 'Teacher\Lists\DisciplineListController@view_by_get')->name('disciplineView');
+Route::get('/teacher/lists/disciplines/view', 'Teacher\DisciplineController@view_by_get')->name('disciplineView');
 
-Route::resource('/teacher/lists/disciplines', 'Teacher\Lists\DisciplineListController');
+Route::resource('/teacher/lists/disciplines', 'Teacher\DisciplineController');
 
-Route::resource('/teacher/lists/schoolkids', 'Teacher\Lists\SchoolkidListController');
+Route::resource('/teacher/lists/schoolkids', 'Teacher\SchoolkidController');
 
-Route::resource('/teacher/lists/teachers', 'Teacher\Lists\TeacherListController');
+Route::resource('/teacher/lists/teachers', 'Teacher\PedagogController');
+
+Route::resource('/teacher/account', 'Teacher\PedagogController');
 
 // Register
 

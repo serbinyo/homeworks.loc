@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Teacher\Lists;
+/*
+ * Испльзуется имя класса PedagogController для модели Teacher,
+ * а не более подходящее TeacherController потому что класс TeacherController
+ * уже есть, используется для проверки роли учителя
+ */
+
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Teacher;
 
-class TeacherListController extends TeacherController
+class PedagogController extends TeacherController
 {
     /**
      * Display a listing of the resource.
