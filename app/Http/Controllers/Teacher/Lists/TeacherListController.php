@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Teacher\Lists;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
-use App\Grade;
+use App\Teacher;
 
-class GradesController extends TeacherController
+class TeacherListController extends TeacherController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Grade $grade)
+    public function index(Teacher $teacher)
     {
-        $all_grades = $grade->getAll();
-        return view('teacher.grades', [
+        $teachers = $teacher->orderBy('lastname')->paginate(5);
+        return view('teacher.lists.teachers', [
             'title' => 'ЭДЗ. Классы',
-            'grades' => $all_grades
+            'teachers' => $teachers
         ]);
     }
 
@@ -51,15 +51,7 @@ class GradesController extends TeacherController
      */
     public function show(Request $request)
     {
-        $data = $request->except('_token');
-        $grade = new Grade();
-        $grade_to_show = $grade->getOne($data['grade_id']);
-        $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
-
-        return view('teacher.grades.show', [
-            'grade' => $grade_to_show,
-            'schoolkids' => $schoolkids
-        ]);
+        echo __METHOD__;
     }
 
     /**

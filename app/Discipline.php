@@ -11,6 +11,11 @@ class Discipline extends Model
         return Discipline::get();
     }
 
+    public function getOne($id)
+    {
+        return  Discipline::find($id);
+    }
+
     public function showAll()
     {
         $entities = Discipline::orderBy('id')->paginate(10);

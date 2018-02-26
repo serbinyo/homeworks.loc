@@ -22,10 +22,10 @@
 
                         <a href="{{route('tasks.index')}}">Задачи</a><br>
                         <a href="{{route('tests.index')}}">Тесты</a><br>
-                        <a href="{{route('materials.index')}}">Дополнительные учебные материалы</a><br><br><br><br>
+                        <a href="{{route('materials.index')}}">Дополнительные учебные материалы</a><br><br>
 
-                        <a href="/teacher/doneworks">Выполненные работы</a><br>
-                        <a href="/teacher/grades">В классы</a><br><br>
+                        {{--<a href="/teacher/doneworks">Выполненные работы</a><br>--}}
+                        <a href="/teacher/lists">Списки</a><br><br>
 
                         <a href="/teacher/register">Зарегистрировать учителя</a><br>
                         <a href="/teacher/register/user">Зареистрировать ученика</a>

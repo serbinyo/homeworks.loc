@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Классы!</div>
+                    <div class="panel-heading">Предметы</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -15,23 +15,24 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        Классы
+                        <a href="/teacher/lists">Списки</a> >>
+                        Предметы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('grades.show', ['method'=>'get']),
+                        {!! Form::open(['url'=>route('disciplineView'),
                         'class'=>'form-horizontal',
                         'method' => 'GET'])
                         !!}
 
                         <div class="form-group">
-                            <label for="grade_id" class="col-md-4 control-label">Класс</label>
+                            <label for="discipline_id" class="col-md-4 control-label">Дисциплина</label>
 
                             <div class="col-md-6">
-                                <select name="grade_id" class="form-control" id="grade_id" required>
-                                    <option selected="selected" value="">Выберите класс...</option>
-                                    @foreach($grades as $grade)
-                                        <option value={{$grade->id}} >
-                                            {{$grade->name}}
+                                <select name="discipline_id" class="form-control" id="discipline_id" required>
+                                    <option selected="selected" value="">Выберите предмет...</option>
+                                    @foreach($disciplines as $discipline)
+                                        <option value={{$discipline->id}} >
+                                            {{$discipline->name}}
                                         </option>
                                     @endforeach
                                 </select>

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
-use Illuminate\Http\Request;
-
 
 class DesktopController extends TeacherController
 {

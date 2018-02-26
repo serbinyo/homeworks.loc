@@ -71,8 +71,23 @@ Route::resource('/teacher/works', 'Teacher\WorksController');
 
 //Route::resource('/teacher/homeworks', 'Teacher\HomeworksController');
 
+// Teachers Lists
 
-Route::resource('/teacher/grades', 'Teacher\GradesController');
+Route::get('/teacher/lists', 'Teacher\ListsController@index');
+
+Route::get('/teacher/lists/grades/view', 'Teacher\Lists\GradeListController@view_by_get')->name('gradeView');
+
+Route::resource('/teacher/lists/grades', 'Teacher\Lists\GradeListController');
+
+Route::get('/teacher/lists/disciplines/view', 'Teacher\Lists\DisciplineListController@view_by_get')->name('disciplineView');
+
+Route::resource('/teacher/lists/disciplines', 'Teacher\Lists\DisciplineListController');
+
+Route::resource('/teacher/lists/schoolkids', 'Teacher\Lists\SchoolkidListController');
+
+Route::resource('/teacher/lists/teachers', 'Teacher\Lists\TeacherListController');
+
+// Register
 
 Route::get('/teacher/register', 'Teacher\TeacheRegController@index');
 
