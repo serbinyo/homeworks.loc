@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+                    <div class="panel-heading">Рабочий стол</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,8 +13,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        User desktop!<br>
 
                         <a href="/homeworks">Домашние задания</a><br>
                         <a href="/statistics">Статистика</a><br>

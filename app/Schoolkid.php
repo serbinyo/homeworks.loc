@@ -2,12 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Schoolkid extends Authenticatable
+class Schoolkid extends Model
 {
-    use Notifiable;
 
     public $timestamps = false;
 

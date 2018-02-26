@@ -20,10 +20,8 @@
                         Учетная запись
                         <br><br>
 
-                        <a href="/teacher/lists/grades">Классы</a><br><br>
-                        <a href="/teacher/lists/disciplines">Предметы</a><br><br>
-                        <a href="/teacher/lists/schoolkids">Учащиеся</a><br><br>
-                        <a href="/teacher/lists/teachers">Учителя</a><br><br>
+
+
 
                     </div>
                 </div>

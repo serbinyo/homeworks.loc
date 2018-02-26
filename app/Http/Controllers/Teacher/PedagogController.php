@@ -55,9 +55,17 @@ class PedagogController extends TeacherController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        echo __METHOD__;
+        $teacher = new Teacher();
+        $teacher_to_show = $teacher->getOne($id);
+
+        if ($this->user->can('view', $teacher_to_show)) {
+            return view('teacher.account.show', [
+                'title' => 'ЭДЗ. Просмотр профиля',
+                'teacher' => $teacher_to_show,
+            ]);
+        }
     }
 
     /**

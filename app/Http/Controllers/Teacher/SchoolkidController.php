@@ -49,7 +49,7 @@ class SchoolkidController extends TeacherController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
         echo __METHOD__;
     }

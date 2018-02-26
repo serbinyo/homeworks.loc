@@ -2,12 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Authenticatable
+class Teacher extends Model
 {
-    use Notifiable;
 
     public $timestamps = false;
 
@@ -19,6 +17,12 @@ class Teacher extends Authenticatable
     protected $fillable = [
         'firstname', 'middlename', 'lastname', 'discipline_id'
     ];
+
+    public function getOne($id)
+    {
+        $entity = Teacher::find($id);
+        return $entity;
+    }
 
     public function getFIO($id)
     {
