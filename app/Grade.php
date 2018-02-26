@@ -3,25 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Grade extends Model
 {
     public function getAll()
     {
-        return DB::table('grades')->get();
+        return Grade::get();
     }
 
     public function getOne($id)
     {
-        $entity = Grade::find($id);
-        return $entity;
+        return  Grade::find($id);
     }
 
     public function showAll()
     {
-        $entities = DB::table('grades')->orderBy('id')->paginate(10);
-        return $entities;
+        return Grade::orderBy('id')->paginate(10);
     }
 
     //Eloquent: Relationships

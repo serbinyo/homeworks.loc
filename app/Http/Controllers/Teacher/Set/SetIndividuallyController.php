@@ -17,7 +17,7 @@ class SetIndividuallyController extends TeacherController
         if (array_key_exists('grade', $data)) {
             $grades = null;
             $grade_to_show = $grade->getOne($data['grade']);
-            $schoolkids = $grade_to_show->schoolkids;
+            $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
         } else {
             $grade_to_show = null;
             $schoolkids = null;

@@ -25,7 +25,10 @@
                         <a href="{{route('materials.index')}}">Дополнительные учебные материалы</a><br><br><br><br>
 
                         <a href="/teacher/doneworks">Выполненные работы</a><br>
-                        <a href="/teacher/classrooms">В классы</a><br>
+                        <a href="/teacher/grades">В классы</a><br><br>
+
+                        <a href="/teacher/register">Зарегистрировать учителя</a><br>
+                        <a href="/teacher/register/user">Зареистрировать ученика</a>
                     </div>
                 </div>
             </div>

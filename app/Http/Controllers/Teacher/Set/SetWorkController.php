@@ -13,8 +13,7 @@ class SetWorkController extends TeacherController
     public function index($id, Work $work, Grade $grade)
     {
         $work_to_set = $work->getOne($id);
-        $grades = $grade->getAll();
-
+        $grades = $grade->orderBy('name')->get();
         if ($this->user->can('view', $work_to_set)) {
             return view('teacher.works.set', [
                 'title' => 'ЭДЗ. TeacherSetWork',

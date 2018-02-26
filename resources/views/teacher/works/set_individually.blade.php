@@ -75,7 +75,7 @@
                                 <div class="col-md-6">
                                     <select name="schoolkid_id" class="form-control" id="schoolkid_id" required>
                                         <option selected="selected" value="">
-                                            {{($schoolkids->count() == 0)
+                                            {{($schoolkids->count() === 0)
                                                 ? 'В классе нет учеников'
                                                 : 'Выберите ученика...'
                                                 }}
@@ -83,7 +83,6 @@
                                         </option>
                                         @foreach($schoolkids as $schoolkid)
                                             <option value={{$schoolkid->id}}>
-                                                {{$schoolkid->id}}
                                                 {{$schoolkid->lastname}}
                                                 {{$schoolkid->firstname}}
                                                 {{$schoolkid->middlename}}

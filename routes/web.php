@@ -60,7 +60,6 @@ Route::post('/teacher/set/material', 'Teacher\Set\SetMaterialController')->name(
 Route::post('/teacher/unset/material/', 'Teacher\Set\UnsetMaterialController')->name('unsetMaterial');
 
 
-
 Route::resource('/teacher/tasks', 'Teacher\TaskController');
 
 Route::resource('/teacher/tests', 'Teacher\TestController');
@@ -70,13 +69,11 @@ Route::resource('/teacher/materials', 'Teacher\MaterialController');
 Route::resource('/teacher/works', 'Teacher\WorksController');
 
 
-
-Route::resource('/teacher/homeworks', 'Teacher\HomeworksController');
-
+//Route::resource('/teacher/homeworks', 'Teacher\HomeworksController');
 
 
-Route::get('/teacher/classrooms', 'Teacher\ClassroomsController@index');
+Route::resource('/teacher/grades', 'Teacher\GradesController');
 
-Route::get('/teacher/classrooms/teachereg', 'Teacher\TeacheRegController@index');
+Route::get('/teacher/register', 'Teacher\TeacheRegController@index');
 
-Route::get('/teacher/classrooms/usereg', 'Teacher\UseRegController@index');
+Route::get('/teacher/register/user', 'Teacher\UseRegController@index');

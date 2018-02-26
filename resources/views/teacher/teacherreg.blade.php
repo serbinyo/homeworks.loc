@@ -15,7 +15,6 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/classrooms">Классы</a> >>
                         Регистрация учителя
                         <br><br>
 
