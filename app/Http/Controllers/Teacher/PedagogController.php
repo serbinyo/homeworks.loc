@@ -66,6 +66,8 @@ class PedagogController extends TeacherController
                 'teacher' => $teacher_to_show,
             ]);
         }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/teacher')->withErrors($message);
     }
 
     /**
@@ -76,7 +78,16 @@ class PedagogController extends TeacherController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $teacher = new Teacher();
+        $teacher_to_update = $teacher->getOne($id);
+        if ($this->user->can('update', $teacher_to_update)) {
+            return view('teacher.account.edit', [
+                'title' => 'ЭДЗ. Редактирование профиля',
+                'teacher' => $teacher_to_update,
+            ]);
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/teacher')->withErrors($message);
     }
 
     /**
@@ -88,6 +99,7 @@ class PedagogController extends TeacherController
      */
     public function update(Request $request, $id)
     {
+        //todo продолжить тут и сделать возможность менять пароль
         echo __METHOD__;
     }
 

@@ -42,7 +42,7 @@ class TeacherPolicy
      */
     public function update(User $user, Teacher $teacher)
     {
-        //
+        return $user->teacher->id === $teacher->id;
     }
 
     /**

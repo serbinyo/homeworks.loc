@@ -20,6 +20,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="{{route('works.index')}}">Работы</a><br><br>
 

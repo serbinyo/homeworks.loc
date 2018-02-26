@@ -137,7 +137,7 @@ class TaskController extends TeacherController
 
         if ($this->user->can('update', $task_to_update)) {
 
-            $response = $task->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+            $response = $task->edit($id, $this->user->teacher->id, $data);
 
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);

@@ -122,7 +122,7 @@ class MaterialController extends TeacherController
 
         if ($this->user->can('update', $material_to_update)) {
 
-            $response = $material->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+            $response = $material->edit($id, $this->user->teacher->id, $data);
 
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);

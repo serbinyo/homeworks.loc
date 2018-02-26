@@ -125,7 +125,7 @@ class WorksController extends TeacherController
 
         if ($this->user->can('update', $work_for_update)) {
 
-            $response = $work->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+            $response = $work->edit($id, $this->user->teacher->id, $data);
 
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);

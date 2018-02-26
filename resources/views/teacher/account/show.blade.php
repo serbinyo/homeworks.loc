@@ -18,10 +18,20 @@
 
                         <a href="/teacher">Учительская</a> >>
                         Учетная запись
-                        <br><br>
+                        <hr>
+                        ID: {{$teacher->id}}<br>
+                        ФИО: {{$teacher->firstname}}
+                        {{$teacher->middlename}}
+                        {{$teacher->lastname}}<br>
+                        E-mail: {{$teacher->user->email}}<br>
+                        Предмет: {{$teacher->discipline->name}}<br>
+                        Логин: {{$teacher->user->login}}<br><br>
 
-
-
+                        <a href="{{route('account.edit', $teacher->id)}}">Изменить данные</a><br>
+                        {!! Form::open(['url'=>route('account.destroy', $teacher->id)]) !!}
+                        {!! Form::submit('Удалить учетную запись', ['class'=>'']) !!}
+                        {{method_field('DELETE')}}
+                        {!! Form::close() !!}
 
                     </div>
                 </div>

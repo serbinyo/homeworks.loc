@@ -122,7 +122,7 @@ class TestController extends TeacherController
 
         if ($this->user->can('update', $test_to_update)) {
 
-            $response = $test->edit($id, $this->user->teacher->getAuthIdentifier(), $data);
+            $response = $test->edit($id, $this->user->teacher->id, $data);
 
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
