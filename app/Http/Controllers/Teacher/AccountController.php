@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Испльзуется имя класса PedagogController для модели Teacher,
+ * Испльзуется имя класса AccountController для модели Teacher,
  * а не более подходящее TeacherController потому что класс TeacherController
- * уже есть, используется для проверки роли учителя
+ * уже есть и используется для проверки роли учителя
  */
 
 namespace App\Http\Controllers\Teacher;
@@ -12,7 +12,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use App\Teacher;
 
-class PedagogController extends TeacherController
+class AccountController extends TeacherController
 {
     /**
      * Display a listing of the resource.
@@ -61,7 +61,7 @@ class PedagogController extends TeacherController
         $teacher_to_show = $teacher->getOne($id);
 
         if ($this->user->can('view', $teacher_to_show)) {
-            return view('teacher.account.show', [
+            return view('teacher.account', [
                 'title' => 'ЭДЗ. Просмотр профиля',
                 'teacher' => $teacher_to_show,
             ]);

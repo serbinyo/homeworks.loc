@@ -16,8 +16,17 @@
                             </div>
                         @endif
 
+                        @if ($errors->has('no_chenge'))
+                            <div class="alert alert-danger">
+                                <div class="message js-form-message">
+                                    {{ $errors->first('no_chenge') }}
+                                </div>
+                            </div>
+                        @endif
+
                         <a href="/teacher">Учительская</a> >>
-                        Учетная запись
+                        <a href="{{ route('account.show', $teacher->id) }}">Учетная запись</a> >>
+                        Редактирование
                         <hr>
 
 
@@ -87,9 +96,20 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Обновить данные', ['class' => 'btn btn-primary']) !!}
+                                или
+                                <a href="/teacher/account/change_password" class="btn btn-primary">
+                                    Изменить пароль
+                                </a>
                             </div>
                         </div>
 
+                        {!! Form::close() !!}
+
+                        <br><br>
+
+                        {!! Form::open(['url'=>route('account.destroy', $teacher->id), 'class'=>'center']) !!}
+                        {!! Form::submit('Удалить учетную запись') !!}
+                        {{method_field('DELETE')}}
                         {!! Form::close() !!}
 
                     </div>

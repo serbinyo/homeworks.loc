@@ -28,10 +28,6 @@
                         Логин: {{$teacher->user->login}}<br><br>
 
                         <a href="{{route('account.edit', $teacher->id)}}">Изменить данные</a><br>
-                        {!! Form::open(['url'=>route('account.destroy', $teacher->id)]) !!}
-                        {!! Form::submit('Удалить учетную запись', ['class'=>'']) !!}
-                        {{method_field('DELETE')}}
-                        {!! Form::close() !!}
 
                     </div>
                 </div>

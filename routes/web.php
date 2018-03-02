@@ -85,9 +85,13 @@ Route::resource('/teacher/lists/disciplines', 'Teacher\DisciplineController');
 
 Route::resource('/teacher/lists/schoolkids', 'Teacher\SchoolkidController');
 
-Route::resource('/teacher/lists/teachers', 'Teacher\PedagogController');
+Route::resource('/teacher/lists/teachers', 'Teacher\AccountController');
 
-Route::resource('/teacher/account', 'Teacher\PedagogController');
+Route::get('/teacher/account/change_password', 'Teacher\ChangePasswordController@index');
+
+Route::post('/teacher/account/change_password', 'Teacher\ChangePasswordController@change')->name('teacherPasswordChange');
+
+Route::resource('/teacher/account', 'Teacher\AccountController');
 
 // Register
 
