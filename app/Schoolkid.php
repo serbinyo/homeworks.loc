@@ -31,7 +31,7 @@ class Schoolkid extends Model
 
     public function setHomework($kid, $work, $date)
     {
-        return $kid->works()->attach($work, ['date_to_completion' => $date]);
+        $kid->works()->attach($work, ['date_to_completion' => $date]);
     }
 
     //Eloquent: Relationships

@@ -14,7 +14,7 @@ class Work extends Model
 
     public function getAllPaginated()
     {
-        $entities = Work::orderBy('id', 'desc')->paginate(10);
+        $entities = self::orderBy('id', 'desc')->paginate(10);
         return $entities;
     }
 
