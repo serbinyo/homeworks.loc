@@ -43,33 +43,36 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'role' => 'required',
-            'login' => 'required|string|max:255|unique:users',
-            'email' => 'nullable|email|max:255|unique:users',
-            'firstname' => 'required|string|max:255',
-            'middlename' => 'max:255',
-            'lastname' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        return Validator::make($data,
+            [
+                'role' => 'required',
+                'login' => 'required|string|max:255|unique:users',
+                'email' => 'nullable|email|max:255|unique:users',
+                'firstname' => 'required|string|max:255',
+                'middlename' => 'max:255',
+                'lastname' => 'required|string|max:255',
+                'password' => 'required|string|min:6|confirmed',
+            ],
+            [
+                //todo прописать ошибки валидации на русском
+            ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
         DB::beginTransaction();
-        if ($data['role']=='s')
-        {
+        if ($data['role'] == 's') {
             $entity = User::create([
                 'role' => $data['role'],
                 'login' => $data['login'],
@@ -82,9 +85,7 @@ class RegisterController extends Controller
             ]);
             DB::commit();
             return $entity;
-        }
-        elseif ($data['role']=='t')
-        {
+        } elseif ($data['role'] == 't') {
             $entity = User::create([
                 'role' => $data['role'],
                 'login' => $data['login'],
@@ -98,9 +99,7 @@ class RegisterController extends Controller
             ]);
             DB::commit();
             return $entity;
-        }
-        else
-        {
+        } else {
             dd('Неизвестная роль');
         }
     }

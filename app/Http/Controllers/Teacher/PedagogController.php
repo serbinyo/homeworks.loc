@@ -33,7 +33,7 @@ class PedagogController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         echo __METHOD__;
     }
@@ -81,13 +81,17 @@ class PedagogController extends TeacherController
         $teacher = new Teacher();
         $teacher_to_update = $teacher->getOne($id);
         if ($this->user->can('update', $teacher_to_update)) {
+
             return view('teacher.account.edit', [
                 'title' => 'ЭДЗ. Редактирование профиля',
                 'teacher' => $teacher_to_update,
             ]);
         }
+
         $message = 'ОШИБКА. Нет прав';
         return redirect('/teacher')->withErrors($message);
+
+        //todo сделать возможность менять пароль
     }
 
     /**
@@ -99,8 +103,21 @@ class PedagogController extends TeacherController
      */
     public function update(Request $request, $id)
     {
-        //todo продолжить тут и сделать возможность менять пароль
-        echo __METHOD__;
+        $data = $request->except('_token');
+        $teacher = new Teacher();
+        $teacher_to_update = $teacher->getOne($id);
+        if ($this->user->can('update', $teacher_to_update)) {
+
+            $response = $teacher->edit($id, $data);
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+            $message = 'Учетная запись обновлена';
+            return redirect('/teacher/account/' . $id)->with('status', $message);
+
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/teacher')->withErrors($message);
     }
 
     /**
@@ -111,7 +128,14 @@ class PedagogController extends TeacherController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $teacher = new Teacher();
+        $teacher_to_delete = $teacher->getOne($id);
+        if ($this->user->can('update', $teacher_to_delete)) {
+            $teacher->kill($id);
+            $message = 'Учетная запись учителя ' . $id . ' удалена!';
+            return redirect('/')->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет права удаления !!!';
+        return redirect('/teacher')->withErrors($message);
     }
 }
