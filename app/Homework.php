@@ -10,12 +10,23 @@ class Homework extends Model
         'computer_mark', 'teacher_comment', 'teacher_mark'
     ];
 
+    public function getOne($id)
+    {
+        $entity = $this->find($id);
+        return $entity;
+    }
+
 
     //Eloquent: Relationships
 
     public function schoolkid()
     {
         return $this->belongsTo('App\Schoolkid');
+    }
+
+    public function work()
+    {
+        return $this->belongsTo('App\Work');
     }
 
     public function given_tasks()

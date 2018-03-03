@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Teacher\Set;
 
+use App\Homework;
+use App\Given_task;
+use App\Given_test;
 use App\Http\Controllers\TeacherController;
 use App\Schoolkid;
 use App\Work;
@@ -39,7 +42,7 @@ class SetIndividuallyController extends TeacherController
         return redirect('/teacher/works/')->withErrors($message);
     }
 
-    public function set(Request $request, Work $work, Schoolkid $schoolkid)
+    public function set(Request $request, Work $work, Schoolkid $schoolkid, Homework $homework)
     {
         $data = $request->except('_token');
 
@@ -48,19 +51,28 @@ class SetIndividuallyController extends TeacherController
 
         $hasHomework = $kid->hasHomework($work_to_set);
         if ($hasHomework) {
-            $message = 'Работа '
-                . $data['work_id']
-                . ' уже была заданна ученику: '
-                . $kid->firstname . ' '
+            $message = 'Работа ' . $data['work_id'] . ' уже была заданна ученику: ' . $kid->firstname . ' '
                 . $kid->lastname;
             return back()->withErrors($message);
         } else {
             $homework_id = $kid->setHomework($work_to_set, $data['date']);
-            $message = 'Работа '
-                . $data['work_id']
-                . ' заданна ученику: '
-                . $kid->firstname . ' '
-                . $kid->lastname;
+
+            $homework_to_fill = $homework->getOne($homework_id);
+            $tests = $homework_to_fill->work->tests;
+
+            foreach ($tests as $test) {
+                $given_test = new Given_test();
+                $given_test->store($test, $homework_id);
+            }
+
+            $tasks = $homework_to_fill->work->tasks;
+
+            foreach ($tasks as $task) {
+                $given_task = new Given_task();
+                $given_task->store($task, $homework_id);
+            }
+
+            $message = 'Работа ' . $data['work_id'] . ' заданна ученику: ' . $kid->firstname . ' ' . $kid->lastname;
             return back()->with('status', $message);
         }
     }

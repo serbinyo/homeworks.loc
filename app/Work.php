@@ -127,4 +127,9 @@ class Work extends Model
             ->withPivot('date_to_completion')
             ->withTimestamps();
     }
+
+    public function homeworks()
+    {
+        return $this->hasMany('App\Homework');
+    }
 }

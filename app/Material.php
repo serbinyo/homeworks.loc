@@ -70,7 +70,7 @@ class Material extends Model
         $entity->title = $data['title'];
         $entity->body = $data['body'];
 
-        if ($entity->image == ''){
+        if ($entity->image == '') {
             $entity->image = 'no image';
         }
 

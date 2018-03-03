@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 
 
-
 class Test extends Model
 {
     protected $fillable = [
@@ -42,7 +41,7 @@ class Test extends Model
             return $err;
         }
 
-        $newMaterial = [
+        $newTest = [
             'teacher_id' => $teacher_id,
             'theme' => $data['theme'],
             'task' => $data['task'],
@@ -52,7 +51,7 @@ class Test extends Model
             'option_d' => $data['option_d'],
             'answer' => $data['answer']
         ];
-        $this->fill($newMaterial);
+        $this->fill($newTest);
         $this->save();
         return $this;
     }
