@@ -25,7 +25,7 @@ class SetWorkController extends TeacherController
         return redirect('/teacher/works/')->withErrors($message);
     }
 
-    public function set(Request $request, Work $work, Schoolkid $schoolkid, Grade $grade)
+    public function set(Request $request, Work $work, Grade $grade)
     {
         $data = $request->except('_token');
         $work_to_set = $work->getOne($data['work_id']);
@@ -40,10 +40,10 @@ class SetWorkController extends TeacherController
             if ($allKids !== 0) {
                 foreach ($grade->schoolkids as $kid) {
 
-                    $hasHomework = $schoolkid->hasHomework($kid, $work_to_set);
+                    $hasHomework = $kid->hasHomework($work_to_set);
 
                     if (!$hasHomework) {
-                        $schoolkid->setHomework($kid, $work_to_set, $data['date']);
+                        $homework_id = $kid->setHomework($work_to_set, $data['date']);
                     } else {
                         $hasHomeworkKids = $hasHomeworkKids + 1;
                     }
@@ -52,7 +52,7 @@ class SetWorkController extends TeacherController
                 if ($allKids === $hasHomeworkKids) {
                     $message = 'Работа '
                         . $data['work_id']
-                        . ' уже заданна '
+                        . ' уже была заданна '
                         . $grade->name
                         . ' классу';
                     return back()->withErrors($message);

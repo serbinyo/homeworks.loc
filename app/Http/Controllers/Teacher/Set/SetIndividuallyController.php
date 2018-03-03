@@ -46,21 +46,21 @@ class SetIndividuallyController extends TeacherController
         $kid = $schoolkid->getOne($data['schoolkid_id']);
         $work_to_set = $work->getOne($data['work_id']);
 
-        $hasHomework = $schoolkid->hasHomework($kid, $work_to_set);
+        $hasHomework = $kid->hasHomework($work_to_set);
         if ($hasHomework) {
             $message = 'Работа '
                 . $data['work_id']
-                . ' уже добавлена ученику: '
-                . $schoolkid->firstname . ' '
-                . $schoolkid->lastname;
+                . ' уже была заданна ученику: '
+                . $kid->firstname . ' '
+                . $kid->lastname;
             return back()->withErrors($message);
         } else {
-            $schoolkid->setHomework($kid, $work_to_set, $data['date']);
+            $homework_id = $kid->setHomework($work_to_set, $data['date']);
             $message = 'Работа '
                 . $data['work_id']
-                . ' добавлена ученику: '
-                . $schoolkid->firstname . ' '
-                . $schoolkid->lastname;
+                . ' заданна ученику: '
+                . $kid->firstname . ' '
+                . $kid->lastname;
             return back()->with('status', $message);
         }
     }

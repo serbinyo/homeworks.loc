@@ -8,17 +8,17 @@ class Discipline extends Model
 {
     public function getAll()
     {
-        return Discipline::get();
+        return $this->get();
     }
 
     public function getOne($id)
     {
-        return  Discipline::find($id);
+        return  $this->find($id);
     }
 
     public function showAll()
     {
-        $entities = Discipline::orderBy('id')->paginate(10);
+        $entities = $this->orderBy('id')->paginate(10);
         return $entities;
     }
 

@@ -10,7 +10,13 @@ class Homework extends Model
         'computer_mark', 'teacher_comment', 'teacher_mark'
     ];
 
+
     //Eloquent: Relationships
+
+    public function schoolkid()
+    {
+        return $this->belongsTo('App\Schoolkid');
+    }
 
     public function given_tasks()
     {

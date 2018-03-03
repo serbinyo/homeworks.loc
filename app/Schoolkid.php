@@ -20,18 +20,22 @@ class Schoolkid extends Model
 
     public function getOne($id)
     {
-        $entity = Schoolkid::find($id);
+        $entity = $this->find($id);
         return $entity;
     }
 
-    public function hasHomework($kid, $work)
+    public function hasHomework($work)
     {
-        return $kid->works()->where('work_id', $work->id)->exists();
+        return $this->works()->where('work_id', $work->id)->exists();
     }
 
-    public function setHomework($kid, $work, $date)
+    public function setHomework($work, $date)
     {
-        $kid->works()->attach($work, ['date_to_completion' => $date]);
+        $this->works()->attach($work, ['date_to_completion' => $date]);
+        // get inserted Identifier of pivot when attach()
+        // Получаем Id записи в промежуточной таблице ( pivot ) после выполнения attach()
+        $homework_id = $this->works()->withPivot('id')->wherePivot('work_id',$work->id)->first()->pivot->id;
+        return $homework_id;
     }
 
     //Eloquent: Relationships
@@ -51,5 +55,10 @@ class Schoolkid extends Model
     public function grade()
     {
         return $this->belongsTo('App\Grade');
+    }
+
+    public function homeworks()
+    {
+        return $this->hasMany('App\Homework');
     }
 }

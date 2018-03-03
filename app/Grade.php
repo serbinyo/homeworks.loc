@@ -8,17 +8,17 @@ class Grade extends Model
 {
     public function getAll()
     {
-        return Grade::get();
+        return $this->get();
     }
 
     public function getOne($id)
     {
-        return  Grade::find($id);
+        return  $this->find($id);
     }
 
     public function showAll()
     {
-        return Grade::orderBy('id')->paginate(10);
+        return $this->orderBy('id')->paginate(10);
     }
 
     //Eloquent: Relationships

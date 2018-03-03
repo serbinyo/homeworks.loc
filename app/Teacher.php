@@ -24,13 +24,13 @@ class Teacher extends Model
 
     public function getOne($id)
     {
-        $entity = self::find($id);
+        $entity = $this->find($id);
         return $entity;
     }
 
     public function getFIO($id)
     {
-        $teacher = self::find($id);
+        $teacher = $this->find($id);
         $fio = $teacher->firstname . ' '
             . $teacher->middlename . ' '
             . $teacher->lastname;
@@ -39,7 +39,7 @@ class Teacher extends Model
 
     public function edit($id, $data)
     {
-        $entity = self::find($id);
+        $entity = $this->find($id);
 
         if ($err = $this->validate($data, $entity->user->id)) {
             return $err;
@@ -97,7 +97,7 @@ class Teacher extends Model
 
     public function change_password($id, $data)
     {
-        $entity = self::find($id);
+        $entity = $this->find($id);
 
         if ($err = $this->validate_password($data)) {
             return $err;
@@ -133,7 +133,7 @@ class Teacher extends Model
 
     public function kill($id)
     {
-        $entity = self::find($id);
+        $entity = $this->find($id);
         DB::beginTransaction();
 
         $entity->user()->delete();

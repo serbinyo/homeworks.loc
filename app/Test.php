@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Validator;
 
 
@@ -16,14 +15,13 @@ class Test extends Model
 
     public function getAllPaginated()
     {
-        $entities = Test::orderBy('id', 'desc')->paginate(10);
+        $entities = $this->orderBy('id', 'desc')->paginate(10);
         return $entities;
     }
 
     public function getDisciplineTestsPaginated($discipline_id)
     {
-        $entities = DB::table('tests')
-            ->join('teachers', 'tests.teacher_id', '=', 'teachers.id')
+        $entities = $this->join('teachers', 'tests.teacher_id', '=', 'teachers.id')
             ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
             ->where('disciplines.id', $discipline_id)
             ->select('tests.*')
@@ -34,7 +32,7 @@ class Test extends Model
 
     public function getOne($id)
     {
-        $entity = Test::find($id);
+        $entity = $this->find($id);
         return $entity;
     }
 
@@ -65,7 +63,7 @@ class Test extends Model
             return $err;
         }
 
-        $entity = Test::find($id);
+        $entity = $this->find($id);
 
         $entity->teacher_id = $teacher_id;
         $entity->theme = $data['theme'];
@@ -109,7 +107,7 @@ class Test extends Model
 
     public function kill($id)
     {
-        $entity = Test::find($id);
+        $entity = $this->find($id);
         return $entity->delete();
     }
 
