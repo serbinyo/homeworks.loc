@@ -15,7 +15,7 @@ class GradeController extends TeacherController
      */
     public function index(Grade $grade)
     {
-        $grades = $grade->orderBy('name')->get();
+        $grades = $grade->getAll();
         return view('teacher.lists.grades', [
             'title' => 'ЭДЗ. Классы',
             'grades' => $grades
@@ -53,9 +53,18 @@ class GradeController extends TeacherController
     {
         $grade = new Grade();
         $grade_to_show = $grade->getOne($id);
+
+        $allKids = $grade_to_show->schoolkids->count();
+
+        if ($allKids === 0) {
+            $message = 'В классе нет учеников';
+            return back()->withErrors($message);
+        }
+
         $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
 
         return view('teacher.lists.grades.show', [
+            'title' => 'ЭДЗ. Класс',
             'grade' => $grade_to_show,
             'schoolkids' => $schoolkids
         ]);
@@ -108,9 +117,18 @@ class GradeController extends TeacherController
         $data = $request->except('_token');
         $grade = new Grade();
         $grade_to_show = $grade->getOne($data['grade_id']);
+
+        $allKids = $grade_to_show->schoolkids->count();
+
+        if ($allKids === 0) {
+            $message = 'В классе нет учеников';
+            return back()->withErrors($message);
+        }
+
         $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
 
         return view('teacher.lists.grades.show', [
+            'title' => 'ЭДЗ. Класс',
             'grade' => $grade_to_show,
             'schoolkids' => $schoolkids
         ]);

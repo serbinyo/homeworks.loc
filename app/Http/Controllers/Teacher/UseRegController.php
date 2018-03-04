@@ -10,8 +10,8 @@ class UseRegController extends TeacherController
 {
     public function index(Grade $gradeModel)
     {
-        $grades = $gradeModel->orderBy('name')->get();
-        return view('teacher.userreg', ['title' => 'ЭДЗ. User Registrate',
+        $grades = $gradeModel->getAll();
+        return view('teacher.userreg', ['title' => 'ЭДЗ. Регистация ученика',
             'grades' => $grades]);
     }
 }

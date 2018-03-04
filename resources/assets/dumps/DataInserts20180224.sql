@@ -40,7 +40,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `grades` WRITE;
 /*!40000 ALTER TABLE `grades` DISABLE KEYS */;
-INSERT INTO `grades` VALUES (1,'8-А',NULL),(2,'8-Б',NULL),(3,'8-В',NULL),(4,'9-А','Математический'),(5,'9-Б',NULL),(6,'9-В',NULL),(7,'10-А','Физмат'),(8,'10-Б','Исторический'),(9,'10-В',NULL),(10,'11-А',NULL),(11,'11-Б',NULL),(12,'11-В',NULL);
+INSERT INTO `grades` VALUES (1,8,'А',NULL),(2,8,'Б',NULL),(3,8,'В',NULL),(4,9,'А','Математический'),(5,9,'Б',NULL),(6,9,'В',NULL),(7,10,'А','Физмат'),(8,10,'Б','Исторический'),(9,10,'В',NULL),(10,11,'А',NULL),(11,11,'Б',NULL),(12,11,'В',NULL);
 /*!40000 ALTER TABLE `grades` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -6,7 +6,10 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Классы: {{$grade->name}}
+                        Классы:
+                        {{$grade->num}}
+                        -
+                        {{$grade->char}}
                     </div>
 
                     <div class="panel-body">
@@ -20,27 +23,21 @@
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/lists">Списки</a> >>
                         <a href="/teacher/lists/grades/">Классы</a> >>
-                        {{$grade->name}}
+                        {{$grade->num}}
+                        -
+                        {{$grade->char}}
                         <br><br>
 
-                        @if(($schoolkids->count() === 0))
-                            <p class="works_show_blok_title">
-                                В классе пока нет учащихся
-                            </p>
-                        @else
-                            <? $i = 0 ?>
-                            @foreach($schoolkids as $schoolkid)
+                        <? $i = 0 ?>
+                        @foreach($schoolkids as $schoolkid)
 
-                                Порядковый номер: {{++$i}}
-                                ID: {{$schoolkid->id }}
-                                ФИО: {{$schoolkid->lastname}}
-                                {{$schoolkid->firstname}}
-                                {{$schoolkid->middlename}}<br>
+                            Порядковый номер: {{++$i}}
+                            ID: {{$schoolkid->id }}
+                            ФИО: {{$schoolkid->lastname}}
+                            {{$schoolkid->firstname}}
+                            {{$schoolkid->middlename}}<br>
 
-                            @endforeach
-                        @endif
-
-
+                        @endforeach
                         <hr>
                     </div>
                 </div>

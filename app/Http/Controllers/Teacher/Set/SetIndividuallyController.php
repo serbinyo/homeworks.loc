@@ -20,6 +20,13 @@ class SetIndividuallyController extends TeacherController
         if (array_key_exists('grade', $data)) {
             $grades = null;
             $grade_to_show = $grade->getOne($data['grade']);
+            $allKids = $grade_to_show->schoolkids->count();
+
+            if ($allKids === 0) {
+                $message = 'В классе нет учеников';
+                return back()->withErrors($message);
+            }
+
             $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
         } else {
             $grade_to_show = null;

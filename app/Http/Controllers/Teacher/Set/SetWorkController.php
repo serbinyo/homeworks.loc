@@ -15,10 +15,10 @@ class SetWorkController extends TeacherController
     public function index($id, Work $work, Grade $grade)
     {
         $work_to_set = $work->getOne($id);
-        $grades = $grade->orderBy('name')->get();
+        $grades = $grade->getAll();
         if ($this->user->can('view', $work_to_set)) {
             return view('teacher.works.set', [
-                'title' => 'ЭДЗ. TeacherSetWork',
+                'title' => 'ЭДЗ. Задать работу',
                 'work_id' => $id,
                 'grades' => $grades
             ]);
@@ -40,46 +40,45 @@ class SetWorkController extends TeacherController
             $allKids = $grade->schoolkids->count();
             $hasHomeworkKids = 0;
 
-            if ($allKids !== 0) {
-                $homework = new Homework();
+            if ($allKids === 0) {
+                $message = 'В классе нет учеников';
+                return back()->withErrors($message);
+            }
 
-                foreach ($grade->schoolkids as $kid) {
+            $homework = new Homework();
 
-                    $hasHomework = $kid->hasHomework($work_to_set);
+            foreach ($grade->schoolkids as $kid) {
 
-                    if (!$hasHomework) {
-                        $homework_id = $kid->setHomework($work_to_set, $data['date']);
+                $hasHomework = $kid->hasHomework($work_to_set);
 
-                        $homework_to_fill = $homework->getOne($homework_id);
-                        $tests = $homework_to_fill->work->tests;
+                if (!$hasHomework) {
+                    $homework_id = $kid->setHomework($work_to_set, $data['date']);
 
-                        foreach ($tests as $test) {
-                            $given_test = new Given_test();
-                            $given_test->store($test, $homework_id);
-                        }
+                    $homework_to_fill = $homework->getOne($homework_id);
+                    $tests = $homework_to_fill->work->tests;
 
-                        $tasks = $homework_to_fill->work->tasks;
-
-                        foreach ($tasks as $task) {
-                            $given_task = new Given_task();
-                            $given_task->store($task, $homework_id);
-                        }
-
-                    } else {
-                        $hasHomeworkKids = $hasHomeworkKids + 1;
+                    foreach ($tests as $test) {
+                        $given_test = new Given_test();
+                        $given_test->store($test, $homework_id);
                     }
-                }
-                dd('end');
-                if ($allKids === $hasHomeworkKids) {
-                    $message = 'Работа ' . $data['work_id'] . ' уже была заданна ' . $grade->name . ' классу';
-                    return back()->withErrors($message);
+
+                    $tasks = $homework_to_fill->work->tasks;
+
+                    foreach ($tasks as $task) {
+                        $given_task = new Given_task();
+                        $given_task->store($task, $homework_id);
+                    }
+
                 } else {
-                    $message = 'Работа ' . $data['work_id'] . ' заданна ' . $grade->name . ' классу';
-                    return back()->with('status', $message);
+                    $hasHomeworkKids = $hasHomeworkKids + 1;
                 }
             }
-            $message = 'В классе нет учеников';
-            return back()->withErrors($message);
+            if ($allKids === $hasHomeworkKids) {
+                $message = 'Работа ' . $data['work_id'] . ' уже была заданна ' . $grade->name . ' классу';
+                return back()->withErrors($message);
+            }
+            $message = 'Работа ' . $data['work_id'] . ' заданна ' . $grade->name . ' классу';
+            return back()->with('status', $message);
         }
         $message = 'ОШИБКА. Нет прав';
         return redirect('/teacher/works/')->withErrors($message);

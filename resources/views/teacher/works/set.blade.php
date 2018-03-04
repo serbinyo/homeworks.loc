@@ -37,7 +37,9 @@
                                     <option selected="selected" value="">Выберите класс...</option>
                                     @foreach($grades as $grade)
                                         <option value={{$grade->id}} >
-                                            {{$grade->name}}
+                                            {{$grade->num}}
+                                            -
+                                            {{$grade->char}}
                                         </option>
                                     @endforeach
                                 </select>

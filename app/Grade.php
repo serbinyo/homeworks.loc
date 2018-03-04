@@ -8,7 +8,7 @@ class Grade extends Model
 {
     public function getAll()
     {
-        return $this->get();
+        return $this->orderBy('num')->orderBy('char')->get();
     }
 
     public function getOne($id)
@@ -18,7 +18,7 @@ class Grade extends Model
 
     public function showAll()
     {
-        return $this->orderBy('id')->paginate(10);
+        return $this->orderBy('num')->orderBy('char')->paginate(10);
     }
 
     //Eloquent: Relationships

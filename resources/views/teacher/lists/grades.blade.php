@@ -13,6 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/lists">Списки</a> >>
@@ -32,7 +33,9 @@
                                     <option selected="selected" value="">Выберите класс...</option>
                                     @foreach($grades as $grade)
                                         <option value={{$grade->id}} >
-                                            {{$grade->name}}
+                                            {{$grade->num}}
+                                            -
+                                            {{$grade->char}}
                                         </option>
                                     @endforeach
                                 </select>

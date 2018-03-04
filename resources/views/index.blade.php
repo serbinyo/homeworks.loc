@@ -8,7 +8,10 @@
                 {{ session('status') }}
             </div>
         @endif
+        @include('common.errors')
+
         {{--todo обернуть в bootstrap шаблон как на остальных страничках--}}
+
         <div class="main_lable">
             <a href="/">
                 Система электронных домашних заданий. Сербин А

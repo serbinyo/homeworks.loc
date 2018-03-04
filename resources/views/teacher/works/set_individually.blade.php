@@ -38,7 +38,9 @@
                                         <option selected="selected" value="">Выберите класс...</option>
                                         @foreach($grades as $grade)
                                             <option value={{$grade->id}} >
-                                                {{$grade->name}}
+                                                {{$grade->num}}
+                                                -
+                                                {{$grade->char}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -74,13 +76,7 @@
 
                                 <div class="col-md-6">
                                     <select name="schoolkid_id" class="form-control" id="schoolkid_id" required>
-                                        <option selected="selected" value="">
-                                            {{($schoolkids->count() === 0)
-                                                ? 'В классе нет учеников'
-                                                : 'Выберите ученика...'
-                                                }}
-
-                                        </option>
+                                        <option selected="selected" value="">Выберите ученика...</option>
                                         @foreach($schoolkids as $schoolkid)
                                             <option value={{$schoolkid->id}}>
                                                 {{$schoolkid->lastname}}
