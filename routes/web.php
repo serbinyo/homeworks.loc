@@ -69,7 +69,19 @@ Route::resource('/teacher/materials', 'Teacher\MaterialController');
 Route::resource('/teacher/works', 'Teacher\WorksController');
 
 
-//Route::resource('/teacher/homeworks', 'Teacher\HomeworksController');
+// Teachers Homework
+
+Route::get('/teacher/homework/grades', 'Teacher\Homework\HwGradeController@index');
+
+Route::post('/teacher/homework/grade', 'Teacher\Homework\HwGradeController@view')->name('hwGradeView');
+
+Route::get('/teacher/homework/schoolkid', 'Teacher\Homework\HwSchoolkidController@index');
+
+Route::post('/teacher/homework/schoolkid', 'Teacher\Homework\HwSchoolkidController@view')->name('hwSchoolkidView');
+
+
+
+Route::resource('/teacher/homework', 'Teacher\HomeworkController');
 
 // Teachers Lists
 

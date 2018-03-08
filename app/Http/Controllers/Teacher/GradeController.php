@@ -115,6 +115,11 @@ class GradeController extends TeacherController
     public function view_by_get(Request $request)
     {
         $data = $request->except('_token');
+
+        if (!array_key_exists('grade_id', $data)) {
+            return redirect('/teacher/lists/grades');
+        }
+
         $grade = new Grade();
         $grade_to_show = $grade->getOne($data['grade_id']);
 

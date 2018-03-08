@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use App\Grade;
-use Illuminate\Http\Request;
 
 class UseRegController extends TeacherController
 {
