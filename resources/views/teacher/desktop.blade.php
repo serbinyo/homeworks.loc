@@ -28,7 +28,7 @@
                         <a href="{{route('tests.index')}}">Тесты</a><br>
                         <a href="{{route('materials.index')}}">Дополнительные учебные материалы</a><br><br>
 
-                        <a href="/teacher/homework/grades">Домашние задания</a><br>
+                        <a href="/teacher/homeworks">Домашние задания</a><br>
                         <a href="{{ route('account.show', $teacher->id) }}">Профайл</a><br>
                         <a href="/teacher/lists">Списки</a><br><br>
 

@@ -27,7 +27,9 @@
                             {{$schoolkid->middlename}},
                             Класс:
                             <a href="{{route('grades.show', $schoolkid->grade->id)}}">
-                                {{$schoolkid->grade->name}}
+                                {{$schoolkid->grade->num}}
+                                -
+                                {{$schoolkid->grade->char}}
                             </a>,
                             Логин: {{$schoolkid->user->login}}
                             ID: {{$schoolkid->id }}

@@ -11,6 +11,21 @@ class Grade extends Model
         return $this->orderBy('num')->orderBy('char')->get();
     }
 
+    public function getTeacherGrades($teacher_id)
+    {
+        $entities = $this
+            ->join('schoolkids', 'grades.id', '=', 'schoolkids.grade_id')
+            ->join('homeworks', 'schoolkids.id', '=', 'homeworks.schoolkid_id')
+            ->join('teachers', 'homeworks.teacher_id', '=', 'teachers.id')
+            ->where('teachers.id', $teacher_id)
+            ->select('grades.*')
+            ->distinct()
+            ->orderBy('grades.num')
+            ->orderBy('grades.char')
+            ->get();
+        return $entities;
+    }
+
     public function getOne($id)
     {
         return  $this->find($id);

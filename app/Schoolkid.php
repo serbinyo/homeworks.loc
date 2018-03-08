@@ -29,9 +29,9 @@ class Schoolkid extends Model
         return $this->works()->where('work_id', $work->id)->exists();
     }
 
-    public function setHomework($work, $date)
+    public function setHomework($work, $teacher_id,$date)
     {
-        $this->works()->attach($work, ['date_to_completion' => $date]);
+        $this->works()->attach($work, ['teacher_id' => $teacher_id, 'date_to_completion' => $date]);
         // get inserted Identifier of pivot when attach()
         // Получаем Id записи в промежуточной таблице ( pivot ) после выполнения attach()
         $homework_id = $this->works()->withPivot('id')->wherePivot('work_id',$work->id)->first()->pivot->id;

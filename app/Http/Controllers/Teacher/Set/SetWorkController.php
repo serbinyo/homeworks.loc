@@ -52,7 +52,8 @@ class SetWorkController extends TeacherController
                 $hasHomework = $kid->hasHomework($work_to_set);
 
                 if (!$hasHomework) {
-                    $homework_id = $kid->setHomework($work_to_set, $data['date']);
+                    $teacher_id = $this->user->teacher->id;
+                    $homework_id = $kid->setHomework($work_to_set, $teacher_id, $data['date']);
 
                     $homework_to_fill = $homework->getOne($homework_id);
                     $tests = $homework_to_fill->work->tests;

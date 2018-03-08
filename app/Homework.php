@@ -16,6 +16,29 @@ class Homework extends Model
         return $entity;
     }
 
+    public function getTeacherDates($teacher_id, $grade_id)
+    {
+        $entities = $this
+            ->join('teachers', 'homeworks.teacher_id', '=', 'teachers.id')
+            ->join('schoolkids', 'homeworks.schoolkid_id', '=', 'schoolkids.id')
+            ->join('grades', 'schoolkids.grade_id', '=', 'grades.id')
+            ->where('teachers.id', $teacher_id)
+            ->where('grades.id', $grade_id)
+            ->select('homeworks.*')
+
+
+
+
+
+            ->get();
+
+        return $entities;
+
+
+    }
+
+
+
 
     //Eloquent: Relationships
 
