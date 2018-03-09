@@ -16,22 +16,27 @@
                         @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
-                        Выбор класса
-                        <br><br>
-
-
-                        Выберите класс:
+                        <a href="/teacher/homeworks"> Выбор класса </a> >>
+                        <a href="{{route('showDates', $grade_id)}}"> Даты </a> >>
+                        Задания
+                        <br>
                         <hr>
-                        @foreach($grades as $grade)
 
 
-                            <a href="{{route('showDates', $grade->id)}}">
-                                {{$grade->num}}
-                                -
-                                {{$grade->char}}
+                        @foreach($homeworks as $homework)
+
+                            <a href="">
+                                Домашнее задание №
+                                {{$homework->id}}
                             </a>
-                            <hr>
+                            (
+                            <a href="{{route('works.show', ['id'=>$homework->work_id])}}">
+                                Работа N:
+                                {{$homework->work_id}}
+                            </a>
+                            )
 
+                            <hr>
                         @endforeach
 
 

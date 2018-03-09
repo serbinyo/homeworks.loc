@@ -6,9 +6,11 @@ use App\Http\Controllers\TeacherController;
 use App\Grade;
 use App\Homework;
 use App\Schoolkid;
+use App\Work;
 
 class HwChoiceController extends TeacherController
 {
+    //todo сделать валидацию для всех GET запросов.
     public function index(Grade $grade)
     {
         $grades_to_show = $grade->getTeacherGrades($this->user->teacher->id);
@@ -18,10 +20,26 @@ class HwChoiceController extends TeacherController
         ]);
     }
 
-    public function show_homeworks($grade_id)
+    public function show_dates($grade_id)
     {
         $homework = new Homework();
         $homework_dates = $homework->getTeacherDates($this->user->teacher->id, $grade_id);
-        dd($homework_dates);
+
+        return view('teacher.homework.calendar', [
+            'grade_id' => $grade_id,
+            'dates' => $homework_dates
+        ]);
+    }
+
+    public function show_works($grade_id, $date)
+    {
+        $homework = new Homework();
+        $homeworks_to_show = $homework->getWorksByDate($this->user->teacher->id, $grade_id, $date);
+
+        return view('teacher.homework.homeworks', [
+            'grade_id' => $grade_id,
+            'date' => $date,
+            'homeworks' => $homeworks_to_show
+        ]);
     }
 }

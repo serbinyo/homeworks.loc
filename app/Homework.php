@@ -22,22 +22,28 @@ class Homework extends Model
             ->join('teachers', 'homeworks.teacher_id', '=', 'teachers.id')
             ->join('schoolkids', 'homeworks.schoolkid_id', '=', 'schoolkids.id')
             ->join('grades', 'schoolkids.grade_id', '=', 'grades.id')
-            ->where('teachers.id', $teacher_id)
+            ->where('homeworks.teacher_id', $teacher_id)
             ->where('grades.id', $grade_id)
-            ->select('homeworks.*')
-
-
-
-
-
-            ->get();
+            ->select('homeworks.date_to_completion')
+            ->distinct()
+            ->paginate(15);
 
         return $entities;
-
-
     }
 
-
+    public function getWorksByDate($teacher_id, $grade_id, $date)
+    {
+        $entities = $this
+            ->join('works', 'homeworks.work_id', '=', 'works.id')
+            ->join('schoolkids', 'homeworks.schoolkid_id', '=', 'schoolkids.id')
+            ->join('grades', 'schoolkids.grade_id', '=', 'grades.id')
+            ->where('homeworks.teacher_id', $teacher_id)
+            ->where('date_to_completion', $date)
+            ->where('grades.id', $grade_id)
+            ->select('homeworks.*')
+            ->get();
+        return $entities;
+    }
 
 
     //Eloquent: Relationships

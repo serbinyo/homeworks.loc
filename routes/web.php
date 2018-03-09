@@ -73,13 +73,9 @@ Route::resource('/teacher/works', 'Teacher\WorksController');
 
 Route::get('/teacher/homeworks', 'Teacher\Homework\HwChoiceController@index');
 
-Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\HwChoiceController@show_homeworks')->name('showHomeworks');
+Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\HwChoiceController@show_dates')->name('showDates');
 
-//Route::post('/teacher/homework/grade', 'Teacher\Homework\HwGradeController@view')->name('hwGradeView');
-//
-//Route::get('/teacher/homework/schoolkid', 'Teacher\Homework\HwSchoolkidController@index');
-//
-//Route::post('/teacher/homework/schoolkid', 'Teacher\Homework\HwSchoolkidController@view')->name('hwSchoolkidView');
+Route::get('/teacher/homework/{grade_id}/{date}', 'Teacher\Homework\HwChoiceController@show_works')->name('showWorks');
 
 
 Route::resource('/teacher/homework', 'Teacher\HomeworkController');
