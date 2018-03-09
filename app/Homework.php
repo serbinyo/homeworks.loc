@@ -31,7 +31,7 @@ class Homework extends Model
         return $entities;
     }
 
-    public function getWorksByDate($teacher_id, $grade_id, $date)
+    public function getByDate($teacher_id, $grade_id, $date)
     {
         $entities = $this
             ->join('works', 'homeworks.work_id', '=', 'works.id')
@@ -60,11 +60,11 @@ class Homework extends Model
 
     public function given_tasks()
     {
-        return $this->belongsToMany('App\Given_task');
+        return $this->HasMany('App\Given_task');
     }
 
     public function given_tests()
     {
-        return $this->belongsToMany('App\Given_test');
+        return $this->HasMany('App\Given_test');
     }
 }

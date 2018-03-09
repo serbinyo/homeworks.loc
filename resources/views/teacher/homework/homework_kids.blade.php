@@ -24,10 +24,14 @@
 
 
                         @foreach($homeworks as $homework)
-
-                            <a href="">
-                                Домашнее задание №
-                                {{$homework->id}}
+                            <a href="{{route('homework.show', [
+                            'grade_id' => $grade_id,
+                            'date' => $date,
+                            'id' => $homework->id
+                            ])}}">
+                                {{$homework->schoolkid->lastname }}
+                                {{$homework->schoolkid->firstname}}
+                                {{$homework->schoolkid->middlename}}
                             </a>
                             (
                             <a href="{{route('works.show', ['id'=>$homework->work_id])}}">

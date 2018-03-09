@@ -34,9 +34,9 @@ class HwChoiceController extends TeacherController
     public function show_works($grade_id, $date)
     {
         $homework = new Homework();
-        $homeworks_to_show = $homework->getWorksByDate($this->user->teacher->id, $grade_id, $date);
+        $homeworks_to_show = $homework->getByDate($this->user->teacher->id, $grade_id, $date);
 
-        return view('teacher.homework.homeworks', [
+        return view('teacher.homework.homework_kids', [
             'grade_id' => $grade_id,
             'date' => $date,
             'homeworks' => $homeworks_to_show

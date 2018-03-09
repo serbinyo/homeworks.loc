@@ -75,10 +75,14 @@ Route::get('/teacher/homeworks', 'Teacher\Homework\HwChoiceController@index');
 
 Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\HwChoiceController@show_dates')->name('showDates');
 
-Route::get('/teacher/homework/{grade_id}/{date}', 'Teacher\Homework\HwChoiceController@show_works')->name('showWorks');
+Route::get('/teacher/homeworks/{grade_id}/{date}', 'Teacher\Homework\HwChoiceController@show_works')->name('showHwKids');
+
+//Route::get('/teacher/homework/{grade_id}/{date}/{homework_id}', 'Teacher\Homework\HwChoiceController@show_schoolkids')->name('showSchoolkids');
 
 
-Route::resource('/teacher/homework', 'Teacher\HomeworkController');
+
+
+Route::resource('/teacher/homeworks/{grade_id}/{date}/homework', 'Teacher\HomeworkController');
 
 // Teachers Lists
 

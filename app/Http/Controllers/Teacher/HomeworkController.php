@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
+use App\Homework;
 
 class HomeworkController extends TeacherController
 {
@@ -14,7 +15,7 @@ class HomeworkController extends TeacherController
      */
     public function index()
     {
-        echo __METHOD__;
+        return redirect('\teacher');
     }
 
     /**
@@ -22,7 +23,7 @@ class HomeworkController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         echo __METHOD__;
     }
@@ -44,9 +45,31 @@ class HomeworkController extends TeacherController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($grade_id, $date, $id)
     {
-        echo __METHOD__;
+        $homework = new Homework();
+        $homework_to_show = $homework->getOne($id);
+
+        if ($this->user->can('view', $homework_to_show)) {
+
+
+            $homework_content = [
+                'given_tasks' => $homework_to_show->given_tasks->all(),
+                'given_tests' => $homework_to_show->given_tests->all(),
+                'materials' => $homework_to_show->work->materials->all()
+            ];
+
+            return view('teacher.homework.show', [
+                'title' => 'ЭДЗ. Просмотр домашнего задания',
+                'grade_id' => $grade_id,
+                'date' => $date,
+                'homework' => $homework_to_show,
+                'homework_content' => $homework_content
+            ]);
+
+        }
+        $message = 'ОШИБКА. Нет права просмотра !!!';
+        return redirect('/teacher')->withErrors($message);
     }
 
     /**

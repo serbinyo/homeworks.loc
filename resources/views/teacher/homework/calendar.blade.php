@@ -24,9 +24,9 @@
 
                         @foreach($dates as $date)
 
-                            <a href="{{route('showWorks', [$grade_id, $date->date_to_completion])}}">
+                            <a href="{{route('showHwKids', [$grade_id, $date->date_to_completion])}}">
                                 {{ $date->date_to_completion }}
-                                </a>
+                            </a>
                             <hr>
 
                         @endforeach

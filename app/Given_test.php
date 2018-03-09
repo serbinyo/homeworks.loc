@@ -31,6 +31,6 @@ class Given_test extends Model
 
     public function homeworks()
     {
-        return $this->belongsToMany('App\Work');
+        return $this->belongsTo('App\Work');
     }
 }

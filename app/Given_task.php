@@ -30,6 +30,6 @@ class Given_task extends Model
 
     public function homeworks()
     {
-        return $this->belongsToMany('App\Homework');
+        return $this->belongsTo('App\Homework');
     }
 }
