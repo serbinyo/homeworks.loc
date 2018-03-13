@@ -15,31 +15,24 @@
                         @endif
                         @include('common.errors')
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/homeworks"> Выбор класса </a> >>
-                        <a href="{{route('showTcrDates', $grade_id)}}"> Даты </a> >>
+                        <a href="/desktop">Рабочий стол</a> >>
+                        <a href="/homeworks"> Выбор предмета </a> >>
+                        <a href="{{route('showUsrDates', $discipline_id)}}"> Даты </a> >>
                         Задания
                         <br>
                         <hr>
 
 
+                        <? $i = 1 ?>
                         @foreach($homeworks as $homework)
+                            {{--todo сделать рабочую ссылку--}}
                             <a href="{{route('homework.show', [
-                            'grade_id' => $grade_id,
+                            'discipline_id' => $discipline_id,
                             'date' => $date,
                             'id' => $homework->id
                             ])}}">
-                                {{$homework->schoolkid->lastname }}
-                                {{$homework->schoolkid->firstname}}
-                                {{$homework->schoolkid->middlename}}
+                                Домашнее задание {{$i++}}<br>
                             </a>
-                            (
-                            <a href="{{route('works.show', ['id'=>$homework->work_id])}}">
-                                Работа N:
-                                {{$homework->work_id}}
-                            </a>
-                            )
-
                             <hr>
                         @endforeach
 

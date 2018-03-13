@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Домашние задания. Выбор класса</div>
+                    <div class="panel-heading">Домашние задания</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -15,24 +15,22 @@
                         @endif
                         @include('common.errors')
 
-                        <a href="/teacher">Учительская</a> >>
-                        Выбор класса
-                        <br><br>
-
-
-                        Выберите класс:
+                        <a href="/desktop">Рабочий стол</a> >>
+                        <a href="/homeworks"> Выбор предмета </a> >>
+                        Даты
+                        <br>
                         <hr>
-                        @foreach($grades as $grade)
 
 
-                            <a href="{{route('showTcrDates', $grade->id)}}">
-                                {{$grade->num}}
-                                -
-                                {{$grade->char}}
+                        @foreach($dates as $date)
+
+                            <a href="{{route('showHomeworks', [$discipline_id, $date->date_to_completion])}}">
+                                {{ $date->date_to_completion }}
                             </a>
                             <hr>
 
                         @endforeach
+                        {{$dates->links()}}
 
 
                     </div>

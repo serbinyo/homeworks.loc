@@ -18,8 +18,8 @@
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/homeworks"> Выбор класса </a> >>
-                        <a href="{{route('showDates', $grade_id)}}"> Даты </a> >>
-                        <a href="{{route('showHwKids', [$grade_id, $date])}}"> >> Задания </a> >>
+                        <a href="{{route('showTcrDates', $grade_id)}}"> Даты </a> >>
+                        <a href="{{route('showHwKids', [$grade_id, $date])}}"> Задания </a> >>
                         Просмотр
                         <br>
                         <br><br>
@@ -27,7 +27,7 @@
                         <p class="works_show_blok_title">Домашнее задание № : {{ $homework->id }}<br>
 
                             <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
-                                По работе: {{$homework->work->id}}
+                                По работе № {{$homework->work->id}}
                             </a><br>
                             {{$homework->schoolkid->grade->num}}
                             -

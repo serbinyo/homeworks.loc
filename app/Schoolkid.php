@@ -38,6 +38,20 @@ class Schoolkid extends Model
         return $homework_id;
     }
 
+    public function getKidDisciplines($schoolkid_id)
+    {
+        $entities = $this
+            ->join('homeworks', 'schoolkids.id', '=', 'homeworks.schoolkid_id')
+            ->join('works', 'homeworks.work_id', '=', 'works.id')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('schoolkids.id', $schoolkid_id)
+            ->select('disciplines.*')
+            ->distinct()
+            ->get();
+        return $entities;
+    }
+
     //Eloquent: Relationships
 
     public function user()

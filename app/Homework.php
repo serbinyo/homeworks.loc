@@ -16,7 +16,7 @@ class Homework extends Model
         return $entity;
     }
 
-    public function getTeacherDates($teacher_id, $grade_id)
+    public function getTeacherGradeDates($teacher_id, $grade_id)
     {
         $entities = $this
             ->join('teachers', 'homeworks.teacher_id', '=', 'teachers.id')
@@ -31,7 +31,7 @@ class Homework extends Model
         return $entities;
     }
 
-    public function getByDate($teacher_id, $grade_id, $date)
+    public function getByDateForTeacher($teacher_id, $grade_id, $date)
     {
         $entities = $this
             ->join('works', 'homeworks.work_id', '=', 'works.id')
@@ -40,6 +40,35 @@ class Homework extends Model
             ->where('homeworks.teacher_id', $teacher_id)
             ->where('date_to_completion', $date)
             ->where('grades.id', $grade_id)
+            ->select('homeworks.*')
+            ->get();
+        return $entities;
+    }
+
+    public function getKidDisciplineDates($schoolkid_id, $discipline_id)
+    {
+        $entities = $this
+            ->join('works', 'homeworks.work_id', '=', 'works.id')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('homeworks.schoolkid_id', $schoolkid_id)
+            ->where('disciplines.id', $discipline_id)
+            ->select('homeworks.date_to_completion')
+            ->distinct()
+            ->paginate(15);
+
+        return $entities;
+    }
+
+    public function getByDateForKid($schoolkid_id, $discipline_id, $date)
+    {
+        $entities = $this
+            ->join('works', 'homeworks.work_id', '=', 'works.id')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('homeworks.schoolkid_id', $schoolkid_id)
+            ->where('date_to_completion', $date)
+            ->where('disciplines.id', $discipline_id)
             ->select('homeworks.*')
             ->get();
         return $entities;

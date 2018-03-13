@@ -22,12 +22,12 @@ Auth::routes();
 
 Route::get('/desktop', 'User\DesktopController@index');
 
+Route::get('/homeworks', 'User\Homework\UsrChoiceController@index');
 
-//Route::get('/homeworks', 'User\UserHomeworksController@index');
+Route::get('/homeworks/{discipline_id}', 'User\Homework\UsrChoiceController@show_dates')->name('showUsrDates');
 
-//Route::get('/homeworks/view', 'User\UserViewHomeworkController@index');
+Route::get('/thomeworks/{discipline_id}/{date}', 'User\Homework\UsrChoiceController@show_homeworks')->name('showHomeworks');
 
-//Route::get('/homeworks/view/solve', 'User\UserSolveHomeworkController@index');
 
 
 Route::get('/statistics', 'User\StatisticsController@index');
@@ -71,16 +71,11 @@ Route::resource('/teacher/works', 'Teacher\WorksController');
 
 // Teachers Homework
 
-Route::get('/teacher/homeworks', 'Teacher\Homework\HwChoiceController@index');
+Route::get('/teacher/homeworks', 'Teacher\Homework\TchrChoiceController@index');
 
-Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\HwChoiceController@show_dates')->name('showDates');
+Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\TchrChoiceController@show_dates')->name('showTcrDates');
 
-Route::get('/teacher/homeworks/{grade_id}/{date}', 'Teacher\Homework\HwChoiceController@show_works')->name('showHwKids');
-
-//Route::get('/teacher/homework/{grade_id}/{date}/{homework_id}', 'Teacher\Homework\HwChoiceController@show_schoolkids')->name('showSchoolkids');
-
-
-
+Route::get('/teacher/homeworks/{grade_id}/{date}', 'Teacher\Homework\TchrChoiceController@show_homeworks')->name('showHwKids');
 
 Route::resource('/teacher/homeworks/{grade_id}/{date}/homework', 'Teacher\HomeworkController');
 
