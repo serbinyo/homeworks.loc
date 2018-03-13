@@ -26,9 +26,9 @@ Route::get('/homeworks', 'User\Homework\UsrChoiceController@index');
 
 Route::get('/homeworks/{discipline_id}', 'User\Homework\UsrChoiceController@show_dates')->name('showUsrDates');
 
-Route::get('/thomeworks/{discipline_id}/{date}', 'User\Homework\UsrChoiceController@show_homeworks')->name('showHomeworks');
+Route::get('/homeworks/{discipline_id}/{date}', 'User\Homework\UsrChoiceController@show_homeworks')->name('showHomeworks');
 
-
+Route::resource('/homeworks/{discipline_id}/{date}/hometask', 'User\HometaskController');
 
 Route::get('/statistics', 'User\StatisticsController@index');
 

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use App\Homework;
 
-class HomeworkController extends TeacherController
+class HometaskController extends UserController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class HomeworkController extends TeacherController
      */
     public function index()
     {
-        return redirect('\teacher');
+        echo __METHOD__;
     }
 
     /**
@@ -25,7 +24,7 @@ class HomeworkController extends TeacherController
      */
     public function create()
     {
-        echo __METHOD__;
+        //
     }
 
     /**
@@ -45,35 +44,9 @@ class HomeworkController extends TeacherController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($grade_id, $date, $id)
+    public function show($id)
     {
-
-        $homework = new Homework();
-        $homework_to_show = $homework->getOne($id);
-
-        if ($this->user->can('view', $homework_to_show)
-            && ($grade_id == $homework_to_show->schoolkid->grade_id)
-            && ($date == $homework_to_show->date_to_completion)
-        ) {
-
-
-            $homework_content = [
-                'given_tasks' => $homework_to_show->given_tasks->all(),
-                'given_tests' => $homework_to_show->given_tests->all(),
-                'materials' => $homework_to_show->work->materials->all()
-            ];
-
-            return view('teacher.homework.show', [
-                'title' => 'ЭДЗ. Просмотр домашнего задания',
-                'grade_id' => $grade_id,
-                'date' => $date,
-                'homework' => $homework_to_show,
-                'homework_content' => $homework_content
-            ]);
-
-        }
-        $message = 'ОШИБКА. Нет права просмотра !!!';
-        return redirect('/teacher')->withErrors($message);
+        echo __METHOD__;
     }
 
     /**
