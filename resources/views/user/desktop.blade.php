@@ -13,6 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="/homeworks">Домашние задания</a><br>
                         <a href="/statistics">Статистика</a><br>

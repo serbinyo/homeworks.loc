@@ -47,7 +47,6 @@ class HomeworkController extends TeacherController
      */
     public function show($grade_id, $date, $id)
     {
-
         $homework = new Homework();
         $homework_to_show = $homework->getOne($id);
 
@@ -55,8 +54,6 @@ class HomeworkController extends TeacherController
             && ($grade_id == $homework_to_show->schoolkid->grade_id)
             && ($date == $homework_to_show->date_to_completion)
         ) {
-
-
             $homework_content = [
                 'given_tasks' => $homework_to_show->given_tasks->all(),
                 'given_tests' => $homework_to_show->given_tests->all(),
@@ -70,9 +67,8 @@ class HomeworkController extends TeacherController
                 'homework' => $homework_to_show,
                 'homework_content' => $homework_content
             ]);
-
         }
-        $message = 'ОШИБКА. Нет права просмотра !!!';
+        $message = 'ОШИБКА. Нет прав!!!';
         return redirect('/teacher')->withErrors($message);
     }
 
@@ -105,7 +101,7 @@ class HomeworkController extends TeacherController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($discipline_id, $date, $id)
     {
         echo __METHOD__;
         dump($id);

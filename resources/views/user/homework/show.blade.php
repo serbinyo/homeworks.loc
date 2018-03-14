@@ -16,29 +16,25 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/homeworks"> Выбор класса </a> >>
-                        <a href="{{route('showTcrDates', $grade_id)}}"> Даты </a> >>
-                        <a href="{{route('showHwKids', [$grade_id, $date])}}"> Задания </a> >>
-                            Просмотр
+                        <a href="/desktop">Рабочий стол</a> >>
+                        <a href="/homeworks"> Выбор предмета </a> >>
+                        <a href="{{route('showUsrDates', $discipline_id)}}"> Даты </a> >>
+                        <a href="{{route('showHomeworks', [$discipline_id, $date])}}"> Задания </a> >>
+                        Просмотр
                         <br>
-                        <br><br>
+                        <hr>
 
-                        <p class="works_show_blok_title">Домашнее задание № : {{ $homework->id }}<br>
-
-                            <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
-                                По работе № {{$homework->work->id}}
-                            </a><br>
+                        <p class="works_show_blok_title">Домашнее задание по дисциплине:<br>
+                            {{ $homework->work->teacher->discipline->name }}<br>
+                            Заданно на: {{$homework->date_to_completion}}<br>
                             {{$homework->schoolkid->grade->num}}
                             -
                             {{$homework->schoolkid->grade->char}}<br>
                             {{$homework->schoolkid->lastname}}
                             {{$homework->schoolkid->firstname}}
                             {{$homework->schoolkid->middlename}}<br>
-                            Заданно на: {{$homework->date_to_completion}}
-                            <br>
-                        <hr>
 
+                        <hr>
 
                         @if (!empty($homework_content['given_tasks']))
                             <p class="works_show_blok_title">Задачи:</p>
@@ -46,7 +42,6 @@
                             @foreach($homework_content['given_tasks'] as $task)
 
                                 {!! nl2br($task->task)!!}<br>
-                                Эталон: {{$task->standard}}<br>
 
                                 <hr>
                             @endforeach
@@ -63,12 +58,10 @@
                                 B: {!! nl2br($test->option_b) !!}<br>
                                 C: {!! nl2br($test->option_c) !!}<br>
                                 D: {!! nl2br($test->option_d) !!}<br>
-                                Эталон: {{$test->standard}}<br>
 
                                 <hr>
                             @endforeach
                         @endif
-
 
                         @if (!empty($homework_content['materials']))
                             <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
@@ -85,18 +78,6 @@
                                 <hr>
                             @endforeach
                         @endif
-
-
-                        Дата создания: {{ $homework->created_at }}<br><br>
-
-                        {!! Form::open(['url'=>route('homework.destroy', [
-                        'grade_id' => $grade_id,
-                        'date' => $date,
-                        'id' => $homework->id
-                        ])]) !!}
-                        {!! Form::submit('Удалить', ['class'=>'']) !!}
-                        {{method_field('DELETE')}}
-                        {!! Form::close() !!}
 
                     </div>
                 </div>
