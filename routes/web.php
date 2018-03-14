@@ -34,7 +34,7 @@ Route::resource('/homeworks/{discipline_id}/{date}/hometask/{hwrk_id}/given_task
 
 Route::resource('/homeworks/{discipline_id}/{date}/hometask/{hwrk_id}/given_test', 'User\GivenTestController');
 
-
+Route::post('/homeworks/pass_homework', 'User\Homework\PassController@pass')->name('passHomework');
 
 
 Route::get('/statistics', 'User\StatisticsController@index');

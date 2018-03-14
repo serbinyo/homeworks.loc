@@ -36,45 +36,129 @@
 
                         <hr>
 
-                        @if (!empty($homework_content['given_tasks']))
-                            <p class="works_show_blok_title">Задачи:</p>
-                            <hr>
-                            @foreach($homework_content['given_tasks'] as $task)
+                        @if (!$homework->computer_mark)
 
-                                {!! nl2br($task->task)!!}<br>
-
-                                <a href="{{route('given_task.edit', [
-                                $discipline_id,
-                                $date,
-                                $homework->id,
-                                $task->id
-                                ])}}">Решать</a><br>
-
+                            @if (!empty($homework_content['given_tasks']))
+                                <p class="works_show_blok_title">Задачи:</p>
                                 <hr>
-                            @endforeach
-                        @endif
+                                @foreach($homework_content['given_tasks'] as $task)
 
-                        @if (!empty($homework_content['given_tests']))
+                                    {!! nl2br($task->task)!!}<br>
 
-                            <p class="works_show_blok_title">Тесты:</p>
-                            <hr>
-                            @foreach($homework_content['given_tests'] as $test)
+                                    @if(!empty($task->answer))
+                                        Ваш ответ:
+                                        <a href="{{route('given_task.edit', [
+                                    $discipline_id,
+                                    $date,
+                                    $homework->id,
+                                    $task->id
+                                    ])}}">
+                                            {!! nl2br($task->answer) !!}
+                                        </a>
+                                    @else
+                                        <a href="{{route('given_task.edit', [
+                                    $discipline_id,
+                                    $date,
+                                    $homework->id,
+                                    $task->id
+                                    ])}}" class="answer_absent">
+                                            Требуется ответ
+                                        </a>
+                                    @endif
 
-                                {!! nl2br($test->task) !!}<br>
-                                A: {!! nl2br($test->option_a) !!}<br>
-                                B: {!! nl2br($test->option_b) !!}<br>
-                                C: {!! nl2br($test->option_c) !!}<br>
-                                D: {!! nl2br($test->option_d) !!}<br>
 
-                                <a href="{{route('given_test.edit', [
-                                $discipline_id,
-                                $date,
-                                $homework->id,
-                                $test->id
-                                ])}}">Решать</a><br>
 
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['given_tests']))
+
+                                <p class="works_show_blok_title">Тесты:</p>
                                 <hr>
-                            @endforeach
+                                @foreach($homework_content['given_tests'] as $test)
+
+                                    {!! nl2br($test->task) !!}<br>
+                                    A: {!! nl2br($test->option_a) !!}<br>
+                                    B: {!! nl2br($test->option_b) !!}<br>
+                                    C: {!! nl2br($test->option_c) !!}<br>
+                                    D: {!! nl2br($test->option_d) !!}<br><br>
+
+                                    @if(!empty($test->answer))
+                                        Ваш ответ:
+                                        <a href="{{route('given_test.edit', [
+                                    $discipline_id,
+                                    $date,
+                                    $homework->id,
+                                    $test->id
+                                    ])}}">
+                                            {!! nl2br($test->answer) !!}
+                                        </a>
+                                    @else
+                                        <a href="{{route('given_test.edit', [
+                                    $discipline_id,
+                                    $date,
+                                    $homework->id,
+                                    $test->id
+                                    ])}}" class="answer_absent">
+                                            Требуется ответ
+                                        </a>
+                                    @endif
+
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            {!! Form::open(['url'=>route('passHomework')]) !!}
+                            {!! Form::hidden('discipline_id', $discipline_id) !!}
+                            {!! Form::hidden('date', $date) !!}
+                            {!! Form::hidden('homework_id', $homework->id) !!}
+                            {!! Form::submit('Сдать домашнее задание', ['class'=>'']) !!}
+                            {!! Form::close() !!}
+
+                        @else
+
+                            @if (!empty($homework_content['given_tasks']))
+                                <p class="works_show_blok_title">Задачи:</p>
+                                <hr>
+                                @foreach($homework_content['given_tasks'] as $task)
+
+                                    {!! nl2br($task->task)!!}<br>
+
+                                    @if(!empty($task->answer))
+                                        Ваш ответ: {!! nl2br($task->answer) !!}
+                                    @else
+                                        Сдано без ответа
+                                    @endif
+
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['given_tests']))
+
+                                <p class="works_show_blok_title">Тесты:</p>
+                                <hr>
+                                @foreach($homework_content['given_tests'] as $test)
+
+                                    {!! nl2br($test->task) !!}<br>
+                                    A: {!! nl2br($test->option_a) !!}<br>
+                                    B: {!! nl2br($test->option_b) !!}<br>
+                                    C: {!! nl2br($test->option_c) !!}<br>
+                                    D: {!! nl2br($test->option_d) !!}<br><br>
+
+                                    @if(!empty($test->answer))
+                                        Ваш ответ: {!! nl2br($test->answer) !!}
+                                    @else
+                                        Сдано без ответа
+                                    @endif
+
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            Оценка: {{$homework->computer_mark}} %
+
                         @endif
 
                         @if (!empty($homework_content['materials']))

@@ -59,4 +59,16 @@ class HomeworkPolicy
     {
         //
     }
+
+    /**
+     * Determine whether the user can update the homework.
+     *
+     * @param  \App\User $user
+     * @param  \App\Homework $homework
+     * @return mixed
+     */
+    public function pass(User $user, Homework $homework)
+    {
+        return $user->schoolkid->id === $homework->schoolkid_id;
+    }
 }

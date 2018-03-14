@@ -134,3 +134,11 @@
 .given_test_opt {
   padding-top: 7px;
 }
+
+.answer_absent {
+  color:#a94442;
+}
+
+.answer_absent:hover {
+  color:#a94442;
+}

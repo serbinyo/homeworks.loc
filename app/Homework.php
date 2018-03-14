@@ -75,6 +75,20 @@ class Homework extends Model
         return $entities;
     }
 
+    public function evaluate($id, $mark)
+    {
+        $entity = $this->find($id);
+
+        if ($mark != 0) {
+            $entity->computer_mark = $mark;
+        } else {
+            $entity->computer_mark = 1;
+        }
+
+        $entity->save();
+        return $entity;
+    }
+
 
     //Eloquent: Relationships
 
