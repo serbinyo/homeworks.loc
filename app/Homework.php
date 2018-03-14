@@ -55,6 +55,7 @@ class Homework extends Model
             ->where('disciplines.id', $discipline_id)
             ->select('homeworks.date_to_completion')
             ->distinct()
+            ->orderBy('date_to_completion', 'desc')
             ->paginate(15);
 
         return $entities;

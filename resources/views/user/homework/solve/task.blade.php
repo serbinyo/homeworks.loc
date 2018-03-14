@@ -30,8 +30,8 @@
 
 
                         {!! Form::model($task, ['method'=>'put', 'route' => ['given_task.update',
-                            'discipline_id' => $discipline_id, 'date' => $date, 'id' => $homework_id,
-                            $task->id], 'class'=>'form-horizontal']) !!}
+                            'discipline_id' => $discipline_id, 'date' => $date, 'hwrk_id' => $homework_id,
+                            'id'=>$task->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('task') ? ' has-error' : '' }}">
                             {!! Form::label('task', 'Условие задачи: ', ['class'=>'col-md-4 control-label']) !!}
@@ -51,7 +51,7 @@
                             {!! Form::label('answer', 'Ответ', ['class'=>'col-md-4 control-label']) !!}
 
                             <div class="col-md-6">
-                                {!! Form::text('answer', null, ['required','class'=>'form-control']) !!}
+                                {!! Form::text('answer', null, ['class'=>'form-control']) !!}
 
                                 @if ($errors->has('answer'))
                                     <span class="help-block">
@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Обновить задачу', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Ответить', ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
 

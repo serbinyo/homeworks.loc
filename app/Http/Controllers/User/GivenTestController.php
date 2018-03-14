@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Given_test;
+use App\Homework;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,7 @@ class GivenTestController extends UserController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +43,7 @@ class GivenTestController extends UserController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,30 +54,83 @@ class GivenTestController extends UserController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($discipline_id, $date, $hwrk_id, $id)
+    public function edit($discipline_id, $date, $homework_id, $id)
     {
-        echo __METHOD__;
+        $test = new Given_test();
+        $test_to_update = $test->getOne($id);
+
+        $homework = new Homework();
+        $homework_to_solve = $homework->getOne($homework_id);
+
+        if (empty($homework_to_solve)) {
+            $message = 'ОШИБКА. Нет прав';
+            return redirect('/desktop')->withErrors($message);
+        }
+
+        if ($this->user->can('update', $test_to_update)
+            && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
+            && ($date == $homework_to_solve->date_to_completion)
+            && ($homework_id == $homework_to_solve->id)
+        ) {
+            return view('user.homework.solve.test', [
+                'title' => 'ЭДЗ. Решать тест',
+                'discipline_id' => $discipline_id,
+                'date' => $date,
+                'homework_id' => $homework_id,
+                'test' => $test_to_update
+            ]);
+        }
+
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $discipline_id, $date, $homework_id, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+
+        $test = new Given_test();
+        $test_to_update = $test->getOne($id);
+
+        $homework = new Homework();
+        $homework_to_solve = $homework->getOne($homework_id);
+
+        if ($this->user->can('update', $test_to_update)
+            && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
+            && ($date == $homework_to_solve->date_to_completion)
+            && ($homework_id == $homework_to_solve->id)
+        ) {
+
+            $response = $test->edit($id, $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+
+            $message = 'Ответ записан';
+            return redirect( route('hometask.show',[
+                $discipline_id, $date, $homework_id
+            ]))->with('status', $message);
+
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

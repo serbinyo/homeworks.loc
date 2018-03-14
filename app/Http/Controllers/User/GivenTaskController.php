@@ -64,12 +64,17 @@ class GivenTaskController extends UserController
         $task_to_update = $task->getOne($id);
 
         $homework = new Homework();
-        $homework_to_show = $homework->getOne($homework_id);
+        $homework_to_solve = $homework->getOne($homework_id);
+
+        if (empty($homework_to_solve)) {
+            $message = 'ОШИБКА. Нет прав';
+            return redirect('/desktop')->withErrors($message);
+        }
 
         if ($this->user->can('update', $task_to_update)
-            && ($discipline_id == $homework_to_show->work->teacher->discipline_id)
-            && ($date == $homework_to_show->date_to_completion)
-            && ($homework_id == $homework_to_show->id)
+            && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
+            && ($date == $homework_to_solve->date_to_completion)
+            && ($homework_id == $homework_to_solve->id)
         ) {
 
             return view('user.homework.solve.task', [
@@ -92,9 +97,34 @@ class GivenTaskController extends UserController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $discipline_id, $date, $homework_id, $id)
     {
-        echo __METHOD__;
+
+        $data = $request->except('_token', '_method');
+        $task = new Given_task();
+        $task_to_update = $task->getOne($id);
+
+        $homework = new Homework();
+        $homework_to_solve = $homework->getOne($homework_id);
+
+        if ($this->user->can('update', $task_to_update)
+            && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
+            && ($date == $homework_to_solve->date_to_completion)
+            && ($homework_id == $homework_to_solve->id)
+        ) {
+            $response = $task->edit($id, $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+
+            $message = 'Ответ записан';
+            return redirect( route('hometask.show',[
+                $discipline_id, $date, $homework_id
+            ]))->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**

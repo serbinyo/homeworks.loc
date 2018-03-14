@@ -51,7 +51,7 @@ class Task extends Model
         return $this;
     }
 
-    public function edit($id, $user_id, $data)
+    public function edit($id, $teacher_id, $data)
     {
         if ($err = $this->validate($data)) {
             return $err;
@@ -59,7 +59,7 @@ class Task extends Model
 
         $entity = $this->find($id);
 
-        $entity->teacher_id = $user_id;
+        $entity->teacher_id = $teacher_id;
         $entity->theme = $data['theme'];
         $entity->task = $data['task'];
         $entity->answer = $data['answer'];
