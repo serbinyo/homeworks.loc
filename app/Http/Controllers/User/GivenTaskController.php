@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Given_task;
+use App\Homework;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use App\Homework;
 
-class HometaskController extends UserController
+class GivenTaskController extends UserController
 {
     /**
      * Display a listing of the resource.
@@ -45,32 +46,9 @@ class HometaskController extends UserController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($discipline_id, $date, $id)
+    public function show($id)
     {
-        $homework = new Homework();
-        $homework_to_show = $homework->getOne($id);
-
-        if ($this->user->can('view', $homework_to_show)
-            && ($discipline_id == $homework_to_show->work->teacher->discipline_id)
-            && ($date == $homework_to_show->date_to_completion)
-        ) {
-            $homework_content = [
-                'given_tasks' => $homework_to_show->given_tasks->all(),
-                'given_tests' => $homework_to_show->given_tests->all(),
-                'materials' => $homework_to_show->work->materials->all()
-            ];
-
-            return view('user.homework.show', [
-                'title' => 'ЭДЗ. Просмотр домашнего задания',
-                'discipline_id' => $discipline_id,
-                'date' => $date,
-                'homework' => $homework_to_show,
-                'homework_content' => $homework_content
-            ]);
-
-        }
-        $message = 'ОШИБКА. Нет прав!!!';
-        return redirect('/desktop')->withErrors($message);
+        echo __METHOD__;
     }
 
     /**
@@ -79,9 +57,32 @@ class HometaskController extends UserController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($discipline_id, $date, $homework_id, $id)
     {
-        echo __METHOD__;
+        //dump($discipline_id, $date, $homework_id, $id);
+        $task = new Given_task();
+        $task_to_update = $task->getOne($id);
+
+        $homework = new Homework();
+        $homework_to_show = $homework->getOne($homework_id);
+
+        if ($this->user->can('update', $task_to_update)
+            && ($discipline_id == $homework_to_show->work->teacher->discipline_id)
+            && ($date == $homework_to_show->date_to_completion)
+            && ($homework_id == $homework_to_show->id)
+        ) {
+
+            return view('user.homework.solve.task', [
+                'title' => 'ЭДЗ. Решать задачу',
+                'discipline_id' => $discipline_id,
+                'date' => $date,
+                'homework_id' => $homework_id,
+                'task' => $task_to_update
+            ]);
+        }
+
+        $message = 'ОШИБКА. Нет прав';
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
@@ -102,9 +103,8 @@ class HometaskController extends UserController
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($discipline_id, $date, $id)
+    public function destroy($id)
     {
         echo __METHOD__;
-        dump($id);
     }
 }

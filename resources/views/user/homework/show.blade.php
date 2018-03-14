@@ -43,6 +43,13 @@
 
                                 {!! nl2br($task->task)!!}<br>
 
+                                <a href="{{route('given_task.edit', [
+                                $discipline_id,
+                                $date,
+                                $homework->id,
+                                $task->id
+                                ])}}">Решать</a><br>
+
                                 <hr>
                             @endforeach
                         @endif
@@ -58,6 +65,13 @@
                                 B: {!! nl2br($test->option_b) !!}<br>
                                 C: {!! nl2br($test->option_c) !!}<br>
                                 D: {!! nl2br($test->option_d) !!}<br>
+
+                                <a href="{{route('given_test.edit', [
+                                $discipline_id,
+                                $date,
+                                $homework->id,
+                                $test->id
+                                ])}}">Решать</a><br>
 
                                 <hr>
                             @endforeach

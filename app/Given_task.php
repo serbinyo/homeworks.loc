@@ -25,10 +25,16 @@ class Given_task extends Model
         return $this;
     }
 
+    public function getOne($id)
+    {
+        $entity = $this->find($id);
+        return $entity;
+    }
+
 
     //Eloquent: Relationships
 
-    public function homeworks()
+    public function homework()
     {
         return $this->belongsTo('App\Homework');
     }

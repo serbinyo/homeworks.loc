@@ -29,8 +29,8 @@ class Given_test extends Model
 
     //Eloquent: Relationships
 
-    public function homeworks()
+    public function homework()
     {
-        return $this->belongsTo('App\Work');
+        return $this->belongsTo('App\Homework');
     }
 }

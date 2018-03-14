@@ -30,6 +30,13 @@ Route::get('/homeworks/{discipline_id}/{date}', 'User\Homework\UsrChoiceControll
 
 Route::resource('/homeworks/{discipline_id}/{date}/hometask', 'User\HometaskController');
 
+Route::resource('/homeworks/{discipline_id}/{date}/hometask/{hwrk_id}/given_task', 'User\GivenTaskController');
+
+Route::resource('/homeworks/{discipline_id}/{date}/hometask/{hwrk_id}/given_test', 'User\GivenTestController');
+
+
+
+
 Route::get('/statistics', 'User\StatisticsController@index');
 
 
@@ -49,11 +56,11 @@ Route::post('/teacher/works/individually', 'Teacher\Set\SetIndividuallyControlle
 
 Route::post('/teacher/set/task', 'Teacher\Set\SetTaskController')->name('setTask');
 
-Route::post('/teacher/unset/task/', 'Teacher\Set\UnsetTaskController')->name('unsetTask');
+Route::post('/teacher/unset/task', 'Teacher\Set\UnsetTaskController')->name('unsetTask');
 
 Route::post('/teacher/set/test', 'Teacher\Set\SetTestController')->name('setTest');
 
-Route::post('/teacher/unset/test/', 'Teacher\Set\UnsetTestController')->name('unsetTest');
+Route::post('/teacher/unset/test', 'Teacher\Set\UnsetTestController')->name('unsetTest');
 
 Route::post('/teacher/set/material', 'Teacher\Set\SetMaterialController')->name('setMaterial');
 
