@@ -18,12 +18,13 @@
                         <a href="/teacher">Учительская</a> >>
                         Выбор класса
                         <br><br>
-
-
-                        Выберите класс:
+                        @if(!empty($grades))
+                            Выберите класс:
+                        @else
+                            Нет заданных работ
+                        @endif
                         <hr>
                         @foreach($grades as $grade)
-
 
                             <a href="{{route('showTcrDates', $grade->id)}}">
                                 {{$grade->num}}
@@ -33,7 +34,6 @@
                             <hr>
 
                         @endforeach
-
 
                     </div>
                 </div>

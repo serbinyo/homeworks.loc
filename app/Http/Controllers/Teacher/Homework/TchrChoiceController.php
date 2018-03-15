@@ -11,7 +11,7 @@ class TchrChoiceController extends TeacherController
     //todo сделать валидацию для всех GET запросов.
     public function index(Grade $grade)
     {
-        $grades_to_show = $grade->getTeacherGrades($this->user->teacher->id);
+        $grades_to_show = $grade->getTeacherGrades($this->user->teacher->id)->all();
 
         return view('teacher.homeworks', [
             'title' => 'Выбор класса',

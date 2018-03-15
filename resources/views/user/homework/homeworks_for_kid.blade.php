@@ -25,7 +25,7 @@
 
                         <? $i = 1 ?>
                         @foreach($homeworks as $homework)
-                            {{--todo сделать рабочую ссылку--}}
+
                             <a href="{{route('hometask.show', [
                             'discipline_id' => $discipline_id,
                             'date' => $date,

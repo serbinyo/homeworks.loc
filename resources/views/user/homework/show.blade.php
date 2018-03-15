@@ -157,7 +157,8 @@
                                 @endforeach
                             @endif
 
-                            Оценка: {{$homework->computer_mark}} %
+                            Оценка: {{$homework->computer_mark}} % <br>
+                            Дата выполнения: {{$homework->date_of_completion}}
 
                         @endif
 

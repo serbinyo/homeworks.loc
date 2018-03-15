@@ -84,7 +84,7 @@ class Homework extends Model
         } else {
             $entity->computer_mark = 1;
         }
-
+        $entity->date_of_completion = date('Y-m-d');
         $entity->save();
         return $entity;
     }
