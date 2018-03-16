@@ -135,6 +135,10 @@
   padding-top: 7px;
 }
 
+.answer_exist {
+  color: #2371b8;
+}
+
 .answer_absent {
   color:#a94442;
 }

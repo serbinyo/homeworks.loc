@@ -50,6 +50,11 @@ class HomeworkController extends TeacherController
         $homework = new Homework();
         $homework_to_show = $homework->getOne($id);
 
+        if (isset($homework_to_show->computer_mark)) {
+            $mark_to_show = $homework->percent_per_character($homework_to_show->computer_mark);
+            $homework_to_show->computer_mark = $mark_to_show;
+        }
+
         if ($this->user->can('view', $homework_to_show)
             && ($grade_id == $homework_to_show->schoolkid->grade_id)
             && ($date == $homework_to_show->date_to_completion)

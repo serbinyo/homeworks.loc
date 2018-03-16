@@ -8,7 +8,6 @@
                     <div class="panel-heading">
                         Просмотр работы!
                     </div>
-
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -20,72 +19,147 @@
                         <a href="/teacher/homeworks"> Выбор класса </a> >>
                         <a href="{{route('showTcrDates', $grade_id)}}"> Даты </a> >>
                         <a href="{{route('showHwKids', [$grade_id, $date])}}"> Задания </a> >>
-                            Просмотр
+                        Просмотр
                         <br>
-                        <br><br>
-
-                        <p class="works_show_blok_title">Домашнее задание № : {{ $homework->id }}<br>
-
-                            <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
-                                По работе № {{$homework->work->id}}
-                            </a><br>
-                            {{$homework->schoolkid->grade->num}}
-                            -
-                            {{$homework->schoolkid->grade->char}}<br>
-                            {{$homework->schoolkid->lastname}}
-                            {{$homework->schoolkid->firstname}}
-                            {{$homework->schoolkid->middlename}}<br>
-                            Заданно на: {{$homework->date_to_completion}}
-                            <br>
                         <hr>
 
+                        @if (!$homework->computer_mark)
 
-                        @if (!empty($homework_content['given_tasks']))
-                            <p class="works_show_blok_title">Задачи:</p>
-                            <hr>
-                            @foreach($homework_content['given_tasks'] as $task)
-
-                                {!! nl2br($task->task)!!}<br>
-                                Эталон: {{$task->standard}}<br>
-
-                                <hr>
-                            @endforeach
-                        @endif
-
-                        @if (!empty($homework_content['given_tests']))
-
-                            <p class="works_show_blok_title">Тесты:</p>
-                            <hr>
-                            @foreach($homework_content['given_tests'] as $test)
-
-                                {!! nl2br($test->task) !!}<br>
-                                A: {!! nl2br($test->option_a) !!}<br>
-                                B: {!! nl2br($test->option_b) !!}<br>
-                                C: {!! nl2br($test->option_c) !!}<br>
-                                D: {!! nl2br($test->option_d) !!}<br>
-                                Эталон: {{$test->standard}}<br>
-
-                                <hr>
-                            @endforeach
-                        @endif
-
-
-                        @if (!empty($homework_content['materials']))
-                            <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
-                            <hr>
-                            @foreach($homework_content['materials'] as $material)
-                                <a href="{{route('materials.show', ['id'=>$material->id])}}">
-                                    Дополнительный учебный материал № : {{ $material->id }}
+                            <p class="works_show_blok_title">
+                                Домашнее задание № : {{ $homework->id }}<br>
+                                <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
+                                    По работе № {{$homework->work->id}}
                                 </a><br>
-                                Тема: {{$material->theme}}<br>
-                                Заголовок: {{ $material->title }}<br>
-                                Изображение: {{$material->image}}<br>
-                                {!! nl2br($material->body) !!}<br>
+                                {{$homework->schoolkid->grade->num}}
+                                -
+                                {{$homework->schoolkid->grade->char}}<br>
+                                {{$homework->schoolkid->lastname}}
+                                {{$homework->schoolkid->firstname}}
+                                {{$homework->schoolkid->middlename}}<br>
+                                Заданно на: {{$homework->date_to_completion}}<br><br>
 
+                                Домашнее задание еще не сдано
+                                <br>
+                            <hr>
+
+                            @if (!empty($homework_content['given_tasks']))
+                                <p class="works_show_blok_title">Задачи:</p>
                                 <hr>
-                            @endforeach
-                        @endif
+                                @foreach($homework_content['given_tasks'] as $task)
+                                    {!! nl2br($task->task)!!}<br><br>
 
+                                    Эталон: {{$task->standard}}
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['given_tests']))
+                                <p class="works_show_blok_title">Тесты:</p>
+                                <hr>
+                                @foreach($homework_content['given_tests'] as $test)
+                                    {!! nl2br($test->task) !!}<br>
+                                    A: {!! nl2br($test->option_a) !!}<br>
+                                    B: {!! nl2br($test->option_b) !!}<br>
+                                    C: {!! nl2br($test->option_c) !!}<br>
+                                    D: {!! nl2br($test->option_d) !!}<br><br>
+
+                                    Эталон: {{$test->standard}}
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['materials']))
+                                <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
+                                <hr>
+                                @foreach($homework_content['materials'] as $material)
+                                    <a href="{{route('materials.show', ['id'=>$material->id])}}">
+                                        Дополнительный учебный материал № : {{ $material->id }}
+                                    </a><br>
+                                    Тема: {{$material->theme}}<br>
+                                    Заголовок: {{ $material->title }}<br>
+                                    Изображение: {{$material->image}}<br>
+                                    {!! nl2br($material->body) !!}<br>
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                        @else
+
+                            <p class="works_show_blok_title">Домашнее задание № : {{ $homework->id }}<br>
+                                <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
+                                    По работе № {{$homework->work->id}}
+                                </a><br>
+                                {{$homework->schoolkid->grade->num}}
+                                -
+                                {{$homework->schoolkid->grade->char}}<br>
+                                {{$homework->schoolkid->lastname}}
+                                {{$homework->schoolkid->firstname}}
+                                {{$homework->schoolkid->middlename}}<br>
+                                Заданно на: {{$homework->date_to_completion}}<br><br>
+
+                                Дата выполнения: {{$homework->date_of_completion}}<br>
+                                Оценка: {{$homework->computer_mark}}<br>
+                            <hr>
+
+                            @if (!empty($homework_content['given_tasks']))
+                                <p class="works_show_blok_title">Задачи:</p>
+                                <hr>
+                                @foreach($homework_content['given_tasks'] as $task)
+                                    {!! nl2br($task->task)!!}<br><br>
+
+                                    Эталон: {{$task->standard}}<br>
+                                    @if(!empty($task->answer))
+                                        <p class="answer_exist">
+                                            Ответ учащегося: {{$task->answer}}
+                                        </p>
+                                    @else
+                                        <p class="answer_absent">
+                                            Сдано без ответа
+                                        </p>
+                                    @endif
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['given_tests']))
+                                <p class="works_show_blok_title">Тесты:</p>
+                                <hr>
+                                @foreach($homework_content['given_tests'] as $test)
+                                    {!! nl2br($test->task) !!}<br>
+                                    A: {!! nl2br($test->option_a) !!}<br>
+                                    B: {!! nl2br($test->option_b) !!}<br>
+                                    C: {!! nl2br($test->option_c) !!}<br>
+                                    D: {!! nl2br($test->option_d) !!}<br><br>
+
+                                    Эталон: {{$test->standard}}<br>
+                                    @if(!empty($test->answer))
+                                        <p class="answer_exist">
+                                            Ответ учащегося: {!! nl2br($test->answer) !!}
+                                        </p>
+                                    @else
+                                        <p class="answer_absent">
+                                            Сдано без ответа
+                                        </p>
+                                    @endif
+                                    <hr>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($homework_content['materials']))
+                                <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
+                                <hr>
+                                @foreach($homework_content['materials'] as $material)
+                                    <a href="{{route('materials.show', ['id'=>$material->id])}}">
+                                        Дополнительный учебный материал № : {{ $material->id }}
+                                    </a><br>
+                                    Тема: {{$material->theme}}<br>
+                                    Заголовок: {{ $material->title }}<br>
+                                    Изображение: {{$material->image}}<br>
+                                    {!! nl2br($material->body) !!}<br>
+                                    <hr>
+                                @endforeach
+                            @endif
+                        @endif
 
                         Дата создания: {{ $homework->created_at }}<br><br>
 
@@ -97,7 +171,6 @@
                         {!! Form::submit('Удалить', ['class'=>'']) !!}
                         {{method_field('DELETE')}}
                         {!! Form::close() !!}
-
                     </div>
                 </div>
             </div>

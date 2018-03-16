@@ -25,6 +25,7 @@ class Homework extends Model
             ->where('homeworks.teacher_id', $teacher_id)
             ->where('grades.id', $grade_id)
             ->select('homeworks.date_to_completion')
+            ->orderBy('date_to_completion', 'desc')
             ->distinct()
             ->paginate(15);
 
@@ -54,8 +55,8 @@ class Homework extends Model
             ->where('homeworks.schoolkid_id', $schoolkid_id)
             ->where('disciplines.id', $discipline_id)
             ->select('homeworks.date_to_completion')
-            ->distinct()
             ->orderBy('date_to_completion', 'desc')
+            ->distinct()
             ->paginate(15);
 
         return $entities;
@@ -87,6 +88,29 @@ class Homework extends Model
         $entity->date_of_completion = date('Y-m-d');
         $entity->save();
         return $entity;
+    }
+
+    public function percent_per_character($percent)
+    {
+        if ($percent == 100)
+            $char = '5+';
+        else if ($percent >= 93 && $percent <= 99)
+            $char = '5';
+        else if ($percent >= 85 && $percent <= 92)
+            $char = '4';
+        else if ($percent >= 77 && $percent <= 84)
+            $char = '4-';
+        else if ($percent >= 70 && $percent <= 76)
+            $char = '3+';
+        else if ($percent >= 63 && $percent <= 69)
+            $char = '3';
+        else if ($percent >= 50 && $percent <= 62)
+            $char = '3-';
+        else if ($percent >= 1 && $percent <= 49)
+            $char = '2';
+        else
+            $char = '1';
+        return $char;
     }
 
 

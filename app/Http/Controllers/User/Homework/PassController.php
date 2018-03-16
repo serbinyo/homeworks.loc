@@ -40,7 +40,7 @@ class PassController extends UserController
             return redirect(route('hometask.show', [
                 'discipline_id' => $data['discipline_id'],
                 'date' => $data['date'],
-                'id' => $data['homework_id']
+                'id' => $data['homework_id'],
             ]))->with('status', $message);
         }
     }
