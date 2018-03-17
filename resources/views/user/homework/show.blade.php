@@ -124,18 +124,28 @@
                                     <hr>
                                 @endforeach
                             @endif
+                            <p class="works_show_blok_title">
+                                Оценка: {{$homework->computer_mark}} <br>
+                                Дата выполнения: {{$homework->date_of_completion}}
+                            </p>
+                            <hr>
 
-                            Оценка: {{$homework->computer_mark}} <br>
-                            Дата выполнения: {{$homework->date_of_completion}}
+                            @if (!empty($homework->teacher_mark))
+                                <p class="works_show_blok_title">
+                                    Оценка учителя: {{$homework->teacher_mark}}
+                                    (Имеет больший приоретет)<br>
+                                    Причина изменения оценки:<br>
+                                    {!! nl2br($homework->teacher_comment) !!}
+                                </p>
+                            @endif
+                            <hr>
 
                         @endif
                         @if (!empty($homework_content['materials']))
                             <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
                             <hr>
                             @foreach($homework_content['materials'] as $material)
-                                <a href="{{route('materials.show', ['id'=>$material->id])}}">
-                                    Дополнительный учебный материал № : {{ $material->id }}
-                                </a><br>
+
                                 Тема: {{$material->theme}}<br>
                                 Заголовок: {{ $material->title }}<br>
                                 Изображение: {{$material->image}}<br>

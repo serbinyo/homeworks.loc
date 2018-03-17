@@ -100,6 +100,15 @@
                                 Дата выполнения: {{$homework->date_of_completion}}<br>
                                 Оценка: {{$homework->computer_mark}}<br>
                             <hr>
+                            @if (!empty($homework->teacher_mark))
+                                <p class="works_show_blok_title">
+                                    Оценка учителя: {{$homework->teacher_mark}}
+                                    (Имеет больший приоретет)<br>
+                                    Причина изменения оценки:<br>
+                                    {!! nl2br($homework->teacher_comment) !!}
+                                </p>
+                            @endif
+                            <hr>
 
                             @if (!empty($homework_content['given_tasks']))
                                 <p class="works_show_blok_title">Задачи:</p>
@@ -159,6 +168,14 @@
                                     <hr>
                                 @endforeach
                             @endif
+                            <a href="{{route('homework.edit', [
+                                'grade_id' => $grade_id,
+                                'date' => $date,
+                                'id' => $homework->id
+                                ])}}">
+                                Исправить оценку
+                            </a>
+                            <hr>
                         @endif
 
                         Дата создания: {{ $homework->created_at }}<br><br>
@@ -172,13 +189,7 @@
                         {{method_field('DELETE')}}
                         {!! Form::close() !!}<br>
 
-                        <a href="{{route('homework.edit', [
-                            'grade_id' => $grade_id,
-                            'date' => $date,
-                            'id' => $homework->id
-                            ])}}">
-                            Исправить оценку
-                        </a>
+
                     </div>
                 </div>
             </div>

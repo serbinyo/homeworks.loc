@@ -43,10 +43,10 @@ class GivenTaskController extends UserController
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int $task_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($task_id)
     {
         echo __METHOD__;
     }
@@ -54,14 +54,16 @@ class GivenTaskController extends UserController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $discipline_id
+     * @param  string $date
+     * @param  int $homework_id
+     * @param  int $task_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($discipline_id, $date, $homework_id, $id)
+    public function edit($discipline_id, $date, $homework_id, $task_id)
     {
-        //dump($discipline_id, $date, $homework_id, $id);
         $task = new Given_task();
-        $task_to_update = $task->getOne($id);
+        $task_to_update = $task->getOne($task_id);
 
         $homework = new Homework();
         $homework_to_solve = $homework->getOne($homework_id);
@@ -94,15 +96,18 @@ class GivenTaskController extends UserController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  int $discipline_id
+     * @param  string $date
+     * @param  int $homework_id
+     * @param  int $task_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $discipline_id, $date, $homework_id, $id)
+    public function update(Request $request, $discipline_id, $date, $homework_id, $task_id)
     {
 
         $data = $request->except('_token', '_method');
         $task = new Given_task();
-        $task_to_update = $task->getOne($id);
+        $task_to_update = $task->getOne($task_id);
 
         $homework = new Homework();
         $homework_to_solve = $homework->getOne($homework_id);
@@ -111,9 +116,8 @@ class GivenTaskController extends UserController
             && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
             && ($date == $homework_to_solve->date_to_completion)
             && ($homework_id == $homework_to_solve->id)
-            //&& ($homework_to_solve->computer_mark)
         ) {
-            $response = $task->edit($id, $data);
+            $response = $task->edit($task_id, $data);
 
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
@@ -131,10 +135,10 @@ class GivenTaskController extends UserController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $task_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($task_id)
     {
         echo __METHOD__;
     }

@@ -60,6 +60,10 @@ class HometaskController extends UserController
                 $mark_to_show = $homework->percent_per_character($homework_to_show->computer_mark);
                 $homework_to_show->computer_mark = $mark_to_show;
             }
+            if (isset($homework_to_show->teacher_mark)) {
+                $mark_to_show = $homework->percent_per_character($homework_to_show->teacher_mark);
+                $homework_to_show->teacher_mark = $mark_to_show;
+            }
 
             $homework_content = [
                 'given_tasks' => $homework_to_show->given_tasks->all(),

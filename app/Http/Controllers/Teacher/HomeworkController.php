@@ -42,6 +42,8 @@ class HomeworkController extends TeacherController
     /**
      * Display the specified resource.
      *
+     * @param  int $grade_id
+     * @param  string $date
      * @param  int $homework_id
      * @return \Illuminate\Http\Response
      */
@@ -58,6 +60,10 @@ class HomeworkController extends TeacherController
             if (isset($homework_to_show->computer_mark)) {
                 $mark_to_show = $homework->percent_per_character($homework_to_show->computer_mark);
                 $homework_to_show->computer_mark = $mark_to_show;
+            }
+            if (isset($homework_to_show->teacher_mark)) {
+                $mark_to_show = $homework->percent_per_character($homework_to_show->teacher_mark);
+                $homework_to_show->teacher_mark = $mark_to_show;
             }
 
             $homework_content = [
@@ -81,7 +87,9 @@ class HomeworkController extends TeacherController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $grade_id
+     * @param  string $date
+     * @param  int $homework_id
      * @return \Illuminate\Http\Response
      */
     public function edit($grade_id, $date, $homework_id)
@@ -89,7 +97,7 @@ class HomeworkController extends TeacherController
         $homework = new Homework();
         $homework_to_show = $homework->getOne($homework_id);
 
-        if ($this->user->can('update', $homework_to_show)
+        if ($this->user->can('edit_mark', $homework_to_show)
             && ($grade_id == $homework_to_show->schoolkid->grade_id)
             && ($date == $homework_to_show->date_to_completion)
         ) {
@@ -115,23 +123,46 @@ class HomeworkController extends TeacherController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  int $grade_id
+     * @param  string $date
+     * @param  int $homework_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $grade_id, $date, $homework_id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+        $homework = new Homework();
+        $homework_to_update = $homework->getOne($homework_id);
+        if ($this->user->can('edit_mark', $homework_to_update)
+            && ($grade_id == $homework_to_update->schoolkid->grade_id)
+            && ($date == $homework_to_update->date_to_completion)
+        ) {
+            $response = $homework->edit_mark($homework_id, $data);
+
+            if (is_array($response) && array_key_exists('errors', $response)) {
+                return back()->withInput()->withErrors($response['errors']);
+            }
+
+            $message = 'Изменения внесены';
+            return redirect( route('homework.show',[
+                $grade_id, $date, $homework_id
+            ]))->with('status', $message);
+        }
+        $message = 'ОШИБКА. Нет прав!!!';
+        return redirect('/teacher')->withErrors($message);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $grade_id
+     * @param  string $date
+     * @param  int $homework_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($discipline_id, $date, $id)
+    public function destroy($grade_id, $date, $homework_id)
     {
         echo __METHOD__;
-        dump($id);
+        dump($homework_id);
     }
 }

@@ -71,4 +71,18 @@ class HomeworkPolicy
     {
         return $user->schoolkid->id === $homework->schoolkid_id;
     }
+
+    /**
+     * Determine whether the user can update the homework.
+     *
+     * @param  \App\User $user
+     * @param  \App\Homework $homework
+     * @return mixed
+     */
+    public function edit_mark(User $user, Homework $homework)
+    {
+        return (($user->teacher->id === $homework->teacher_id)
+            &&
+            ($homework->computer_mark));
+    }
 }

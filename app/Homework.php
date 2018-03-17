@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Homework extends Model
 {
@@ -92,25 +93,66 @@ class Homework extends Model
 
     public function percent_per_character($percent)
     {
+        if ($percent > 100 || $percent < 0)
+            return null;
         if ($percent == 100)
             $char = '5+';
-        else if ($percent >= 93 && $percent <= 99)
+        else if ($percent >= 90 && $percent <= 99)
             $char = '5';
-        else if ($percent >= 85 && $percent <= 92)
+        else if ($percent >= 85 && $percent <= 89)
+            $char = '5-';
+        else if ($percent >= 70 && $percent <= 84)
             $char = '4';
-        else if ($percent >= 77 && $percent <= 84)
+        else if ($percent >= 65 && $percent <= 69)
             $char = '4-';
-        else if ($percent >= 70 && $percent <= 76)
-            $char = '3+';
-        else if ($percent >= 63 && $percent <= 69)
+        else if ($percent >= 50 && $percent <= 64)
             $char = '3';
-        else if ($percent >= 50 && $percent <= 62)
+        else if ($percent >= 45 && $percent <= 49)
             $char = '3-';
-        else if ($percent >= 1 && $percent <= 49)
+        else if ($percent >= 30 && $percent <= 44)
             $char = '2';
+        else if ($percent >= 1 && $percent <= 29)
+            $char = '2-';
         else
             $char = '1';
         return $char;
+    }
+
+    public function edit_mark($id, $data)
+    {
+        //dd($data['teacher_comment'],intval($data['teacher_mark']));
+        if ($err = $this->validate_mark($data)) {
+            return $err;
+        }
+        $entity = $this->find($id);
+
+        $entity->teacher_comment = $data['teacher_comment'];
+
+        if (!empty($data['teacher_mark'])) {
+            $entity->teacher_mark = $data['teacher_mark'];
+        }
+
+        $entity->save();
+        return $entity;
+    }
+
+    public function validate_mark($data)
+    {
+        $validator = Validator::make($data,
+            [
+                'teacher_comment' => 'required',
+                'teacher_mark' => 'integer|min:10|max:100',
+            ],
+            [
+                'teacher_comment.required' => 'Напишите пару слов',
+                'teacher_mark.integer' => 'Оценка должна быть целым числом',
+                'teacher_mark.min' => 'Оценка не должна быть меньше 1 процента',
+                'teacher_mark.max' => 'Оценка не должна быть больше 100 процентов',
+            ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
     }
 
 
