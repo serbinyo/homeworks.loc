@@ -25,7 +25,7 @@ class PassController extends UserController
             $tests_num = $tests->count();
             $tests_correct_num = $tests->where('correct_flag', 1)->count();
 
-            //Если не задана пустая работа. Ученик сдаваяполучает 100%
+            //Если задана пустая работа, ученик сдавая ее получает 100%
             if(($tasks_num + $tests_num) !== 0)
             {
                 $mark = ($tasks_correct_num + $tests_correct_num) / ($tasks_num + $tests_num) * 100;

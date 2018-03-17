@@ -70,7 +70,7 @@ class GivenTestController extends UserController
             return redirect('/desktop')->withErrors($message);
         }
 
-        if ($this->user->can('update', $test_to_update)
+        if ($this->user->can('update', [$test_to_update, $homework_to_solve])
             && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
             && ($date == $homework_to_solve->date_to_completion)
             && ($homework_id == $homework_to_solve->id)
@@ -105,7 +105,7 @@ class GivenTestController extends UserController
         $homework = new Homework();
         $homework_to_solve = $homework->getOne($homework_id);
 
-        if ($this->user->can('update', $test_to_update)
+        if ($this->user->can('update', [$test_to_update, $homework_to_solve])
             && ($discipline_id == $homework_to_solve->work->teacher->discipline_id)
             && ($date == $homework_to_solve->date_to_completion)
             && ($homework_id == $homework_to_solve->id)

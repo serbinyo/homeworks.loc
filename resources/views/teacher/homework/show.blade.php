@@ -168,9 +168,17 @@
                         'date' => $date,
                         'id' => $homework->id
                         ])]) !!}
-                        {!! Form::submit('Удалить', ['class'=>'']) !!}
+                        {!! Form::submit('Удалить домашнее задание', ['class'=>'']) !!}
                         {{method_field('DELETE')}}
-                        {!! Form::close() !!}
+                        {!! Form::close() !!}<br>
+
+                        <a href="{{route('homework.edit', [
+                            'grade_id' => $grade_id,
+                            'date' => $date,
+                            'id' => $homework->id
+                            ])}}">
+                            Исправить оценку
+                        </a>
                     </div>
                 </div>
             </div>

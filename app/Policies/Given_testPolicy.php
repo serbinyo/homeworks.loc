@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Homework;
 use App\User;
 use App\Given_test;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -38,11 +39,21 @@ class Given_testPolicy
      *
      * @param  \App\User  $user
      * @param  \App\Given_test  $givenTest
+     * @param  \App\Homework  $homework
      * @return mixed
      */
-    public function update(User $user, Given_test $givenTest)
+    public function update(User $user, Given_test $givenTest, Homework $homework)
     {
-        return $user->schoolkid->id === $givenTest->homework->schoolkid_id;
+        if ($homework->computer_mark) {
+            $pass = false;
+        } else {
+            ($homework->teacher_mark) ? $pass = false : $pass = true;
+        }
+        return (
+            ($user->schoolkid->id === $givenTest->homework->schoolkid_id)
+            &&
+            ($pass)
+        );
     }
 
     /**
