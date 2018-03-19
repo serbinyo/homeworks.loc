@@ -120,7 +120,6 @@ class Homework extends Model
 
     public function edit_mark($id, $data)
     {
-        //dd($data['teacher_comment'],intval($data['teacher_mark']));
         if ($err = $this->validate_mark($data)) {
             return $err;
         }
@@ -153,6 +152,18 @@ class Homework extends Model
         if ($validator->fails()) {
             return ['errors' => $validator->errors()];
         }
+    }
+
+    public function clear_marks($id)
+    {
+        $entity = $this->find($id);
+
+        $entity->computer_mark = NULL;
+        $entity->teacher_comment = NULL;
+        $entity->teacher_mark = NULL;
+
+        $entity->save();
+        return $entity;
     }
 
 

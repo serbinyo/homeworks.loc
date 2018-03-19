@@ -16,9 +16,9 @@
                         @endif
 
                         <a href="/desktop">Рабочий стол</a> >>
-                        <a href="/homeworks"> Выбор предмета </a> >>
-                        <a href="{{route('showUsrDates', $discipline_id)}}"> Даты </a> >>
-                        <a href="{{route('showHomeworks', [$discipline_id, $date])}}"> Задания </a> >>
+                        <a href="/homeworks"> Предмет </a> >>
+                        <a href="{{route('showUsrDates', $discipline_id)}}"> Дата </a> >>
+                        <a href="{{route('showHomeworks', [$discipline_id, $date])}}"> Задание </a> >>
                         Просмотр
                         <hr>
 
@@ -92,6 +92,21 @@
                             {!! Form::close() !!}
 
                         @else
+                            <p class="works_show_blok_title">
+                                Оценка: {{$homework->computer_mark}} <br>
+                                Дата выполнения: {{$homework->date_of_completion}}
+                            </p>
+                            <hr>
+                            @if (!empty($homework->teacher_mark))
+                                <p class="works_show_blok_title">
+                                    Оценка учителя: {{$homework->teacher_mark}}
+                                    (Имеет больший приоретет)<br>
+                                    Причина изменения оценки:<br>
+                                    {!! nl2br($homework->teacher_comment) !!}
+                                </p>
+                                <hr>
+                            @endif
+
                             @if (!empty($homework_content['given_tasks']))
                                 <p class="works_show_blok_title">Задачи:</p>
                                 <hr>
@@ -124,21 +139,6 @@
                                     <hr>
                                 @endforeach
                             @endif
-                            <p class="works_show_blok_title">
-                                Оценка: {{$homework->computer_mark}} <br>
-                                Дата выполнения: {{$homework->date_of_completion}}
-                            </p>
-                            <hr>
-
-                            @if (!empty($homework->teacher_mark))
-                                <p class="works_show_blok_title">
-                                    Оценка учителя: {{$homework->teacher_mark}}
-                                    (Имеет больший приоретет)<br>
-                                    Причина изменения оценки:<br>
-                                    {!! nl2br($homework->teacher_comment) !!}
-                                </p>
-                            @endif
-                            <hr>
 
                         @endif
                         @if (!empty($homework_content['materials']))

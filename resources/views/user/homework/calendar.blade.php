@@ -16,8 +16,8 @@
                         @include('common.errors')
 
                         <a href="/desktop">Рабочий стол</a> >>
-                        <a href="/homeworks"> Выбор предмета </a> >>
-                        Даты
+                        <a href="/homeworks"> Предмет </a> >>
+                        Дата
                         <br>
                         <hr>
 

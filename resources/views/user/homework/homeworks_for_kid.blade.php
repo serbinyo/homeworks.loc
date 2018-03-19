@@ -16,9 +16,9 @@
                         @include('common.errors')
 
                         <a href="/desktop">Рабочий стол</a> >>
-                        <a href="/homeworks"> Выбор предмета </a> >>
-                        <a href="{{route('showUsrDates', $discipline_id)}}"> Даты </a> >>
-                        Задания
+                        <a href="/homeworks"> Предмет </a> >>
+                        <a href="{{route('showUsrDates', $discipline_id)}}"> Дата </a> >>
+                        Задание
                         <br>
                         <hr>
 
@@ -31,8 +31,11 @@
                             'date' => $date,
                             'id' => $homework->id
                             ])}}">
-                                Домашнее задание {{$i++}}<br>
+                                Домашнее задание {{$i++}}
                             </a>
+                            @if ($homework->computer_mark)
+                                &#10004;
+                            @endif
                             <hr>
                         @endforeach
 

@@ -39,7 +39,9 @@
                                 {{$homework->work_id}}
                             </a>
                             )
-
+                            @if ($homework->computer_mark)
+                                &#10004;
+                            @endif
                             <hr>
                         @endforeach
 

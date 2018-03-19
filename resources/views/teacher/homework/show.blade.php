@@ -107,8 +107,9 @@
                                     Причина изменения оценки:<br>
                                     {!! nl2br($homework->teacher_comment) !!}
                                 </p>
+                                <hr>
                             @endif
-                            <hr>
+
 
                             @if (!empty($homework_content['given_tasks']))
                                 <p class="works_show_blok_title">Задачи:</p>
@@ -176,9 +177,17 @@
                                 Исправить оценку
                             </a>
                             <hr>
+
+                            {!! Form::open(['url'=>route('toRePass')]) !!}
+                            {!! Form::hidden('grade_id', $grade_id) !!}
+                            {!! Form::hidden('date', $date) !!}
+                            {!! Form::hidden('homework_id', $homework->id) !!}
+                            {!! Form::submit('На пересдачу', ['class'=>'']) !!}
+                            {!! Form::close() !!}
+                            <hr>
                         @endif
 
-                        Дата создания: {{ $homework->created_at }}<br><br>
+
 
                         {!! Form::open(['url'=>route('homework.destroy', [
                         'grade_id' => $grade_id,
@@ -187,7 +196,10 @@
                         ])]) !!}
                         {!! Form::submit('Удалить домашнее задание', ['class'=>'']) !!}
                         {{method_field('DELETE')}}
-                        {!! Form::close() !!}<br>
+                        {!! Form::close() !!}
+                        <hr>
+
+                        Дата создания: {{ $homework->created_at }}
 
 
                     </div>

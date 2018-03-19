@@ -20,8 +20,9 @@
                         <a href="/teacher/homeworks"> Выбор класса </a> >>
                         <a href="{{route('showTcrDates', $grade_id)}}"> Даты </a> >>
                         <a href="{{route('showHwKids', [$grade_id, $date])}}"> Задания </a> >>
-                        Просмотр
-                        <br>
+                        <a href="{{route('homework.show', [$grade_id, $date, $homework->id])}}"> Просмотр </a> >>
+                        Исправить оценку
+
                         <hr>
 
 

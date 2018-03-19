@@ -36,6 +36,17 @@ class UsrChoiceController extends UserController
         $homework = new Homework();
         $homeworks_to_show = $homework->getByDateForKid($this->user->schoolkid->id, $discipline_id, $date);
 
+        if ($homeworks_to_show->count() === 1) {
+            $homework_to_show = $homeworks_to_show->first();
+            $date = $homework_to_show->date_to_completion;
+            return redirect(route('hometask.show', [
+                'discipline_id' => $discipline_id,
+                'date' => $date,
+                'id' => $homework_to_show->id,
+            ]));
+
+        };
+
         return view('user.homework.homeworks_for_kid', [
             'title' => 'Домашние задания',
             'discipline_id' => $discipline_id,

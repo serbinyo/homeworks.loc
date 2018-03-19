@@ -80,6 +80,8 @@ Route::resource('/teacher/works', 'Teacher\WorksController');
 
 Route::get('/teacher/homeworks', 'Teacher\Homework\TchrChoiceController@index');
 
+Route::post('/teacher/repass', 'Teacher\Homework\RePassController@repass')->name('toRePass');
+
 Route::get('/teacher/homeworks/{grade_id}', 'Teacher\Homework\TchrChoiceController@show_dates')->name('showTcrDates');
 
 Route::get('/teacher/homeworks/{grade_id}/{date}', 'Teacher\Homework\TchrChoiceController@show_homeworks')->name('showHwKids');
