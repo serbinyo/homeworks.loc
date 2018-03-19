@@ -8,7 +8,7 @@ class Discipline extends Model
 {
     public function getAll()
     {
-        return $this->get();
+        return $this->orderBy('name')->get();
     }
 
     public function getOne($id)

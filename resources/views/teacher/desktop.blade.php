@@ -33,8 +33,7 @@
                         <a href="{{ route('account.show', $teacher->id) }}">Профайл</a><br>
                         <a href="/teacher/lists">Списки</a><br><br>
 
-                        <a href="/teacher/register">Зарегистрировать учителя</a><br>
-                        <a href="/teacher/register/user">Зареистрировать ученика</a>
+
                     </div>
                 </div>
             </div>

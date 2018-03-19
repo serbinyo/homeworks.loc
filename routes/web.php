@@ -110,8 +110,15 @@ Route::post('/teacher/account/change_password', 'Teacher\ChangePasswordControlle
 
 Route::resource('/teacher/account', 'Teacher\AccountController');
 
+
+//ADMIN
+
+Route::get('/admin', 'Admin\DesktopController@index');
+
 // Register
 
-Route::get('/teacher/register', 'Teacher\TeacheRegController@index');
+Route::get('/admin/register', 'Admin\TeacheRegController@index');
 
-Route::get('/teacher/register/user', 'Teacher\UseRegController@index');
+Route::get('/admin/register/user', 'Admin\UseRegController@index');
+
+Route::get('/admin/register/redirect-to-main-page-after-registration', 'Admin\InfoPagesController@afterReg');

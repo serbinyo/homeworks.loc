@@ -60,10 +60,13 @@
                             Учитель
                             {{ $user->teacher->lastname }}
                             {{ $user->teacher->firstname }}
-                        @else
+                        @elseif ($user->role == 's')
                             Учащийся
                             {{ $user->schoolkid->lastname }}
                             {{ $user->schoolkid->firstname }}
+                        @elseif ($user->role == 'a')
+                            Администратор
+                            {{$user->login}}
                         @endif
                     </div>
 
@@ -72,10 +75,11 @@
                         <tr>
                             <td>
                                 @if ($user->role == 't')
-                                    <a href="/teacher" style="text-decoration: none" class="enter_button">В
-                                        учительскую</a>
-                                @else
+                                    <a href="/teacher" style="text-decoration: none" class="enter_button">В учительскую</a>
+                                @elseif ($user->role == 's')
                                     <a href="/desktop" style="text-decoration: none" class="enter_button">За уроки</a>
+                                @elseif ($user->role == 'a')
+                                    <a href="/admin" style="text-decoration: none" class="enter_button">Войти</a>
                                 @endif
                             </td>
                             <td>

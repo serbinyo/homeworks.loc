@@ -28,7 +28,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/teacher';
+    protected $redirectTo = '/admin/register/redirect-to-main-page-after-registration';
+
+//    protected function redirectTo()
+//    {
+//        //
+//    }
 
     /**
      * Create a new controller instance.

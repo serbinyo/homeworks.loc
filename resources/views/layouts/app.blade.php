@@ -69,10 +69,13 @@
                                         {{ Auth::user()->teacher->discipline->name }}
                                         {{ Auth::user()->teacher->lastname }}
                                         {{ Auth::user()->teacher->firstname }}
-                                    @else
+                                    @elseif (Auth::user()->role == 's')
                                         Учащийся
                                         {{ Auth::user()->schoolkid->lastname }}
                                         {{ Auth::user()->schoolkid->firstname }}
+                                    @elseif (Auth::user()->role == 'a')
+                                        Администратор
+                                        {{Auth::user()->login}}
                                     @endif
                                     <span class="caret"></span>
                                 </a>

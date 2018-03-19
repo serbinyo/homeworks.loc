@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
-class TeacherController extends Controller
+class AdminController extends Controller
 {
     protected $user;
 
@@ -18,7 +18,7 @@ class TeacherController extends Controller
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
                 $this->user = Auth::user();
-                if (Auth::user()->role == 't') {
+                if (Auth::user()->role == 'a') {
                     return $next($request);
                 } else {
                     return redirect('/');
@@ -26,7 +26,6 @@ class TeacherController extends Controller
             } else {
                 return redirect('login');
             }
-
         });
     }
 }
