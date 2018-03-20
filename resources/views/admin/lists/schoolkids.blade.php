@@ -14,8 +14,8 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/lists">Списки</a> >>
+                        <a href="/admin">Рабочий стол</a> >>
+                        <a href="/admin/lists">Списки</a> >>
                         Учащиеся
                         <hr>
                         <br>
@@ -26,7 +26,7 @@
                             {{$schoolkid->firstname}}
                             {{$schoolkid->middlename}},
                             Класс:
-                            <a href="{{route('gradeShow', $schoolkid->grade->id)}}">
+                            <a href="{{route('/teacher/lists/grades/{id}', $schoolkid->grade->id)}}">
                                 {{$schoolkid->grade->num}}
                                 -
                                 {{$schoolkid->grade->char}}

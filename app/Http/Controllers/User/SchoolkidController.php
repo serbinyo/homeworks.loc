@@ -13,13 +13,9 @@ class SchoolkidController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Schoolkid $schoolkid)
+    public function index()
     {
-        $schoolkids = $schoolkid->orderBy('lastname')->paginate(3);
-        return view('teacher.lists.schoolkids', [
-            'title' => 'ЭДЗ. Классы',
-            'schoolkids' => $schoolkids
-        ]);
+        echo __METHOD__;
     }
 
     /**
@@ -27,7 +23,7 @@ class SchoolkidController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         echo __METHOD__;
     }

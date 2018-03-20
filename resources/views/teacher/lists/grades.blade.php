@@ -20,7 +20,7 @@
                         Классы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('gradeView'),
+                        {!! Form::open(['url'=>route('gradeShowGet'),
                         'class'=>'form-horizontal',
                         'method' => 'GET'])
                         !!}

@@ -93,17 +93,24 @@ Route::resource('/teacher/homeworks/{grade_id}/{date}/homework', 'Teacher\Homewo
 
 Route::get('/teacher/lists', 'Teacher\ListsController@index');
 
-Route::get('/teacher/lists/grades/view', 'Teacher\GradeController@view_by_get')->name('gradeView');
+Route::get('/teacher/lists/grades', 'Teacher\ListsController@grade_list');
 
-Route::resource('/teacher/lists/grades', 'Teacher\GradeController');
+Route::get('/teacher/lists/grades/view', 'Teacher\ListsController@grade_show_by_get')->name('gradeShowGet');
 
-Route::get('/teacher/lists/disciplines/view', 'Teacher\DisciplineController@view_by_get')->name('disciplineView');
+Route::get('/teacher/lists/grades/{id}', 'Teacher\ListsController@grade_show')->name('gradeShow');
 
-Route::resource('/teacher/lists/disciplines', 'Teacher\DisciplineController');
+Route::get('/teacher/lists/disciplines', 'Teacher\ListsController@discipline_list');
 
-Route::resource('/teacher/lists/schoolkids', 'Teacher\SchoolkidController');
+Route::get('/teacher/lists/disciplines/view', 'Teacher\ListsController@discipline_show_by_get')->name('disciplineShowGet');
 
-Route::resource('/teacher/lists/teachers', 'Teacher\AccountController');
+Route::get('/teacher/lists/disciplines/{id}', 'Teacher\ListsController@discipline_show')->name('disciplineShow');
+
+Route::get('/teacher/lists/schoolkids', 'Teacher\ListsController@schoolkid_list');
+
+Route::get('/teacher/lists/teachers', 'Teacher\ListsController@teacher_list');
+
+
+//Teacher Account
 
 Route::get('/teacher/account/change_password', 'Teacher\ChangePasswordController@index');
 
@@ -126,10 +133,24 @@ Route::get('/admin/register/redirect-to-main-page-after-registration', 'Admin\In
 
 // Create
 
-Route::get('/admin/add/grade', 'Admin\AdminGradeController@create');
+Route::resource('/admin/add/grade', 'Admin\GradeController');
 
-Route::post('/admin/add/grade', 'Admin\AdminGradeController@store')->name('storeGrade');
+Route::resource('/admin/add/discipline', 'Admin\DisciplineController');
 
-Route::get('/admin/add/discipline', 'Admin\AdminDisciplineController@create');
+// Admin Lists
 
-Route::post('/admin/add/discipline', 'Admin\AdminDisciplineController@store')->name('storeDiscipline');
+//Route::get('/admin/admin_lists', 'Teacher\AdminListsController@index');
+//
+//Route::get('/admin/lists/admin_grades/view', 'Teacher\AdminGradeController@view_by_get')->name('AdminGradeView');
+//
+//Route::resource('/admin/lists/admin_grades', 'Teacher\AdminGradeController');
+//
+//Route::get('/admin/lists/admin_disciplines/view', 'Teacher\AdminDisciplineController@view_by_get')->name('AdminDisciplineView');
+//
+//Route::resource('/admin/lists/admin_disciplines', 'Teacher\AdminDisciplineController');
+//
+//Route::resource('/admin/lists/admin_schoolkids', 'Teacher\AdminSchoolkidController');
+//
+//Route::resource('/admin/lists/admin_teachers', 'Teacher\AdminAccountController');
+//
+//Route::resource('/admin/admin_account', 'Teacher\AdminAccountController');

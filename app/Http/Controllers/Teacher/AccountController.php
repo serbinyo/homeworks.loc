@@ -19,13 +19,9 @@ class AccountController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Teacher $teacher)
+    public function index()
     {
-        $teachers = $teacher->orderBy('lastname')->paginate(5);
-        return view('teacher.lists.teachers', [
-            'title' => 'ЭДЗ. Классы',
-            'teachers' => $teachers
-        ]);
+        echo __METHOD__;
     }
 
     /**

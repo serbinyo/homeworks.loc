@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Предметы</div>
+                    <div class="panel-heading">Классы</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,26 +13,29 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/lists">Списки</a> >>
-                        Предметы
+                        <a href="/admin">Рабочий стол</a> >>
+                        <a href="/admin/lists">Списки</a> >>
+                        Классы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('disciplineShowGet'),
+                        {!! Form::open(['url'=>route('gradeView'),
                         'class'=>'form-horizontal',
                         'method' => 'GET'])
                         !!}
 
                         <div class="form-group">
-                            <label for="discipline_id" class="col-md-4 control-label">Дисциплина</label>
+                            <label for="grade_id" class="col-md-4 control-label">Класс</label>
 
                             <div class="col-md-6">
-                                <select name="discipline_id" class="form-control" id="discipline_id" required>
-                                    <option selected="selected" value="">Выберите предмет...</option>
-                                    @foreach($disciplines as $discipline)
-                                        <option value={{$discipline->id}} >
-                                            {{$discipline->name}}
+                                <select name="grade_id" class="form-control" id="grade_id" required>
+                                    <option selected="selected" value="">Выберите класс...</option>
+                                    @foreach($grades as $grade)
+                                        <option value={{$grade->id}} >
+                                            {{$grade->num}}
+                                            -
+                                            {{$grade->char}}
                                         </option>
                                     @endforeach
                                 </select>

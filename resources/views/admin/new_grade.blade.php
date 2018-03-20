@@ -26,7 +26,7 @@
                         Добавление класса
                         <br><br>
 
-                        <form class="form-horizontal" method="POST" action="{{ route('storeGrade') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('grade.store') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('num') ? ' has-error' : '' }}">

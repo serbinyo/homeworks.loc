@@ -18,7 +18,7 @@
                         Добавление предмета
                         <br><br>
 
-                        <form class="form-horizontal" method="POST" action="{{ route('storeDiscipline') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('discipline.store') }}">
                             {{ csrf_field() }}
 
 

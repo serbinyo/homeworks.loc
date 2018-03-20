@@ -14,12 +14,12 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/lists">Списки</a> >>
+                        <a href="/admin">Рабочий стол</a> >>
+                        <a href="/admin/lists">Списки</a> >>
                         Предметы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('disciplineShowGet'),
+                        {!! Form::open(['url'=>route('disciplineView'),
                         'class'=>'form-horizontal',
                         'method' => 'GET'])
                         !!}
