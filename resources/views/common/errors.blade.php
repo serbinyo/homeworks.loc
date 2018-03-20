@@ -1,7 +1,5 @@
 @if(count($errors) > 0)
-
     <div class="alert alert-danger">
-
         <div class="message js-form-message">
             <ul>
                 @foreach($errors->all() as $error)
@@ -11,7 +9,5 @@
                 @endforeach
             </ul>
         </div>
-
     </div>
-
 @endif

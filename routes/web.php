@@ -66,6 +66,7 @@ Route::post('/teacher/set/material', 'Teacher\Set\SetMaterialController')->name(
 
 Route::post('/teacher/unset/material/', 'Teacher\Set\UnsetMaterialController')->name('unsetMaterial');
 
+// For works
 
 Route::resource('/teacher/tasks', 'Teacher\TaskController');
 
@@ -122,3 +123,13 @@ Route::get('/admin/register', 'Admin\TeacheRegController@index');
 Route::get('/admin/register/user', 'Admin\UseRegController@index');
 
 Route::get('/admin/register/redirect-to-main-page-after-registration', 'Admin\InfoPagesController@afterReg');
+
+// Create
+
+Route::get('/admin/add/grade', 'Admin\AdminGradeController@create');
+
+Route::post('/admin/add/grade', 'Admin\AdminGradeController@store')->name('storeGrade');
+
+Route::get('/admin/add/discipline', 'Admin\AdminDisciplineController@create');
+
+Route::post('/admin/add/discipline', 'Admin\AdminDisciplineController@store')->name('storeDiscipline');

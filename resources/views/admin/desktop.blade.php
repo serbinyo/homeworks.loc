@@ -15,8 +15,11 @@
                         @endif
                         @include('common.errors')
 
+                        <a href="/admin/add/discipline">Добавить предмет</a><br>
+                        <a href="/admin/add/grade">Добавить класс</a><br>
                         <a href="/admin/register">Зарегистрировать учителя</a><br>
-                        <a href="/admin/register/user">Зареистрировать ученика</a>
+                        <a href="/admin/register/user">Зареистрировать ученика</a><br>
+
 
                     </div>
                 </div>

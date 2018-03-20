@@ -27,7 +27,7 @@ class DisciplineController extends TeacherController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         echo __METHOD__;
     }
