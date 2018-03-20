@@ -26,7 +26,7 @@
                             {{$schoolkid->firstname}}
                             {{$schoolkid->middlename}},
                             Класс:
-                            <a href="{{route('/teacher/lists/grades/{id}', $schoolkid->grade->id)}}">
+                            <a href="{{route('AdminGradeShow', $schoolkid->grade->id)}}">
                                 {{$schoolkid->grade->num}}
                                 -
                                 {{$schoolkid->grade->char}}

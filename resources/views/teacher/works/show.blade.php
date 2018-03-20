@@ -21,18 +21,18 @@
                         Просмотр работы
                         <br><br>
 
-                        <p class="works_show_blok_title">Работа № : {{ $work->id }}<br>
+                        <p class="works_show_block_title">Работа № : {{ $work->id }}<br>
                             Тема: {{$work->theme}}<br>
                             Создал: {{$author_fio}}</p>
                         <hr>
 
 
                         @if(empty($work_content['tasks']) && empty($work_content['tests']))
-                            <p class="works_show_blok_title">Автор не добавил заданий к этой работе</p>
+                            <p class="works_show_block_title">Автор не добавил заданий к этой работе</p>
                         @else
 
                             @if (!empty($work_content['tasks']))
-                                <p class="works_show_blok_title">Задачи:</p>
+                                <p class="works_show_block_title">Задачи:</p>
                                 <hr>
                                 @foreach($work_content['tasks'] as $task)
                                     <a href="{{route('tasks.show', ['id'=>$task->id])}}">
@@ -57,7 +57,7 @@
                             @endif
 
                             @if (!empty($work_content['tests']))
-                                <p class="works_show_blok_title">Тесты:</p>
+                                <p class="works_show_block_title">Тесты:</p>
                                 <hr>
                                 @foreach($work_content['tests'] as $test)
                                     <a href="{{route('tests.show', ['id'=>$test->id])}}">
@@ -86,7 +86,7 @@
                         @endif
 
                         @if (!empty($work_content['materials']))
-                            <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
+                            <p class="works_show_block_title">Дополнительные учебные материалы:</p>
                             <hr>
                             @foreach($work_content['materials'] as $material)
                                 <a href="{{route('materials.show', ['id'=>$material->id])}}">

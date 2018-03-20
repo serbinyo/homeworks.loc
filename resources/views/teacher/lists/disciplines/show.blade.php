@@ -24,7 +24,7 @@
                         <br><br>
 
                         @if(($teachers->count() === 0))
-                            <p class="works_show_blok_title">
+                            <p class="works_show_block_title">
                                 Учителей по предмету нет
                             </p>
                         @else

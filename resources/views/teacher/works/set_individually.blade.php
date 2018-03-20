@@ -65,7 +65,7 @@
                             {!! Form::open(['url'=>route('setIndividually')]) !!}
                             {!! Form::hidden('work_id', $work_id) !!}
 
-                            <p class="works_show_blok_title">
+                            <p class="works_show_block_title">
                                 Класс {{$grade->name}}<br>
                                 <a href="{{route('indexIndividually', ['id'=>$work_id])}}">
                                     Веруться к выбору класса

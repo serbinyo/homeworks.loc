@@ -139,6 +139,25 @@ Route::resource('/admin/add/discipline', 'Admin\DisciplineController');
 
 // Admin Lists
 
+Route::get('/admin/lists', 'Admin\ListsController@index');
+
+Route::get('/admin/lists/grades', 'Admin\ListsController@grade_list');
+
+Route::get('/admin/lists/grades/view', 'Admin\ListsController@grade_show_by_get')->name('AdminGradeShowGet');
+
+Route::get('/admin/lists/grades/{id}', 'Admin\ListsController@grade_show')->name('AdminGradeShow');
+
+Route::get('/admin/lists/disciplines', 'Admin\ListsController@discipline_list');
+
+Route::get('/admin/lists/disciplines/view', 'Admin\ListsController@discipline_show_by_get')->name('AdminDisciplineShowGet');
+
+Route::get('/admin/lists/disciplines/{id}', 'Admin\ListsController@discipline_show')->name('AdminDisciplineShow');
+
+Route::get('/admin/lists/schoolkids', 'Admin\ListsController@schoolkid_list');
+
+Route::get('/admin/lists/teachers', 'Admin\ListsController@teacher_list');
+
+
 //Route::get('/admin/admin_lists', 'Teacher\AdminListsController@index');
 //
 //Route::get('/admin/lists/admin_grades/view', 'Teacher\AdminGradeController@view_by_get')->name('AdminGradeView');

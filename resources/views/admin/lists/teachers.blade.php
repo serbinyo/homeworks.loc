@@ -26,7 +26,7 @@
                             {{$teacher->firstname}}
                             {{$teacher->middlename}},
                             Класс:
-                            <a href="{{route('disciplines.show', $teacher->discipline->id)}}">
+                            <a href="{{route('AdminDisciplineShow', $teacher->discipline->id)}}">
                                 {{$teacher->discipline->name}}
                             </a>,
                             Логин: {{$teacher->user->login}}

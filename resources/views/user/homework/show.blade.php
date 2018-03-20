@@ -22,7 +22,7 @@
                         Просмотр
                         <hr>
 
-                        <p class="works_show_blok_title">Домашнее задание по дисциплине:<br>
+                        <p class="works_show_block_title">Домашнее задание по дисциплине:<br>
                             {{ $homework->work->teacher->discipline->name }}<br>
                             Заданно на: {{$homework->date_to_completion}}<br>
                             {{$homework->schoolkid->grade->num}}
@@ -35,7 +35,7 @@
 
                         @if (!$homework->computer_mark)
                             @if (!empty($homework_content['given_tasks']))
-                                <p class="works_show_blok_title">Задачи:</p>
+                                <p class="works_show_block_title">Задачи:</p>
                                 <hr>
                                 @foreach($homework_content['given_tasks'] as $task)
                                     {!! nl2br($task->task)!!}<br>
@@ -57,7 +57,7 @@
                             @endif
 
                             @if (!empty($homework_content['given_tests']))
-                                <p class="works_show_blok_title">Тесты:</p>
+                                <p class="works_show_block_title">Тесты:</p>
                                 <hr>
                                 @foreach($homework_content['given_tests'] as $test)
                                     {!! nl2br($test->task) !!}<br>
@@ -92,13 +92,13 @@
                             {!! Form::close() !!}
 
                         @else
-                            <p class="works_show_blok_title">
+                            <p class="works_show_block_title">
                                 Оценка: {{$homework->computer_mark}} <br>
                                 Дата выполнения: {{$homework->date_of_completion}}
                             </p>
                             <hr>
                             @if (!empty($homework->teacher_mark))
-                                <p class="works_show_blok_title">
+                                <p class="works_show_block_title">
                                     Оценка учителя: {{$homework->teacher_mark}}
                                     (Имеет больший приоретет)<br>
                                     Причина изменения оценки:<br>
@@ -108,7 +108,7 @@
                             @endif
 
                             @if (!empty($homework_content['given_tasks']))
-                                <p class="works_show_blok_title">Задачи:</p>
+                                <p class="works_show_block_title">Задачи:</p>
                                 <hr>
                                 @foreach($homework_content['given_tasks'] as $task)
                                     {!! nl2br($task->task)!!}<br>
@@ -122,7 +122,7 @@
                             @endif
 
                             @if (!empty($homework_content['given_tests']))
-                                <p class="works_show_blok_title">Тесты:</p>
+                                <p class="works_show_block_title">Тесты:</p>
                                 <hr>
                                 @foreach($homework_content['given_tests'] as $test)
                                     {!! nl2br($test->task) !!}<br>
@@ -142,7 +142,7 @@
 
                         @endif
                         @if (!empty($homework_content['materials']))
-                            <p class="works_show_blok_title">Дополнительные учебные материалы:</p>
+                            <p class="works_show_block_title">Дополнительные учебные материалы:</p>
                             <hr>
                             @foreach($homework_content['materials'] as $material)
 

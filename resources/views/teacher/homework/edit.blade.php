@@ -26,7 +26,7 @@
                         <hr>
 
 
-                        <p class="works_show_blok_title">Домашнее задание № : {{ $homework->id }}<br>
+                        <p class="works_show_block_title">Домашнее задание № : {{ $homework->id }}<br>
                             <a href="{{route('works.show', ['id'=>$homework->work->id])}}">
                                 По работе № {{$homework->work->id}}
                             </a><br>
@@ -43,7 +43,7 @@
                         </p>
                         <hr>
                         @if (!empty($homework->teacher_mark))
-                            <p class="works_show_blok_title">
+                            <p class="works_show_block_title">
                                 Оценка учителя в процентах: {{$homework->teacher_mark}} %
                                 (Имеет больший приоретет)<br>
                                 Причина изменения оценки:<br>
@@ -54,7 +54,7 @@
 
 
                         @if (!empty($homework_content['given_tasks']))
-                            <p class="works_show_blok_title">Задачи:</p>
+                            <p class="works_show_block_title">Задачи:</p>
                             <hr>
                             @foreach($homework_content['given_tasks'] as $task)
                                 {!! nl2br($task->task)!!}<br><br>
@@ -74,7 +74,7 @@
                         @endif
 
                         @if (!empty($homework_content['given_tests']))
-                            <p class="works_show_blok_title">Тесты:</p>
+                            <p class="works_show_block_title">Тесты:</p>
                             <hr>
                             @foreach($homework_content['given_tests'] as $test)
                                 {!! nl2br($test->task) !!}<br>

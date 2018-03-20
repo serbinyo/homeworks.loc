@@ -19,7 +19,7 @@
                         Предметы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('disciplineView'),
+                        {!! Form::open(['url'=>route('AdminDisciplineShowGet'),
                         'class'=>'form-horizontal',
                         'method' => 'GET'])
                         !!}
