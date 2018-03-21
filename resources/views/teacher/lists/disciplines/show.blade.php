@@ -23,11 +23,6 @@
                         {{$discipline->name}}
                         <br><br>
 
-                        @if(($teachers->count() === 0))
-                            <p class="works_show_block_title">
-                                Учителей по предмету нет
-                            </p>
-                        @else
                             <? $i = 0 ?>
                             @foreach($teachers as $teacher)
 
@@ -38,7 +33,6 @@
                                 {{$teacher->middlename}}<br>
 
                             @endforeach
-                        @endif
 
 
                         <hr>

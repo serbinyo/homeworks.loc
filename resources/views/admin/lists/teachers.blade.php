@@ -13,6 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="/admin">Рабочий стол</a> >>
                         <a href="/admin/lists">Списки</a> >>

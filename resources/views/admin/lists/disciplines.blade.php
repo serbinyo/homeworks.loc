@@ -13,39 +13,28 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        @include('common.errors')
 
                         <a href="/admin">Рабочий стол</a> >>
                         <a href="/admin/lists">Списки</a> >>
                         Предметы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('AdminDisciplineShowGet'),
-                        'class'=>'form-horizontal',
-                        'method' => 'GET'])
-                        !!}
+                        @foreach($disciplines as $discipline)
+                            <a href="{{route('discipline.show', $discipline->id)}}">
+                                {{$discipline->name}}
+                            </a>
+                            <br>
+                            <a href="{{route('discipline.edit', ['id'=>$discipline->id])}}">Изменить</a><br>
 
-                        <div class="form-group">
-                            <label for="discipline_id" class="col-md-4 control-label">Дисциплина</label>
+                            {!! Form::open(['url'=>route('discipline.destroy', ['id'=>$discipline->id])]) !!}
+                            {!! Form::submit('Удалить', ['class'=>'']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
 
-                            <div class="col-md-6">
-                                <select name="discipline_id" class="form-control" id="discipline_id" required>
-                                    <option selected="selected" value="">Выберите предмет...</option>
-                                    @foreach($disciplines as $discipline)
-                                        <option value={{$discipline->id}} >
-                                            {{$discipline->name}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Выбрать', ['class'=>'btn btn-primary']) !!}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}<br>
-
+                            <hr>
+                        @endforeach
+                        {{$disciplines->links()}}
 
                     </div>
                 </div>

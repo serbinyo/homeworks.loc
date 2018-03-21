@@ -20,35 +20,24 @@
                         Классы
                         <br><br>
 
-                        {!! Form::open(['url'=>route('AdminGradeShowGet'),
-                        'class'=>'form-horizontal',
-                        'method' => 'GET'])
-                        !!}
 
-                        <div class="form-group">
-                            <label for="grade_id" class="col-md-4 control-label">Класс</label>
+                        @foreach($grades as $grade)
+                            <a href="{{route('grade.show', $grade->id)}}">
+                                {{$grade->num}}
+                                -
+                                {{$grade->char}}
+                            </a>
+                            <br>
+                            <a href="{{route('grade.edit', ['id'=>$grade->id])}}">Изменить</a><br>
 
-                            <div class="col-md-6">
-                                <select name="grade_id" class="form-control" id="grade_id" required>
-                                    <option selected="selected" value="">Выберите класс...</option>
-                                    @foreach($grades as $grade)
-                                        <option value={{$grade->id}} >
-                                            {{$grade->num}}
-                                            -
-                                            {{$grade->char}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                            {!! Form::open(['url'=>route('grade.destroy', ['id'=>$grade->id])]) !!}
+                            {!! Form::submit('Удалить', ['class'=>'']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit('Выбрать', ['class'=>'btn btn-primary']) !!}
-                            </div>
-                        </div>
-                        {!! Form::close() !!}<br>
-
+                            <hr>
+                        @endforeach
+                        {{$grades->links()}}
 
                     </div>
                 </div>

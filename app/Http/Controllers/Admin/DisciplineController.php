@@ -57,7 +57,20 @@ class DisciplineController extends AdminController
      */
     public function show($id)
     {
-        echo __METHOD__;
+        $discipline = new Discipline();
+        $discipline_to_show = $discipline->getOne($id);
+        $teachers = $discipline_to_show->teachers()->orderBy('lastname')->get();
+
+        $allTeachers = $teachers->count();
+        if ($allTeachers === 0) {
+            $message = 'Учителей по предмету нет';
+            return back()->withErrors($message);
+        }
+        return view('admin.disciplines.show', [
+            'title' => $discipline_to_show->name,
+            'discipline' => $discipline_to_show,
+            'teachers' => $teachers
+        ]);
     }
 
     /**

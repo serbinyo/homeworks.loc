@@ -23,9 +23,9 @@ class Discipline extends Model
         return $this->find($id);
     }
 
-    public function showAll()
+    public function getAllPaginated($num)
     {
-        $entities = $this->orderBy('id')->paginate(10);
+        $entities = $this->orderBy('name')->paginate($num);
         return $entities;
     }
 

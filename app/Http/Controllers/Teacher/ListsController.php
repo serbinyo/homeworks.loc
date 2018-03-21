@@ -116,6 +116,12 @@ class ListsController extends TeacherController
         $discipline_to_show = $discipline->getOne($data['discipline_id']);
         $teachers = $discipline_to_show->teachers()->orderBy('lastname')->get();
 
+        $allTeachers = $teachers->count();
+        if ($allTeachers === 0) {
+            $message = 'Учителей по предмету нет';
+            return back()->withErrors($message);
+        }
+
         return view('teacher.lists.disciplines.show', [
             'title' => $discipline_to_show->name,
             'discipline' => $discipline_to_show,
@@ -134,6 +140,12 @@ class ListsController extends TeacherController
         $discipline = new Discipline();
         $discipline_to_show = $discipline->getOne($id);
         $teachers = $discipline_to_show->teachers()->orderBy('lastname')->get();
+
+        $allTeachers = $teachers->count();
+        if ($allTeachers === 0) {
+            $message = 'Учителей по предмету нет';
+            return back()->withErrors($message);
+        }
 
         return view('teacher.lists.disciplines.show', [
             'title' => $discipline_to_show->name,

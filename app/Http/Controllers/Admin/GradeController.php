@@ -58,7 +58,19 @@ class GradeController extends AdminController
      */
     public function show($id)
     {
-        echo __METHOD__;
+        $grade = new Grade();
+        $grade_to_show = $grade->getOne($id);
+        $allKids = $grade_to_show->schoolkids->count();
+        if ($allKids === 0) {
+            $message = 'В классе нет учеников';
+            return back()->withErrors($message);
+        }
+        $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
+        return view('admin.grades.show', [
+            'title' => 'Класс',
+            'grade' => $grade_to_show,
+            'schoolkids' => $schoolkids
+        ]);
     }
 
     /**
@@ -69,7 +81,12 @@ class GradeController extends AdminController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $grade = new Grade();
+        $grade_to_update = $grade->getOne($id);
+        return view('admin.grades.edit', [
+            'title' => 'Редактирование класса',
+            'grade' => $grade_to_update
+        ]);
     }
 
     /**
@@ -81,7 +98,19 @@ class GradeController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+        $grade = new Grade();
+
+        $response = $grade->edit($id, $data);
+
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+
+        $num = $response->num;
+        $char = $response->char;
+        $message = $num . ' - ' . $char . ' класс - данные обновлены';
+        return back()->with('status', $message);
     }
 
     /**
@@ -92,7 +121,20 @@ class GradeController extends AdminController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $grade = new Grade();
+        $grade_to_delete = $grade->getOne($id);
+        $allKids = $grade_to_delete->schoolkids->count();
+        if ($allKids === 0) {
+            $num = $grade_to_delete->num;
+            $char = $grade_to_delete->char;
+            $grade->kill($id);
+            $message = 'Класс ' . $num . ' - ' . $char . ' удален';
+            return redirect('/admin/lists/grades/')->withErrors($message);
+        }
+        $message = 'Вы не можете удалить из системы класс, в котором есть ученики. 
+        Обратитесь к системному администратору';
+        return back()->withErrors($message);
+
+
     }
 }

@@ -13,9 +13,19 @@ class Grade extends Model
 
     public $timestamps = false;
 
+    public function getOne($id)
+    {
+        return $this->find($id);
+    }
+
     public function getAll()
     {
         return $this->orderBy('num')->orderBy('char')->get();
+    }
+
+    public function getAllPaginated($num)
+    {
+        return $this->orderBy('num')->orderBy('char')->paginate($num);
     }
 
     public function getTeacherGrades($teacher_id)
@@ -33,19 +43,19 @@ class Grade extends Model
         return $entities;
     }
 
-    public function getOne($id)
-    {
-        return $this->find($id);
-    }
-
-    public function showAll()
-    {
-        return $this->orderBy('num')->orderBy('char')->paginate(10);
-    }
-
     public function store($data)
     {
+
         $data['char'] = mb_strtoupper($data['char']);
+
+        if ($this
+            ->where('num', '=', $data['num'])
+            ->where('char', '=', $data['char'])
+            ->first()) {
+            return ['errors' => [
+                'duplicated' => $data['num'] . ' - ' . $data['char'] . ' класс уже есть в списке']
+            ];
+        };
 
         if ($err = $this->validate($data)) {
             return $err;
@@ -61,17 +71,32 @@ class Grade extends Model
         return $this;
     }
 
+    public function edit($id, $data)
+    {
+        $data['char'] = mb_strtoupper($data['char']);
+
+        if ($err = $this->validate($data)) {
+            return $err;
+        }
+
+        $entity = $this->find($id);
+
+        $entity->num = $data['num'];
+        $entity->char = $data['char'];
+        $entity->description = $data['description'];
+
+        $entity->save();
+        return $entity;
+    }
+
+    public function kill($id)
+    {
+        $entity = $this->find($id);
+        return $entity->delete();
+    }
+
     public function validate($data)
     {
-        if ($this
-            ->where('num', '=', $data['num'])
-            ->where('char', '=', $data['char'])
-            ->first()) {
-            return ['errors' => [
-                'duplicated' => $data['num'] . ' - ' . $data['char'] . ' класс уже есть в списке']
-            ];
-        };
-
         $validator = Validator::make($data,
             [
                 'num' => 'required|numeric',

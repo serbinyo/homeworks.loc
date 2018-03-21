@@ -93,6 +93,8 @@
                             </div>
                         </div>
 
+                        <br>
+                            
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Обновить данные', ['class' => 'btn btn-primary']) !!}
@@ -105,12 +107,12 @@
 
                         {!! Form::close() !!}
 
-                        <br><br>
 
-                        {!! Form::open(['url'=>route('account.destroy', $teacher->id), 'class'=>'center']) !!}
-                        {!! Form::submit('Удалить учетную запись') !!}
-                        {{method_field('DELETE')}}
-                        {!! Form::close() !!}
+
+                        {{--{!! Form::open(['url'=>route('account.destroy', $teacher->id), 'class'=>'center']) !!}--}}
+                        {{--{!! Form::submit('Удалить учетную запись') !!}--}}
+                        {{--{{method_field('DELETE')}}--}}
+                        {{--{!! Form::close() !!}--}}
 
                     </div>
                 </div>

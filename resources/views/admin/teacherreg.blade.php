@@ -14,14 +14,14 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
+                        <a href="/admin">Рабочий стол</a> >>
                         Регистрация учителя
                         <br><br>
 
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
-                            {{-- indicate the role 's' - schoolkid 't' - teacher --}}
+                            {{-- indicate the role 's' - schoolkid, 't' - teacher, 'a' - admin --}}
                             {!! Form::hidden('role', 't') !!}
 
                             <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
