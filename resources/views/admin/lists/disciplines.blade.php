@@ -21,17 +21,21 @@
                         <br><br>
 
                         @foreach($disciplines as $discipline)
-                            <a href="{{route('discipline.show', $discipline->id)}}">
-                                {{$discipline->name}}
-                            </a>
-                            <br>
-                            <a href="{{route('discipline.edit', ['id'=>$discipline->id])}}">Изменить</a><br>
+                            <div>
+                                <a href="{{route('discipline.show', $discipline->id)}}" class="th-float">
+                                    {{$discipline->name}}
+                                </a>
 
-                            {!! Form::open(['url'=>route('discipline.destroy', ['id'=>$discipline->id])]) !!}
-                            {!! Form::submit('Удалить', ['class'=>'']) !!}
-                            {{method_field('DELETE')}}
-                            {!! Form::close() !!}
+                                <a href="{{route('discipline.edit', ['id'=>$discipline->id])}}">
+                                    <div class="ico_edit"></div>
+                                </a>
 
+                                {!! Form::open(['url'=>route('discipline.destroy', ['id'=>$discipline->id])]) !!}
+                                {!! Form::submit('', ['class'=>'ico_delete']) !!}
+                                {{method_field('DELETE')}}
+                                {!! Form::close() !!}
+                            </div>
+                            <div style="clear: both"></div>
                             <hr>
                         @endforeach
                         {{$disciplines->links()}}

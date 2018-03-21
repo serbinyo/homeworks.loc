@@ -25,7 +25,7 @@ class GradeController extends AdminController
      */
     public function create()
     {
-        return view('admin.new_grade', ['title' => 'ЭДЗ. Новый класс']);
+        return view('admin.grades.create', ['title' => 'ЭДЗ. Новый класс']);
     }
 
     /**

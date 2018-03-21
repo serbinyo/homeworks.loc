@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Validator;
 
 class Discipline extends Model
@@ -44,13 +45,28 @@ class Discipline extends Model
         return $this;
     }
 
+    public function edit($id, $data)
+    {
+        if ($err = $this->validate($data)) {
+            return $err;
+        }
+
+        $entity = $this->find($id);
+
+        $entity->name = $data['name'];
+        $entity->description = $data['description'];
+
+        $entity->save();
+        return $entity;
+    }
+
     public function validate($data)
     {
         $validator = Validator::make($data,
             [
                 'name' => [
                     'required',
-                    'unique:disciplines'
+                    Rule::unique('disciplines')->ignore($data['id'])
                 ],
             ],
             [
@@ -63,6 +79,11 @@ class Discipline extends Model
         }
     }
 
+    public function kill($id)
+    {
+        $entity = $this->find($id);
+        return $entity->delete();
+    }
 
     //Eloquent: Relationships
 

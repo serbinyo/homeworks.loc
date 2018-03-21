@@ -25,7 +25,7 @@ class DisciplineController extends AdminController
      */
     public function create()
     {
-        return view('admin.new_discipline', ['title' => 'ЭДЗ. Новый предмет']);
+        return view('admin.disciplines.create', ['title' => 'ЭДЗ. Новый предмет']);
     }
 
     /**
@@ -81,7 +81,12 @@ class DisciplineController extends AdminController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $discipline = new Discipline();
+        $discipline_to_update = $discipline->getOne($id);
+        return view('admin.disciplines.edit', [
+            'title' => 'Редактирование предмета',
+            'discipline' => $discipline_to_update
+        ]);
     }
 
     /**
@@ -93,7 +98,17 @@ class DisciplineController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+        $discipline = new Discipline();
+
+        $response = $discipline->edit($id, $data);
+
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+
+        $message = 'Предмет ' . $response->name . ' - данные обновлены';
+        return back()->with('status', $message);
     }
 
     /**
@@ -104,9 +119,18 @@ class DisciplineController extends AdminController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $discipline = new Discipline();
+        $discipline_to_delete = $discipline->getOne($id);
+        $allTeachers = $discipline_to_delete->teachers->count();
+
+        if ($allTeachers === 0) {
+            $name = $discipline_to_delete->name;
+            $discipline->kill($id);
+            $message = 'Предмет ' . $name . ' удален';
+            return redirect('/admin/lists/disciplines/')->withErrors($message);
+        }
+        $message = 'Вы не можете удалить из системы предмет, к которому преписаны учителя. 
+        Обратитесь к системному администратору';
+        return back()->withErrors($message);
     }
-
-
 }
