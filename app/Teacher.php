@@ -37,6 +37,12 @@ class Teacher extends Model
         return $fio;
     }
 
+    public function getAllPaginated($num)
+    {
+        $entities = $this->orderBy('lastname')->paginate($num);
+        return $entities;
+    }
+
     public function edit($id, $data)
     {
         $entity = $this->find($id);

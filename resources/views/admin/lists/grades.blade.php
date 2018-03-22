@@ -37,8 +37,8 @@
                                 {!! Form::submit('', ['class'=>'ico_delete']) !!}
                                 {{method_field('DELETE')}}
                                 {!! Form::close() !!}
-                                <div style="clear: both"></div>
                             </div>
+                                <div style="clear: both"></div>
                             <hr>
                         @endforeach
                         {{$grades->links()}}

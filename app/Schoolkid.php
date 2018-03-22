@@ -24,6 +24,12 @@ class Schoolkid extends Model
         return $entity;
     }
 
+    public function getAllPaginated($num)
+    {
+        $entities = $this->orderBy('lastname')->paginate($num);
+        return $entities;
+    }
+
     public function hasHomework($work)
     {
         return $this->works()->where('work_id', $work->id)->exists();

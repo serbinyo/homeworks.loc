@@ -19,20 +19,15 @@
                         <a href="/teacher/lists">Списки</a> >>
                         Учителя
                         <hr>
-                        <br>
 
                         @foreach($teachers as $teacher)
 
                             {{$teacher->lastname }}
                             {{$teacher->firstname}}
                             {{$teacher->middlename}},
-                            Класс:
                             <a href="{{route('disciplineShow', $teacher->discipline->id)}}">
                                 {{$teacher->discipline->name}}
-                            </a>,
-                            Логин: {{$teacher->user->login}}
-                            ID: {{$teacher->id }}
-
+                            </a>
                             <hr>
 
                         @endforeach

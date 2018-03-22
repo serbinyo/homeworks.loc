@@ -61,11 +61,6 @@ class DisciplineController extends AdminController
         $discipline_to_show = $discipline->getOne($id);
         $teachers = $discipline_to_show->teachers()->orderBy('lastname')->get();
 
-        $allTeachers = $teachers->count();
-        if ($allTeachers === 0) {
-            $message = 'Учителей по предмету нет';
-            return back()->withErrors($message);
-        }
         return view('admin.disciplines.show', [
             'title' => $discipline_to_show->name,
             'discipline' => $discipline_to_show,
@@ -108,7 +103,7 @@ class DisciplineController extends AdminController
         }
 
         $message = 'Предмет ' . $response->name . ' - данные обновлены';
-        return back()->with('status', $message);
+        return redirect(route('discipline.show', $id))->with('status', $message);
     }
 
     /**

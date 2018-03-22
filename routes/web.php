@@ -143,15 +143,15 @@ Route::get('/admin/lists', 'Admin\ListsController@index');
 
 Route::get('/admin/lists/grades', 'Admin\ListsController@grade_list');
 
-Route::get('/admin/lists/grades/{id}', 'Admin\ListsController@grade_show')->name('AdminGradeShow');
-
 Route::get('/admin/lists/disciplines', 'Admin\ListsController@discipline_list');
-
-Route::get('/admin/lists/disciplines/{id}', 'Admin\ListsController@discipline_show')->name('AdminDisciplineShow');
 
 Route::get('/admin/lists/schoolkids', 'Admin\ListsController@schoolkid_list');
 
 Route::get('/admin/lists/teachers', 'Admin\ListsController@teacher_list');
+
+Route::resource('/admin/teach', 'Admin\PedagogueController');
+
+Route::resource('/admin/kid', 'Admin\SchoolkidController');
 
 
 

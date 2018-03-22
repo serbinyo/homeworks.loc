@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
-use App\Schoolkid;
+use App\Teacher;
 
-class SchoolkidController extends AdminController
+class PedagogueController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -47,12 +47,12 @@ class SchoolkidController extends AdminController
      */
     public function show($id)
     {
-        $schoolkid = new Schoolkid();
-        $schoolkid_to_show = $schoolkid->getOne($id);
+        $teacher = new Teacher();
+        $teacher_to_show = $teacher->getOne($id);
 
-        return view('admin.schoolkids.show', [
-            'title' => 'Профиль учащигося',
-            'schoolkid' => $schoolkid_to_show
+        return view('admin.teachers.show', [
+            'title' => 'Профиль преподавателя',
+            'teacher' => $teacher_to_show
         ]);
     }
 

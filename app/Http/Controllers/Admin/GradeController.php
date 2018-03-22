@@ -60,14 +60,11 @@ class GradeController extends AdminController
     {
         $grade = new Grade();
         $grade_to_show = $grade->getOne($id);
-        $allKids = $grade_to_show->schoolkids->count();
-        if ($allKids === 0) {
-            $message = 'В классе нет учеников';
-            return back()->withErrors($message);
-        }
+        $name = $grade_to_show->num . ' - ' . $grade_to_show->char;
+
         $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
         return view('admin.grades.show', [
-            'title' => 'Класс',
+            'title' => $name,
             'grade' => $grade_to_show,
             'schoolkids' => $schoolkids
         ]);
@@ -110,7 +107,7 @@ class GradeController extends AdminController
         $num = $response->num;
         $char = $response->char;
         $message = $num . ' - ' . $char . ' класс - данные обновлены';
-        return back()->with('status', $message);
+        return redirect(route('grade.show', $id))->with('status', $message);
     }
 
     /**
@@ -134,7 +131,5 @@ class GradeController extends AdminController
         $message = 'Вы не можете удалить из системы класс, в котором есть ученики. 
         Обратитесь к системному администратору';
         return back()->withErrors($message);
-
-
     }
 }

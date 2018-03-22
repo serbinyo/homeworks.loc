@@ -21,25 +21,56 @@
                         <a href="/admin/lists">Списки</a> >>
                         <a href="/admin/lists/disciplines/">Передметы</a> >>
                         {{$discipline->name}}
-                        <br><br>
+                        <hr>
+
+                        <div class="center-show-title">
+                            <div class="th-float">
+                                {{$discipline->name}}
+                            </div>
+
+                            <a href="{{route('discipline.edit', ['id'=>$discipline->id])}}">
+                                <div class="ico_edit"></div>
+                            </a>
+
+                            {!! Form::open(['url'=>route('discipline.destroy', ['id'=>$discipline->id])]) !!}
+                            {!! Form::submit('', ['class'=>'ico_delete']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
+                        </div>
+                        <div style="clear: both"></div>
+                        @if($discipline->description)
+                            Описание:<br>
+                            {{ nl2br($discipline->description) }}
+                        @endif
+                        <hr>
 
                         @if(($teachers->count() === 0))
                             <p class="works_show_block_title">
                                 Учителей по предмету нет
                             </p>
                         @else
-                            <? $i = 0 ?>
+                            Учителя по предмету:<br><br>
                             @foreach($teachers as $teacher)
+                                <div>
+                                    <a href="{{route('teach.show', $teacher->id)}}" class="th-float">
+                                        {{$teacher->lastname }}
+                                        {{$teacher->firstname}}
+                                        {{$teacher->middlename}}
+                                    </a>
 
-                                Порядковый номер: {{++$i}}
-                                ID: {{$teacher->id }}
-                                ФИО: {{$teacher->lastname }}
-                                {{$teacher->firstname}}
-                                {{$teacher->middlename}}<br>
+                                    <a href="{{route('teach.edit', ['id'=>$teacher->id])}}">
+                                        <div class="ico_edit"></div>
+                                    </a>
+                                    {!! Form::open(['url'=>route('teach.destroy', ['id'=>$teacher->id])]) !!}
+                                    {!! Form::submit('', ['class'=>'ico_delete']) !!}
+                                    {{method_field('DELETE')}}
+                                    {!! Form::close() !!}
+                                </div>
+                                <div style="clear: both"></div>
+                                <hr>
 
                             @endforeach
                         @endif
-
 
                         <hr>
                     </div>

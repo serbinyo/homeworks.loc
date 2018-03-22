@@ -121,9 +121,18 @@
     text-align: center;
 }
 
-.center {
-    /*margin: 0 auto;*/
+.center-show-title{
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    width: 250px;
+    height: 25px;
+}
+
+.center-show-desc{
+    margin-left: auto;
+    margin-right: auto;
+    width: 390px;
 }
 
 .given_test_opt {

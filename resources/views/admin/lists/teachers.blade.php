@@ -23,15 +23,14 @@
 
                         @foreach($teachers as $teacher)
 
-                            {{$teacher->lastname }}
-                            {{$teacher->firstname}}
-                            {{$teacher->middlename}},
-                            Класс:
-                            <a href="{{route('AdminDisciplineShow', $teacher->discipline->id)}}">
+                            <a href="{{route('teach.show', $teacher->id)}}">
+                                {{$teacher->lastname }}
+                                {{$teacher->firstname}}
+                                {{$teacher->middlename}},
+                            </a>
+                            <a href="{{route('discipline.show', $teacher->discipline->id)}}">
                                 {{$teacher->discipline->name}}
-                            </a>,
-                            Логин: {{$teacher->user->login}}
-                            ID: {{$teacher->id }}
+                            </a>
 
                             <hr>
 

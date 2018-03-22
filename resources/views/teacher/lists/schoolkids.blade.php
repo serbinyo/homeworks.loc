@@ -19,22 +19,17 @@
                         <a href="/teacher/lists">Списки</a> >>
                         Учащиеся
                         <hr>
-                        <br>
 
                         @foreach($schoolkids as $schoolkid)
 
                             {{$schoolkid->lastname }}
                             {{$schoolkid->firstname}}
                             {{$schoolkid->middlename}},
-                            Класс:
                             <a href="{{route('gradeShow', $schoolkid->grade->id)}}">
                                 {{$schoolkid->grade->num}}
                                 -
                                 {{$schoolkid->grade->char}}
-                            </a>,
-                            Логин: {{$schoolkid->user->login}}
-                            ID: {{$schoolkid->id }}
-
+                            </a>
                             <hr>
 
                         @endforeach

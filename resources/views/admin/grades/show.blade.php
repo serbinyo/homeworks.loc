@@ -26,18 +26,62 @@
                         {{$grade->num}}
                         -
                         {{$grade->char}}
-                        <br><br>
+                        <hr>
 
-                        <? $i = 0 ?>
-                        @foreach($schoolkids as $schoolkid)
+                        <div class="center-show-title">
+                            <div class="th-float">
+                                {{$grade->num}}
+                                -
+                                {{$grade->char}}
+                            </div>
 
-                            Порядковый номер: {{++$i}}
-                            ID: {{$schoolkid->id }}
-                            ФИО: {{$schoolkid->lastname}}
-                            {{$schoolkid->firstname}}
-                            {{$schoolkid->middlename}}<br>
+                            <a href="{{route('grade.edit', ['id'=>$grade->id])}}">
+                                <div class="ico_edit"></div>
+                            </a>
 
-                        @endforeach
+                            {!! Form::open(['url'=>route('grade.destroy', ['id'=>$grade->id])]) !!}
+                            {!! Form::submit('', ['class'=>'ico_delete']) !!}
+                            {{method_field('DELETE')}}
+                            {!! Form::close() !!}
+                        </div>
+
+                        <div style="clear: both"></div>
+                        @if($grade->description)
+                            Описание:<br>
+                            {{ nl2br($grade->description) }}
+                        @endif
+
+                        <hr>
+
+                        @if(($schoolkids->count() === 0))
+                            <p class="works_show_block_title">
+                                В классе пока нет учеников
+                            </p>
+                        @else
+                            Учащиеся в классе:<br><br>
+                            @foreach($schoolkids as $schoolkid)
+                                <div>
+                                    <a href="{{route('kid.show', $schoolkid->id)}} " class="th-float">
+                                        {{$schoolkid->lastname}}
+                                        {{$schoolkid->firstname}}
+                                        {{$schoolkid->middlename}}
+                                    </a>
+
+                                    <a href="{{route('kid.edit', ['id'=>$schoolkid->id])}}">
+                                        <div class="ico_edit"></div>
+                                    </a>
+
+                                    {!! Form::open(['url'=>route('kid.destroy', ['id'=>$schoolkid->id])]) !!}
+                                    {!! Form::submit('', ['class'=>'ico_delete']) !!}
+                                    {{method_field('DELETE')}}
+                                    {!! Form::close() !!}
+
+                                </div>
+                                <div style="clear: both"></div>
+                                <hr>
+
+                            @endforeach
+                        @endif
                         <hr>
                     </div>
                 </div>

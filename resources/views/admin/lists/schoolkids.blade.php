@@ -23,18 +23,16 @@
 
                         @foreach($schoolkids as $schoolkid)
 
+                            <a href="{{route('kid.show', $schoolkid->id)}}">
                             {{$schoolkid->lastname }}
                             {{$schoolkid->firstname}}
                             {{$schoolkid->middlename}},
-                            Класс:
-                            <a href="{{route('AdminGradeShow', $schoolkid->grade->id)}}">
+                            </a>
+                            <a href="{{route('grade.show', $schoolkid->grade->id)}}">
                                 {{$schoolkid->grade->num}}
                                 -
                                 {{$schoolkid->grade->char}}
-                            </a>,
-                            Логин: {{$schoolkid->user->login}}
-                            ID: {{$schoolkid->id }}
-
+                            </a>
                             <hr>
 
                         @endforeach

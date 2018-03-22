@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
-use Illuminate\Http\Request;
 use App\Discipline;
 use App\Schoolkid;
 use App\Teacher;
@@ -35,29 +34,6 @@ class ListsController extends AdminController
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function grade_show($id)
-    {
-        $grade = new Grade();
-        $grade_to_show = $grade->getOne($id);
-        $allKids = $grade_to_show->schoolkids->count();
-        if ($allKids === 0) {
-            $message = 'В классе нет учеников';
-            return back()->withErrors($message);
-        }
-        $schoolkids = $grade_to_show->schoolkids()->orderBy('lastname')->get();
-        return view('admin.lists.grades.show', [
-            'title' => 'ЭДЗ. Класс',
-            'grade' => $grade_to_show,
-            'schoolkids' => $schoolkids
-        ]);
-    }
-
     //Discipline
 
     /**
@@ -75,25 +51,6 @@ class ListsController extends AdminController
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function discipline_show($id)
-    {
-        $discipline = new Discipline();
-        $discipline_to_show = $discipline->getOne($id);
-        $teachers = $discipline_to_show->teachers()->orderBy('lastname')->get();
-
-        return view('admin.lists.disciplines.show', [
-            'title' => $discipline_to_show->name,
-            'discipline' => $discipline_to_show,
-            'teachers' => $teachers
-        ]);
-    }
-
     //Schoolkid
 
     /**
@@ -104,7 +61,7 @@ class ListsController extends AdminController
      */
     public function schoolkid_list(Schoolkid $schoolkid)
     {
-        $schoolkids = $schoolkid->orderBy('lastname')->paginate(5);
+        $schoolkids = $schoolkid->getAllPaginated(25);
         return view('admin.lists.schoolkids', [
             'title' => 'ЭДЗ. Классы',
             'schoolkids' => $schoolkids
@@ -121,7 +78,7 @@ class ListsController extends AdminController
      */
     public function teacher_list(Teacher $teacher)
     {
-        $teachers = $teacher->orderBy('lastname')->paginate(5);
+        $teachers = $teacher->getAllPaginated(10);
         return view('admin.lists.teachers', [
             'title' => 'Учителя',
             'teachers' => $teachers
