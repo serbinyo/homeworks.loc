@@ -87,7 +87,18 @@ class SchoolkidController extends AdminController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_delete = $schoolkid->getOne($id);
+
+        $homeworks = $schoolkid_to_delete->homeworks->count();
+
+        if ($homeworks === 0) {
+            $schoolkid->kill($id);
+            $message = 'Профиль ученика ' . $id . ' удален';
+            return redirect('/admin/lists/schoolkids/')->withErrors($message);
+        }
+        $message = 'Вы не можете удалить из системы ученика, к которому привязанны домашние задания. 
+        Обратитесь к системному администратору';
+        return back()->withErrors($message);
     }
 }

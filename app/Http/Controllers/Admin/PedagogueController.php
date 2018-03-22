@@ -87,7 +87,21 @@ class PedagogueController extends AdminController
      */
     public function destroy($id)
     {
-        echo __METHOD__;
-        dump($id);
+        $teacher = new Teacher();
+        $teacher_to_delete = $teacher->getOne($id);
+        $works = $teacher_to_delete->works->count();
+        $tasks = $teacher_to_delete->tasks->count();
+        $tests = $teacher_to_delete->tests->count();
+        $materials = $teacher_to_delete->materials->count();
+        $allWorks = ($works + $tasks + $tests + $materials);
+
+        if ($allWorks === 0) {
+            $teacher->kill($id);
+            $message = 'Профиль учителя ' . $id . ' удален';
+            return redirect('/admin/lists/teachers/')->withErrors($message);
+        }
+        $message = 'Вы не можете удалить из системы учителя, к которому привязанны работы,
+        тесты, задачи или учебные материалы. Обратитесь к системному администратору';
+        return back()->withErrors($message);
     }
 }

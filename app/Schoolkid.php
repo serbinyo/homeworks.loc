@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Schoolkid extends Model
 {
@@ -56,6 +57,16 @@ class Schoolkid extends Model
             ->distinct()
             ->get();
         return $entities;
+    }
+
+    public function kill($id)
+    {
+        $entity = $this->find($id);
+        DB::beginTransaction();
+
+        $entity->user()->delete();
+
+        DB::commit();
     }
 
     //Eloquent: Relationships

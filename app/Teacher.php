@@ -143,7 +143,6 @@ class Teacher extends Model
         DB::beginTransaction();
 
         $entity->user()->delete();
-        $entity->delete();
 
         DB::commit();
     }
