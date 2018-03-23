@@ -55,13 +55,21 @@ class Teacher extends Model
 
         $entity->user->email = $data['email'];
 
-        $email_is_change = $entity->user->isDirty('email');
+        if (isset($data['login'])) {
+            $entity->user->login = $data['login'];
+        }
+
+        $email_is_change = $entity->user->isDirty();
 
         $entity->user->save();
 
         $entity->firstname = $data['firstname'];
         $entity->middlename = $data['middlename'];
         $entity->lastname = $data['lastname'];
+
+        if (isset($data['discipline'])) {
+            $entity->discipline_id = $data['discipline'];
+        }
 
         $data_is_change = $entity->isDirty();
 
@@ -87,12 +95,18 @@ class Teacher extends Model
                         'max:255',
                         Rule::unique('users')->ignore($id)
                     ],
+                'login' =>
+                    [
+                        'max:255',
+                        Rule::unique('users')->ignore($id)
+                    ],
                 'firstname' => 'required|string|max:255',
                 'middlename' => 'max:255',
                 'lastname' => 'required|string|max:255'
             ],
             [
-                'email.unique' => 'Новая почта занята'
+                'email.unique' => 'Почта занята',
+                'login.unique' => 'Логин занят',
                 //todo прописать ошибки валидации на русском
             ]);
 

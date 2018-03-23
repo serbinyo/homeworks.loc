@@ -15,7 +15,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @include('common.errors')
+                        @if ($errors->has('no_chenge'))
+                            <div class="alert alert-danger">
+                                <div class="message js-form-message">
+                                    {{ $errors->first('no_chenge') }}
+                                </div>
+                            </div>
+                        @endif
 
                         <a href="/admin">Рабочий стол</a> >>
                         <a href="/admin/lists">Списки</a> >>

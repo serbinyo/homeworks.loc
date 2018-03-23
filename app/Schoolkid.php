@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class Schoolkid extends Model
 {
@@ -36,12 +39,12 @@ class Schoolkid extends Model
         return $this->works()->where('work_id', $work->id)->exists();
     }
 
-    public function setHomework($work, $teacher_id,$date)
+    public function setHomework($work, $teacher_id, $date)
     {
         $this->works()->attach($work, ['teacher_id' => $teacher_id, 'date_to_completion' => $date]);
         // get inserted Identifier of pivot when attach()
         // Получаем Id записи в промежуточной таблице ( pivot ) после выполнения attach()
-        $homework_id = $this->works()->withPivot('id')->wherePivot('work_id',$work->id)->first()->pivot->id;
+        $homework_id = $this->works()->withPivot('id')->wherePivot('work_id', $work->id)->first()->pivot->id;
         return $homework_id;
     }
 
@@ -57,6 +60,74 @@ class Schoolkid extends Model
             ->distinct()
             ->get();
         return $entities;
+    }
+
+    public function edit($id, $data)
+    {
+        $entity = $this->find($id);
+
+        if ($err = $this->validate($data, $entity->user->id)) {
+            return $err;
+        }
+
+        DB::beginTransaction();
+
+        $entity->user->email = $data['email'];
+        if (isset($data['login'])) {
+            $entity->user->login = $data['login'];
+        }
+
+        $email_is_change = $entity->user->isDirty();
+        $entity->user->save();
+
+        $entity->firstname = $data['firstname'];
+        $entity->middlename = $data['middlename'];
+        $entity->lastname = $data['lastname'];
+        if (isset($data['grade'])) {
+            $entity->grade_id = $data['grade'];
+        }
+
+        $data_is_change = $entity->isDirty();
+        $entity->save();
+
+        DB::commit();
+
+        if ($email_is_change || $data_is_change) {
+            return $entity;
+        } else {
+            return ['errors' => ['no_chenge' => 'Изменений нет']];
+        }
+    }
+
+    public function validate($data, $id)
+    {
+        $validator = Validator::make($data,
+            [
+                'email' =>
+                    [
+                        'nullable',
+                        'email',
+                        'max:255',
+                        Rule::unique('users')->ignore($id)
+                    ],
+                'login' =>
+                    [
+                        'max:255',
+                        Rule::unique('users')->ignore($id)
+                    ],
+                'firstname' => 'required|string|max:255',
+                'middlename' => 'max:255',
+                'lastname' => 'required|string|max:255'
+            ],
+            [
+                'email.unique' => 'Почта занята',
+                'login.unique' => 'Логин занят',
+                //todo прописать ошибки валидации на русском
+            ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
     }
 
     public function kill($id)

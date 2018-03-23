@@ -125,10 +125,6 @@ Route::get('/admin', 'Admin\DesktopController@index');
 
 // Register
 
-Route::get('/admin/register', 'Admin\TeacheRegController@index');
-
-Route::get('/admin/register/user', 'Admin\UseRegController@index');
-
 Route::resource('/admin/teach', 'Admin\PedagogueController');
 
 Route::resource('/admin/kid', 'Admin\SchoolkidController');
@@ -152,8 +148,6 @@ Route::get('/admin/lists/disciplines', 'Admin\ListsController@discipline_list');
 Route::get('/admin/lists/schoolkids', 'Admin\ListsController@schoolkid_list');
 
 Route::get('/admin/lists/teachers', 'Admin\ListsController@teacher_list');
-
-
 
 
 //Route::get('/admin/admin_lists', 'Teacher\AdminListsController@index');
