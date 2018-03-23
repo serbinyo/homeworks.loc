@@ -51,22 +51,12 @@
                         @else
                             Учителя по предмету:<br><br>
                             @foreach($teachers as $teacher)
-                                <div>
-                                    <a href="{{route('teach.show', $teacher->id)}}" class="th-float">
-                                        {{$teacher->lastname }}
-                                        {{$teacher->firstname}}
-                                        {{$teacher->middlename}}
-                                    </a>
 
-                                    <a href="{{route('teach.edit', ['id'=>$teacher->id])}}">
-                                        <div class="ico_edit"></div>
-                                    </a>
-                                    {!! Form::open(['url'=>route('teach.destroy', ['id'=>$teacher->id])]) !!}
-                                    {!! Form::submit('', ['class'=>'ico_delete']) !!}
-                                    {{method_field('DELETE')}}
-                                    {!! Form::close() !!}
-                                </div>
-                                <div style="clear: both"></div>
+                                <a href="{{route('teach.show', $teacher->id)}}">
+                                    {{$teacher->lastname }}
+                                    {{$teacher->firstname}}
+                                    {{$teacher->middlename}}
+                                </a>
                                 <hr>
 
                             @endforeach

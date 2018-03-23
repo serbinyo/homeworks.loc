@@ -60,24 +60,12 @@
                         @else
                             Учащиеся в классе:<br><br>
                             @foreach($schoolkids as $schoolkid)
-                                <div>
-                                    <a href="{{route('kid.show', $schoolkid->id)}} " class="th-float">
-                                        {{$schoolkid->lastname}}
-                                        {{$schoolkid->firstname}}
-                                        {{$schoolkid->middlename}}
-                                    </a>
 
-                                    <a href="{{route('kid.edit', ['id'=>$schoolkid->id])}}">
-                                        <div class="ico_edit"></div>
-                                    </a>
-
-                                    {!! Form::open(['url'=>route('kid.destroy', ['id'=>$schoolkid->id])]) !!}
-                                    {!! Form::submit('', ['class'=>'ico_delete']) !!}
-                                    {{method_field('DELETE')}}
-                                    {!! Form::close() !!}
-
-                                </div>
-                                <div style="clear: both"></div>
+                                <a href="{{route('kid.show', $schoolkid->id)}}">
+                                    {{$schoolkid->lastname}}
+                                    {{$schoolkid->firstname}}
+                                    {{$schoolkid->middlename}}
+                                </a>
                                 <hr>
 
                             @endforeach

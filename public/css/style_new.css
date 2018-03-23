@@ -129,6 +129,14 @@
     height: 25px;
 }
 
+.center-edt-del{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100px;
+    height: 25px;
+}
+
 .center-show-desc{
     margin-left: auto;
     margin-right: auto;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Discipline;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use App\Teacher;
@@ -21,11 +22,16 @@ class PedagogueController extends AdminController
     /**
      * Show the form for creating a new resource.
      *
+     * @param \App\Discipline $discipline
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Discipline $discipline)
     {
-        echo __METHOD__;
+        $disciplines = $discipline->getAll();
+        return view('admin.teachers.create', [
+            'title' => 'ЭДЗ. Регистрация учителя',
+            'disciplines' => $disciplines
+        ]);
     }
 
     /**
@@ -64,7 +70,15 @@ class PedagogueController extends AdminController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $teacher = new Teacher();
+        $teacher_to_update = $teacher->getOne($id);
+        $discipline = new Discipline();
+        $disciplines = $discipline->getAll();
+        return view('admin.teachers.edit', [
+            'title' => 'Редактирование учетной записи',
+            'teacher' => $teacher_to_update,
+            'disciplines' => $disciplines,
+        ]);
     }
 
     /**
@@ -76,7 +90,15 @@ class PedagogueController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+        $teacher = new Teacher();
+
+        $response = $teacher->edit($id, $data);
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+        $message = 'Учетная запись обновлена';
+        return redirect('/admin/teach/' . $id)->with('status', $message);
     }
 
     /**

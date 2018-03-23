@@ -22,23 +22,13 @@
 
 
                         @foreach($grades as $grade)
-                            <div>
-                                <a href="{{route('grade.show', $grade->id)}} " class="th-float">
+
+                                <a href="{{route('grade.show', $grade->id)}} ">
                                     {{$grade->num}}
                                     -
                                     {{$grade->char}}
                                 </a>
 
-                                <a href="{{route('grade.edit', ['id'=>$grade->id])}}">
-                                    <div class="ico_edit"></div>
-                                </a>
-
-                                {!! Form::open(['url'=>route('grade.destroy', ['id'=>$grade->id])]) !!}
-                                {!! Form::submit('', ['class'=>'ico_delete']) !!}
-                                {{method_field('DELETE')}}
-                                {!! Form::close() !!}
-                            </div>
-                                <div style="clear: both"></div>
                             <hr>
                         @endforeach
                         {{$grades->links()}}

@@ -129,6 +129,10 @@ Route::get('/admin/register', 'Admin\TeacheRegController@index');
 
 Route::get('/admin/register/user', 'Admin\UseRegController@index');
 
+Route::resource('/admin/teach', 'Admin\PedagogueController');
+
+Route::resource('/admin/kid', 'Admin\SchoolkidController');
+
 Route::get('/admin/register/redirect-to-main-page-after-registration', 'Admin\InfoPagesController@afterReg');
 
 // Create
@@ -149,9 +153,6 @@ Route::get('/admin/lists/schoolkids', 'Admin\ListsController@schoolkid_list');
 
 Route::get('/admin/lists/teachers', 'Admin\ListsController@teacher_list');
 
-Route::resource('/admin/teach', 'Admin\PedagogueController');
-
-Route::resource('/admin/kid', 'Admin\SchoolkidController');
 
 
 
@@ -170,4 +171,3 @@ Route::resource('/admin/kid', 'Admin\SchoolkidController');
 //Route::resource('/admin/lists/admin_teachers', 'Teacher\AdminAccountController');
 //
 //Route::resource('/admin/admin_account', 'Teacher\AdminAccountController');
-

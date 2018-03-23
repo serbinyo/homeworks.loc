@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Grade;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use App\Schoolkid;
@@ -21,11 +22,14 @@ class SchoolkidController extends AdminController
     /**
      * Show the form for creating a new resource.
      *
+     * @param \App\Grade $grade
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Grade $grade)
     {
-        echo __METHOD__;
+        $grades = $grade->getAll();
+        return view('admin.schoolkids.create', ['title' => 'ЭДЗ. Регистация ученика',
+            'grades' => $grades]);
     }
 
     /**
@@ -64,7 +68,15 @@ class SchoolkidController extends AdminController
      */
     public function edit($id)
     {
-        echo __METHOD__;
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_edit = $schoolkid->getOne($id);
+        $grade = new Grade();
+        $grades = $grade->getAll();
+        return view('admin.schoolkids.edit', [
+            'title' => 'Редактирование учетной записи',
+            'schoolkid' => $schoolkid_to_edit,
+            'grades' => $grades,
+        ]);
     }
 
     /**
@@ -76,7 +88,15 @@ class SchoolkidController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        echo __METHOD__;
+        $data = $request->except('_token', '_method');
+        $schoolkid = new Schoolkid();
+
+        $response = $schoolkid->edit($id, $data);
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return back()->withInput()->withErrors($response['errors']);
+        }
+        $message = 'Учетная запись обновлена';
+        return redirect('/admin/kid/' . $id)->with('status', $message);
     }
 
     /**
