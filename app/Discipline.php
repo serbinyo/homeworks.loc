@@ -62,11 +62,16 @@ class Discipline extends Model
 
     public function validate($data)
     {
+        if (array_key_exists('id', $data))
+            $unique_rule = Rule::unique('disciplines')->ignore($data['id']);
+        else
+            $unique_rule = 'unique:disciplines';
+
         $validator = Validator::make($data,
             [
                 'name' => [
                     'required',
-                    Rule::unique('disciplines')->ignore($data['id'])
+                    $unique_rule,
                 ],
             ],
             [
