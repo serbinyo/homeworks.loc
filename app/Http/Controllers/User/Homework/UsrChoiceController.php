@@ -8,7 +8,7 @@ use App\Homework;
 
 class UsrChoiceController extends UserController
 {
-    //todo сделать валидацию для всех GET запросов.
+
     public function index(Schoolkid $schoolkid)
     {
         $disciplines_to_show = $schoolkid->getKidDisciplines($this->user->schoolkid->id);

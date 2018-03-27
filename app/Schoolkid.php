@@ -130,6 +130,32 @@ class Schoolkid extends Model
         }
     }
 
+    public function getStat($homeworks)
+    {
+        $homeworks_count = $homeworks->count();
+        $done_homeworks_count = $homeworks->where('computer_mark', '!=', NULL)->count();
+
+        $done_percent = ($done_homeworks_count / $homeworks_count) * 100;
+        $done_percent = round($done_percent, 2);
+        $sum_of_marks = 0;
+
+        foreach ($homeworks as $homework) {
+            if (!empty($homework->teacher_mark))
+                $sum_of_marks = $sum_of_marks + $homework->teacher_mark;
+            else
+                $sum_of_marks = $sum_of_marks + $homework->computer_mark;
+        }
+
+        $average_percent = ($sum_of_marks / $homeworks_count);
+        $average_percent = round($average_percent, 2);
+
+        return [
+            'homeworks_count' => $homeworks_count,
+            'done_percent' => $done_percent,
+            'average_percent' => $average_percent,
+        ];
+    }
+
     public function kill($id)
     {
         $entity = $this->find($id);

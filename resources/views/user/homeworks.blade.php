@@ -20,14 +20,12 @@
                         <hr>
 
                         @foreach($disciplines as $discipline)
-
                             <a href="{{route('showUsrDates', $discipline->id)}}">
                                 {{$discipline->name}}
-
                             </a>
                             <hr>
-
                         @endforeach
+
                     </div>
                 </div>
             </div>

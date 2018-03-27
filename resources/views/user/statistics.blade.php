@@ -1,23 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Статистика. Выбор предмета</div>
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @include('common.errors')
 
-                    Statistics!
+                        <a href="/desktop">Рабочий стол</a> >>
+                        Выбор предмета
+                        <hr>
+
+                        @foreach($disciplines as $discipline)
+                            <a href="{{route('showDisciplineStat', $discipline->id)}}">
+                                {{$discipline->name}}
+                            </a>
+                            <hr>
+                        @endforeach
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

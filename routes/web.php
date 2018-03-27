@@ -39,6 +39,8 @@ Route::post('/homeworks/pass_homework', 'User\Homework\PassController@pass')->na
 
 Route::get('/statistics', 'User\StatisticsController@index');
 
+Route::get('/statistics/{discipline_id}', 'User\StatisticsController@show')->name('showDisciplineStat');
+
 
 //TEACHER
 

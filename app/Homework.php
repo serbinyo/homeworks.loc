@@ -77,6 +77,21 @@ class Homework extends Model
         return $entities;
     }
 
+    public function getKidDisciplineHomeworks($schoolkid_id, $discipline_id)
+    {
+        $entities = $this
+            ->join('works', 'homeworks.work_id', '=', 'works.id')
+            ->join('teachers', 'works.teacher_id', '=', 'teachers.id')
+            ->join('disciplines', 'teachers.discipline_id', '=', 'disciplines.id')
+            ->where('homeworks.schoolkid_id', $schoolkid_id)
+            ->where('disciplines.id', $discipline_id)
+            ->select('homeworks.*')
+//            ->orderBy('date_to_completion', 'desc')
+            ->get();
+
+        return $entities;
+    }
+
     public function evaluate($id, $mark)
     {
         $entity = $this->find($id);
