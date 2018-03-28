@@ -21,8 +21,6 @@
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/style_new.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{asset('public/js/jquery-3.2.1.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('') }}"></script>
 </head>
 <body>
 <div id="app">
@@ -106,6 +104,7 @@
 </div>
 
 <!-- Scripts -->
+
 <script src="{{ asset('public/js/app.js') }}"></script>
 </body>
 </html>

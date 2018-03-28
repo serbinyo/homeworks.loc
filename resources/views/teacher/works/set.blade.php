@@ -58,7 +58,8 @@
                             <div class="col-md-6">
                                 {!! Form::text('date', old('date'), ['required',
                                 'class'=>'form-control',
-                                'placeholder' => 'ГГГГ-ММ-ДД'
+                                'placeholder' => 'ГГГГ-ММ-ДД',
+                                'id' => 'datepicker',
                                 ]) !!}
 
                                 @if ($errors->has('date'))
