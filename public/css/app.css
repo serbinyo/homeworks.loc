@@ -9618,7 +9618,7 @@ button.close {
 }
 
 @-ms-viewport {
-  width: auto;
+  /*width: device-width;*/
 }
 
 .visible-xs {
