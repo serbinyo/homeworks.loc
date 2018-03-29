@@ -19,7 +19,7 @@
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/lists">Списки</a> >>
-                        <a href="/teacher/lists/disciplines/">Передметы</a> >>
+                        <a href="/teacher/lists/disciplines">Передметы</a> >>
                         {{$discipline->name}}
                         <br><br>
 

@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/works/">Список работ</a> >>
+                        <a href="/teacher/works">Список работ</a> >>
                         <a href="{{route('works.show', ['id'=>$work_to_update->id])}}">Просмотр работы</a> >>
                         Редактирование
                         <br><br>

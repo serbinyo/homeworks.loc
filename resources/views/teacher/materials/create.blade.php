@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/materials/">Список материалов</a> >>
+                        <a href="/teacher/materials">Список материалов</a> >>
                         Новый учебный материал
                         <br><br>
 

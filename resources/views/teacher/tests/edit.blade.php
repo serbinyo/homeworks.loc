@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/tests/">Список задач</a> >>
+                        <a href="/teacher/tests">Список задач</a> >>
                         <a href="{{route('tests.show', ['id'=>$test_to_update->id])}}">Просмотр теста</a> >>
                         Редактирование
                         <br><br>

@@ -16,7 +16,7 @@
                         @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/works/">Список работ</a> >>
+                        <a href="/teacher/works">Список работ</a> >>
                         <a href="{{route('works.show', ['id'=>$work_id])}}">Просмотр работы</a> >>
                         Задать индивидуально
                         <br><br>

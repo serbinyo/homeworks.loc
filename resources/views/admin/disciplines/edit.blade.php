@@ -16,7 +16,7 @@
 
                         <a href="/admin">Рабочий стол</a> >>
                         <a href="/admin/lists">Списки</a> >>
-                        <a href="/admin/lists/disciplines/">Передметы</a> >>
+                        <a href="/admin/lists/disciplines">Передметы</a> >>
                         <a href="{{route('discipline.show', $discipline->id)}}">
                             {{$discipline->name}}
                         </a> >>

@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/tests/">Список тестов</a> >>
+                        <a href="/teacher/tests">Список тестов</a> >>
                         Новый тест
                         <br><br>
 

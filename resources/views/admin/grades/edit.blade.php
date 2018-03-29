@@ -22,7 +22,7 @@
 
                         <a href="/admin">Рабочий стол</a> >>
                         <a href="/admin/lists">Списки</a> >>
-                        <a href="/admin/lists/grades/">Классы</a> >>
+                        <a href="/admin/lists/grades">Классы</a> >>
                         <a href="{{route('grade.show', $grade->id)}}">
                             {{$grade->num}}
                             -

@@ -18,7 +18,7 @@
                         @include('common.errors')
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/materials/">Список материалов</a> >>
+                        <a href="/teacher/materials">Список материалов</a> >>
                         Просмотр материала
                         <br><br>
 

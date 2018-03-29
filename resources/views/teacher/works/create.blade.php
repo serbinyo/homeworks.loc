@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/works/">Список работ</a> >>
+                        <a href="/teacher/works">Список работ</a> >>
                         Создать работу
                         <br><br>
 

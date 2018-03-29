@@ -22,7 +22,7 @@
 
                         <a href="/teacher">Учительская</a> >>
                         <a href="/teacher/lists">Списки</a> >>
-                        <a href="/teacher/lists/grades/">Классы</a> >>
+                        <a href="/teacher/lists/grades">Классы</a> >>
                         {{$grade->num}}
                         -
                         {{$grade->char}}

@@ -15,7 +15,7 @@
                         @endif
 
                         <a href="/teacher">Учительская</a> >>
-                        <a href="/teacher/tasks/">Список задач</a> >>
+                        <a href="/teacher/tasks">Список задач</a> >>
                         <a href="{{route('tasks.show', ['id'=>$task_to_update->id])}}">Просмотр задачи</a> >>
                         Редактирование
                         <br><br>
