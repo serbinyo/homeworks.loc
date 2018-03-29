@@ -11373,7 +11373,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js__);
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -11395,6 +11394,7 @@ Vue.component('example-component', __webpack_require__(39));
 var app = new Vue({
     el: '#app'
 });
+
 
 
 window.$ = window.jQuery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
@@ -11430,7 +11430,8 @@ window.$ = window.jQuery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: "" };
+        yearSuffix: ""
+    };
     datepicker.setDefaults(datepicker.regional.ru);
 
     return datepicker.regional.ru;
@@ -11440,6 +11441,16 @@ __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#datepicker').datepicker({
     showOtherMonths: true,
     selectOtherMonths: true
 });
+
+/* function addJQueryHandler открывает блок по клику */
+
+function addJQueryHandler(btnOpenId, editBoxId, $) {
+    $(btnOpenId).click(function () {
+        var elementStyle = $(editBoxId).css('display');
+        if (elementStyle === 'none') $(editBoxId).css('display', 'block');else $(editBoxId).css('display', 'none');
+    });
+}
+addJQueryHandler('#btn_open', '#hiding_block', __WEBPACK_IMPORTED_MODULE_0_jquery___default.a);
 
 /***/ }),
 /* 13 */

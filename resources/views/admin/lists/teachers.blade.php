@@ -26,8 +26,9 @@
                             <a href="{{route('teach.show', $teacher->id)}}">
                                 {{$teacher->lastname }}
                                 {{$teacher->firstname}}
-                                {{$teacher->middlename}},
+                                {{$teacher->middlename}}
                             </a>
+                            ,
                             <a href="{{route('discipline.show', $teacher->discipline->id)}}">
                                 {{$teacher->discipline->name}}
                             </a>

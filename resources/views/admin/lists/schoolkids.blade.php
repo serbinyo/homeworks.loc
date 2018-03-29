@@ -24,10 +24,11 @@
                         @foreach($schoolkids as $schoolkid)
 
                             <a href="{{route('kid.show', $schoolkid->id)}}">
-                            {{$schoolkid->lastname }}
-                            {{$schoolkid->firstname}}
-                            {{$schoolkid->middlename}},
+                                {{$schoolkid->lastname }}
+                                {{$schoolkid->firstname}}
+                                {{$schoolkid->middlename}}
                             </a>
+                            ,
                             <a href="{{route('grade.show', $schoolkid->grade->id)}}">
                                 {{$schoolkid->grade->num}}
                                 -
