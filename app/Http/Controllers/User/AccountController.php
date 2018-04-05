@@ -1,18 +1,12 @@
 <?php
 
-/*
- * Испльзуется имя класса AccountController для модели Teacher,
- * а не более подходящее TeacherController потому что класс TeacherController
- * уже есть и используется для проверки роли учителя
- */
+namespace App\Http\Controllers\User;
 
-namespace App\Http\Controllers\Teacher;
-
-use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use App\Teacher;
+use App\Schoolkid;
 
-class AccountController extends TeacherController
+class AccountController extends UserController
 {
     /**
      * Display a listing of the resource.
@@ -53,17 +47,17 @@ class AccountController extends TeacherController
      */
     public function show($id)
     {
-        $teacher = new Teacher();
-        $teacher_to_show = $teacher->getOne($id);
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_show = $schoolkid->getOne($id);
 
-        if ($this->user->can('view', $teacher_to_show)) {
-            return view('teacher.account', [
+        if ($this->user->can('view', $schoolkid_to_show)) {
+            return view('user.account', [
                 'title' => 'ЭДЗ. Просмотр профиля',
-                'teacher' => $teacher_to_show,
+                'schoolkid' => $schoolkid_to_show,
             ]);
         }
         $message = 'ОШИБКА. Нет прав';
-        return redirect('/teacher')->withErrors($message);
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
@@ -74,18 +68,18 @@ class AccountController extends TeacherController
      */
     public function edit($id)
     {
-        $teacher = new Teacher();
-        $teacher_to_update = $teacher->getOne($id);
-        if ($this->user->can('update', $teacher_to_update)) {
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_update = $schoolkid->getOne($id);
+        if ($this->user->can('update', $schoolkid_to_update)) {
 
-            return view('teacher.account.edit', [
+            return view('user.account.edit', [
                 'title' => 'ЭДЗ. Редактирование профиля',
-                'teacher' => $teacher_to_update,
+                'schoolkid' => $schoolkid_to_update,
             ]);
         }
 
         $message = 'ОШИБКА. Нет прав';
-        return redirect('/teacher')->withErrors($message);
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
@@ -98,20 +92,20 @@ class AccountController extends TeacherController
     public function update(Request $request, $id)
     {
         $data = $request->except('_token');
-        $teacher = new Teacher();
-        $teacher_to_update = $teacher->getOne($id);
-        if ($this->user->can('update', $teacher_to_update)) {
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_update = $schoolkid->getOne($id);
+        if ($this->user->can('update', $schoolkid_to_update)) {
 
-            $response = $teacher->edit($id, $data);
+            $response = $schoolkid->edit($id, $data);
             if (is_array($response) && array_key_exists('errors', $response)) {
                 return back()->withInput()->withErrors($response['errors']);
             }
             $message = 'Учетная запись обновлена';
-            return redirect('/teacher/account/' . $id)->with('status', $message);
+            return redirect('/kid-account/' . $id)->with('status', $message);
 
         }
         $message = 'ОШИБКА. Нет прав';
-        return redirect('/teacher')->withErrors($message);
+        return redirect('/desktop')->withErrors($message);
     }
 
     /**
@@ -122,14 +116,14 @@ class AccountController extends TeacherController
      */
     public function destroy($id)
     {
-        $teacher = new Teacher();
-        $teacher_to_delete = $teacher->getOne($id);
-        if ($this->user->can('delete', $teacher_to_delete)) {
-            $teacher->kill($id);
-            $message = 'Учетная запись учителя ' . $id . ' удалена!';
+        $schoolkid = new Schoolkid();
+        $schoolkid_to_delete = $schoolkid->getOne($id);
+        if ($this->user->can('delete', $schoolkid_to_delete)) {
+            $schoolkid->kill($id);
+            $message = 'Учетная запись учащегося ' . $id . ' удалена!';
             return redirect('/')->with('status', $message);
         }
         $message = 'ОШИБКА. Нет права удаления !!!';
-        return redirect('/teacher')->withErrors($message);
+        return redirect('/desktop')->withErrors($message);
     }
 }

@@ -19,7 +19,7 @@ class SchoolkidPolicy
      */
     public function view(User $user, Schoolkid $schoolkid)
     {
-        //
+        return $user->schoolkid->id === $schoolkid->id;
     }
 
     /**
@@ -42,7 +42,7 @@ class SchoolkidPolicy
      */
     public function update(User $user, Schoolkid $schoolkid)
     {
-        //
+        return $user->schoolkid->id === $schoolkid->id;
     }
 
     /**

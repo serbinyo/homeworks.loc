@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Учетная запись
+                        Учетная запись. Редактирование
                     </div>
 
                     <div class="panel-body">
@@ -24,21 +24,21 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="{{ route('account.show', $teacher->id) }}">Учетная запись</a> >>
+                        <a href="/teacher">Рабочий стол</a> >>
+                        <a href="{{ route('kid-account.show', $schoolkid->id) }}">Учетная запись</a> >>
                         Редактирование
                         <hr>
 
 
-                        {!! Form::open(['method'=>'put', 'route' => ['account.update',
-                        $teacher->id], 'class'=>'form-horizontal']) !!}
+                        {!! Form::open(['method'=>'put', 'route' => ['kid-account.update',
+                        $schoolkid->id], 'class'=>'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail адрес</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email"
-                                       value="{{ $teacher->user->email }}" placeholder="Не Обязательно">
+                                       value="{{ $schoolkid->user->email }}" placeholder="Не Обязательно">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -53,7 +53,7 @@
 
                             <div class="col-md-6">
                                 <input id="lastname" type="text" class="form-control" name="lastname"
-                                       value="{{ $teacher->lastname }}" required>
+                                       value="{{ $schoolkid->lastname }}" required>
 
                                 @if ($errors->has('lastname'))
                                     <span class="help-block">
@@ -68,7 +68,7 @@
 
                             <div class="col-md-6">
                                 <input id="firstname" type="text" class="form-control" name="firstname"
-                                       value="{{ $teacher->firstname }}" required>
+                                       value="{{ $schoolkid->firstname }}" required>
 
                                 @if ($errors->has('firstname'))
                                     <span class="help-block">
@@ -83,7 +83,7 @@
 
                             <div class="col-md-6">
                                 <input id="middlename" type="text" class="form-control" name="middlename"
-                                       value="{{ $teacher->middlename }}" placeholder="Не обязательно">
+                                       value="{{ $schoolkid->middlename }}" placeholder="Не обязательно">
 
                                 @if ($errors->has('middlename'))
                                     <span class="help-block">
@@ -99,7 +99,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Редактировать', ['class' => 'btn btn-primary']) !!}
                                 или
-                                <a href="/teacher/account/change_password" class="btn btn-primary">
+                                <a href="/kid-account/change_password" class="btn btn-primary">
                                     Изменить пароль
                                 </a>
                             </div>
@@ -107,7 +107,7 @@
 
                         {!! Form::close() !!}
 
-                        {{--{!! Form::open(['url'=>route('account.destroy', $teacher->id), 'class'=>'center']) !!}--}}
+                        {{--{!! Form::open(['url'=>route('kid-account.destroy', $schoolkid->id), 'class'=>'center']) !!}--}}
                         {{--{!! Form::submit('Удалить учетную запись') !!}--}}
                         {{--{{method_field('DELETE')}}--}}
                         {{--{!! Form::close() !!}--}}

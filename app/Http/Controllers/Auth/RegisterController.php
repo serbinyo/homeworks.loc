@@ -64,7 +64,13 @@ class RegisterController extends Controller
                 'password' => 'required|string|min:6|confirmed',
             ],
             [
-                //todo прописать ошибки валидации на русском
+                'email.unique' => 'Почта занята',
+                'login.unique' => 'Логин занят',
+                'firstname.required' => 'Необходимо указать имя',
+                'firstname.max' => 'Поле не должно быть больше 255 символов',
+                'middlename.max' => 'Поле не должно быть больше 255 символов',
+                'lastname.required' => 'Необходимо указать фамилию',
+                'lastname.max' => 'Поле не должно быть больше 255 символов',
             ]);
     }
 

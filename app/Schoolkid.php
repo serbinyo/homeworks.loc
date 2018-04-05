@@ -122,7 +122,47 @@ class Schoolkid extends Model
             [
                 'email.unique' => 'Почта занята',
                 'login.unique' => 'Логин занят',
-                //todo прописать ошибки валидации на русском
+                'firstname.required' => 'Необходимо указать имя',
+                'firstname.max' => 'Поле не должно быть больше 255 символов',
+                'middlename.max' => 'Поле не должно быть больше 255 символов',
+                'lastname.required' => 'Необходимо указать фамилию',
+                'lastname.max' => 'Поле не должно быть больше 255 символов',
+            ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
+    }
+
+    public function change_password($id, $data)
+    {
+        $entity = $this->find($id);
+
+        if ($err = $this->validate_password($data)) {
+            return $err;
+        }
+
+        if (Hash::check($data['password'], $entity->user->password)) {
+            $entity->user->password = Hash::make($data['password-new']);
+            $entity->user->save();
+            return $entity;
+        }
+        return ['errors' => ['password' => 'Неправильный пароль']];
+    }
+
+    public function validate_password($data)
+    {
+        $validator = Validator::make($data,
+            [
+                'password' => 'required|string|min:6',
+                'password-new' => 'required|string|min:6|confirmed',
+            ],
+            [
+                'password.required' => 'Укажите пароль',
+                'password.min' => 'Пароль должен содержать как минимум 6 символов',
+                'password-new.required' => 'Укажите новый пароль',
+                'password-new.min' => 'Пароль должен содержать как минимум 6 символов',
+                'password-new.confirmed' => 'Новый пароль и подтверждение пароля не совпадают',
             ]);
 
         if ($validator->fails()) {

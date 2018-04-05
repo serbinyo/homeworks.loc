@@ -24,16 +24,16 @@
                             </div>
                         @endif
 
-                        <a href="/teacher">Учительская</a> >>
-                        <a href="{{ route('account.show', $teacher->id) }}">Учетная запись</a> >>
-                        <a href="{{route('account.edit', $teacher->id)}}">Редактирование</a> >>
+                        <a href="/desktop">Рабочий стол</a> >>
+                        <a href="{{ route('kid-account.show', $schoolkid->id) }}">Учетная запись</a> >>
+                        <a href="{{route('kid-account.edit', $schoolkid->id)}}">Редактирование</a> >>
                         Смена пароля
                         <hr>
 
 
-                        {!! Form::open(['method'=>'post', 'route' => ['teacherPasswordChange'], 'class'=>'form-horizontal']) !!}
+                        {!! Form::open(['method'=>'post', 'route' => ['userPasswordChange'], 'class'=>'form-horizontal']) !!}
 
-                        {!! Form::hidden ('id', $teacher->id) !!}
+                        {!! Form::hidden ('id', $schoolkid->id) !!}
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Пароль</label>

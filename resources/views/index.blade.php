@@ -75,7 +75,8 @@
                         <tr>
                             <td>
                                 @if ($user->role == 't')
-                                    <a href="/teacher" style="text-decoration: none" class="enter_button">В учительскую</a>
+                                    <a href="/teacher" style="text-decoration: none" class="enter_button">В
+                                        учительскую</a>
                                 @elseif ($user->role == 's')
                                     <a href="/desktop" style="text-decoration: none" class="enter_button">За уроки</a>
                                 @elseif ($user->role == 'a')

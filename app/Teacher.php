@@ -107,7 +107,11 @@ class Teacher extends Model
             [
                 'email.unique' => 'Почта занята',
                 'login.unique' => 'Логин занят',
-                //todo прописать ошибки валидации на русском
+                'firstname.required' => 'Необходимо указать имя',
+                'firstname.max' => 'Поле не должно быть больше 255 символов',
+                'middlename.max' => 'Поле не должно быть больше 255 символов',
+                'lastname.required' => 'Необходимо указать фамилию',
+                'lastname.max' => 'Поле не должно быть больше 255 символов',
             ]);
 
         if ($validator->fails()) {

@@ -41,6 +41,14 @@ Route::get('/statistics', 'User\StatisticsController@index');
 
 Route::get('/statistics/{discipline_id}', 'User\StatisticsController@show')->name('showDisciplineStat');
 
+//User Account
+
+Route::get('/kid-account/change_password', 'User\ChangePasswordController@index');
+
+Route::post('/kid-account/change_password', 'User\ChangePasswordController@change')->name('userPasswordChange');
+
+Route::resource('/kid-account', 'User\AccountController');
+
 
 //TEACHER
 
@@ -150,20 +158,3 @@ Route::get('/admin/lists/disciplines', 'Admin\ListsController@discipline_list');
 Route::get('/admin/lists/schoolkids', 'Admin\ListsController@schoolkid_list');
 
 Route::get('/admin/lists/teachers', 'Admin\ListsController@teacher_list');
-
-
-//Route::get('/admin/admin_lists', 'Teacher\AdminListsController@index');
-//
-//Route::get('/admin/lists/admin_grades/view', 'Teacher\AdminGradeController@view_by_get')->name('AdminGradeView');
-//
-//Route::resource('/admin/lists/admin_grades', 'Teacher\AdminGradeController');
-//
-//Route::get('/admin/lists/admin_disciplines/view', 'Teacher\AdminDisciplineController@view_by_get')->name('AdminDisciplineView');
-//
-//Route::resource('/admin/lists/admin_disciplines', 'Teacher\AdminDisciplineController');
-//
-//Route::resource('/admin/lists/admin_schoolkids', 'Teacher\AdminSchoolkidController');
-//
-//Route::resource('/admin/lists/admin_teachers', 'Teacher\AdminAccountController');
-//
-//Route::resource('/admin/admin_account', 'Teacher\AdminAccountController');

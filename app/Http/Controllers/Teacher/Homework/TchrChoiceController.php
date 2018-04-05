@@ -8,7 +8,6 @@ use App\Homework;
 
 class TchrChoiceController extends TeacherController
 {
-    //todo сделать валидацию для всех GET запросов.
     public function index(Grade $grade)
     {
         $grades_to_show = $grade->getTeacherGrades($this->user->teacher->id)->all();
