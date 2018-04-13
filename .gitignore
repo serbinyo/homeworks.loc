@@ -12,4 +12,3 @@ yarn-error.log
 composer.phar
 node
 package-lock.json
-.env
