@@ -26,8 +26,7 @@ class PassController extends UserController
             $tests_correct_num = $tests->where('correct_flag', 1)->count();
 
             //Если задана пустая работа, ученик сдавая ее получает 100%
-            if(($tasks_num + $tests_num) !== 0)
-            {
+            if (($tasks_num + $tests_num) !== 0) {
                 $mark = ($tasks_correct_num + $tests_correct_num) / ($tasks_num + $tests_num) * 100;
                 $mark = round($mark, 2);
             } else {
@@ -43,5 +42,10 @@ class PassController extends UserController
                 'id' => $data['homework_id'],
             ]))->with('status', $message);
         }
+    }
+
+    public function setMark($tasks_correct_num, $tests_correct_num, $tasks_num, $tests_num)
+    {
+        return round(($tasks_correct_num + $tests_correct_num) / ($tasks_num + $tests_num) * 100, 2);
     }
 }
