@@ -44,7 +44,7 @@ class PassController extends UserController
         }
     }
 
-    public function setMark($tasks_correct_num, $tests_correct_num, $tasks_num, $tests_num)
+    public function setMarkPercent($tasks_correct_num, $tests_correct_num, $tasks_num, $tests_num)
     {
         return round(($tasks_correct_num + $tests_correct_num) / ($tasks_num + $tests_num) * 100, 2);
     }
